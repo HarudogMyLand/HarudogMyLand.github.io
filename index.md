@@ -22,3 +22,11 @@ Bien le bonjour! Bienvenue sur le blog de Harudog My Land!
 - Ocupation：BUAAer
 - Affection: RPG games, reading and wrinting markdown pages
 - Hatred: Online Politics, Cyberbullying, Horror things.
+
+And I want to share my online resources with you! Here are some of them:
+
+- [My GitHub](https://github.com/HarudogMyLand)
+- [My Blog](https://harudogmyland.github.io/)
+- I wish there were more resources here :(
+
+    Hope you enjoy your stay! :)
