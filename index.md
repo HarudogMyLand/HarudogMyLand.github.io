@@ -1,14 +1,24 @@
-# 这是一个测试的文档
 
-## 测试标题一
+# Welcome to my World
 
-## 测试标题二
+您好！Hello! Bonjour !こんにちは！
 
-$$lim_{n \rightarrow \infty} f(x)=0$$
+欢迎您来到春犬君的博客……这里很多东西都还在制作中，敬请期待！
 
-```Java
-System.out.printlen("hello world");
-```
+Welcome to the blog page of Harudog My Land. Here, we are still working on many things, so please wait for a while.
 
->[!tip]
->有意思的文件
+Bien le bonjour! Bienvenue sur le blog de Harudog My Land!
+
+こんにちは! “Harudog My Land”のブログへようこそ！ここではまだ多くのことを作っていますので、しばらくお待ちください。ありがとうございます！
+
+
+# 关于我 About Me
+
+春犬君（Harudog）
+
+- True Name：**Classified**
+- Nickname：**春犬君**
+- Birthday：Sep 1th
+- Ocupation：BUAAer
+- Affection: RPG games, reading and wrinting markdown pages
+- Hatred: Online Politics, Cyberbullying, Horror things.
