@@ -20,8 +20,8 @@ Bien le bonjour! Bienvenue sur le blog de Harudog My Land!
 - Nickname：**春犬君**
 - Birthday：Sep 1th
 - Ocupation：BUAAer
-- Affection: RPG games, reading and wrinting markdown pages
-- Hatred: Online Politics, Cyberbullying, Horror things.
+- Affection:heart:: RPG games, reading and writing markdown pages, issue comment.
+- Hatred:imp:: Online Politics, Cyberbullying, Horror things.
 
 And I want to share my online resources with you! Here are some of them:
 
