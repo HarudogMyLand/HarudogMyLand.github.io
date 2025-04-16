@@ -12,25 +12,11 @@ layout: compress
   </head>
 
   <body>
+
     {% include browser-upgrade.html %}
     {% include masthead.html %}
 
-    <div class="page-wrapper">
-      <!-- 侧边目录（左侧，固定定位） -->
-      {% if page.show_toc %}
-      <nav id="toc" class="toc-sidebar">
-        <h3>目录</h3>
-        <ul id="toc-list"></ul>
-      </nav>
-      {% endif %}
-
-      <!-- 主内容区域 -->
-      <div class="main-content">
-        <div class="container">
-          {{ content }}
-        </div>
-      </div>
-    </div>
+    {{ content }}
 
     <div class="page__footer">
       <footer>
@@ -40,9 +26,6 @@ layout: compress
     </div>
 
     {% include scripts.html %}
-    <!-- 引入目录脚本 -->
-    {% if page.show_toc %}
-    <script src="{{ base_path }}/assets/js/toc.js"></script>
-    {% endif %}
+
   </body>
 </html>
