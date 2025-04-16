@@ -1,9 +1,19 @@
-/* 侧边栏样式 */
-#toc {
-  position: sticky;
-  top: 20px;
+/* 整体布局 */
+.page-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+.toc-sidebar {
+  width: 200px; /* 目录宽度 */
+  position: fixed; /* 固定在左侧 */
+  top: 80px; /* 避开顶部导航栏，调整根据 masthead 高度 */
+  left: 20px; /* 左侧边距 */
+  bottom: 20px;
+  overflow-y: auto; /* 长目录可滚动 */
   padding: 10px;
   border-left: 2px solid #ddd;
+  background: #fff; /* 背景，防止内容重叠 */
 }
 
 #toc h3 {
@@ -30,7 +40,8 @@
 }
 
 /* 暗色主题兼容 */
-[data-theme="dark"] #toc {
+[data-theme="dark"] .toc-sidebar {
+  background: #222;
   border-left-color: #555;
 }
 
@@ -42,18 +53,35 @@
   color: #1e90ff;
 }
 
+/* 主内容区域 */
+.main-content {
+  flex-grow: 1;
+  margin-left: 240px; /* 留出目录宽度 + 边距 */
+  padding: 20px;
+}
+
 /* 标题锚点偏移 */
 :target::before {
   content: '';
   display: block;
-  height: 80px; /* 假设顶部导航栏高度 */
+  height: 80px; /* 避开顶部导航 */
   margin-top: -80px;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
-  #toc {
-    position: static;
-    margin-bottom: 20px;
+  .toc-sidebar {
+    position: static; /* 取消固定定位 */
+    width: 100%;
+    margin: 0 0 20px 0;
+    border-left: none;
+    border-bottom: 2px solid #ddd;
+    background: none;
+  }
+  .main-content {
+    margin-left: 0; /* 取消左边距 */
+  }
+  [data-theme="dark"] .toc-sidebar {
+    border-bottom-color: #555;
   }
 }

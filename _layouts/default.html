@@ -15,20 +15,18 @@ layout: compress
     {% include browser-upgrade.html %}
     {% include masthead.html %}
 
-    <div class="container">
-      <div class="row">
-        <!-- 侧边目录（仅在 show_toc 为 true 时显示） -->
-        {% if page.show_toc %}
-        <div class="col-md-3">
-          <nav id="toc" class="nav flex-column sticky-top">
-            <h3>目录</h3>
-            <ul id="toc-list" class="nav"></ul>
-          </nav>
-        </div>
-        {% endif %}
+    <div class="page-wrapper">
+      <!-- 侧边目录（左侧，固定定位） -->
+      {% if page.show_toc %}
+      <nav id="toc" class="toc-sidebar">
+        <h3>目录</h3>
+        <ul id="toc-list"></ul>
+      </nav>
+      {% endif %}
 
-        <!-- 页面内容 -->
-        <div class="{% if page.show_toc %}col-md-9{% else %}col-md-12{% endif %}">
+      <!-- 主内容区域 -->
+      <div class="main-content">
+        <div class="container">
           {{ content }}
         </div>
       </div>

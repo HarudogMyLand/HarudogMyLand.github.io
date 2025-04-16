@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   const tocList = document.getElementById('toc-list');
-  const headings = document.querySelectorAll('.col-md-9 h1, .col-md-9 h2, .col-md-9 h3');
+  const headings = document.querySelectorAll('.main-content h1, .main-content h2, .main-content h3');
 
   if (!tocList || headings.length === 0) return;
 
