@@ -12,11 +12,27 @@ layout: compress
   </head>
 
   <body>
-
     {% include browser-upgrade.html %}
     {% include masthead.html %}
 
-    {{ content }}
+    <div class="container">
+      <div class="row">
+        <!-- 侧边目录（仅在 show_toc 为 true 时显示） -->
+        {% if page.show_toc %}
+        <div class="col-md-3">
+          <nav id="toc" class="nav flex-column sticky-top">
+            <h3>目录</h3>
+            <ul id="toc-list" class="nav"></ul>
+          </nav>
+        </div>
+        {% endif %}
+
+        <!-- 页面内容 -->
+        <div class="{% if page.show_toc %}col-md-9{% else %}col-md-12{% endif %}">
+          {{ content }}
+        </div>
+      </div>
+    </div>
 
     <div class="page__footer">
       <footer>
@@ -26,6 +42,9 @@ layout: compress
     </div>
 
     {% include scripts.html %}
-
+    <!-- 引入目录脚本 -->
+    {% if page.show_toc %}
+    <script src="{{ base_path }}/assets/js/toc.js"></script>
+    {% endif %}
   </body>
 </html>

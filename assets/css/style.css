@@ -1,0 +1,59 @@
+/* 侧边栏样式 */
+#toc {
+  position: sticky;
+  top: 20px;
+  padding: 10px;
+  border-left: 2px solid #ddd;
+}
+
+#toc h3 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+}
+
+#toc ul {
+  list-style: none;
+  padding: 0;
+}
+
+#toc li {
+  margin: 5px 0;
+}
+
+#toc a {
+  text-decoration: none;
+  color: #333;
+}
+
+#toc a:hover {
+  color: #007bff;
+}
+
+/* 暗色主题兼容 */
+[data-theme="dark"] #toc {
+  border-left-color: #555;
+}
+
+[data-theme="dark"] #toc a {
+  color: #ccc;
+}
+
+[data-theme="dark"] #toc a:hover {
+  color: #1e90ff;
+}
+
+/* 标题锚点偏移 */
+:target::before {
+  content: '';
+  display: block;
+  height: 80px; /* 假设顶部导航栏高度 */
+  margin-top: -80px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  #toc {
+    position: static;
+    margin-bottom: 20px;
+  }
+}
