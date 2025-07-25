@@ -14,7 +14,6 @@ redirect_from:
 - True Name：**Classified**
 - Nickname：**春犬君**
 - Birthday：Sep 1th
-- Ocupation：BUAAer
 - Affection:heart:: RPG games, reading and writing markdown pages, issue comment.
 - Hatred:imp:: Online Politics, Cyberbullying, Horror things.
 
