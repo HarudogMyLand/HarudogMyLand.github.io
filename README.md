@@ -1,4 +1,13 @@
+## 先看这个
+
+Academic Pages 是伟大的、开源的、劳动人民智慧结晶的、优秀且杰出的学术网页模板。具体的官方介绍放在下面，该网站为求职者或学术者提供了很好的信息宣传平台。
+
+在顶部的Guide按钮下，你会看到如何使用本文档的基本操作。然而进一步的操作还有待挖掘，实际上，似乎完全可以使用 `JavaScript` 或者 `python` 给自己的网页添加大量的功能。
+
+行吧，暂且如此。
+
 # Academic Pages
+
 **Academic Pages is a GitHub Pages template for personal and professional portfolio-oriented websites.**
 
 ![Academic Pages template example](images/homepage.png "Academic Pages template example")
@@ -21,7 +30,7 @@ When you are initially working on your website, it is very useful to be able to 
 
 1. Clone the repository and made updates as detailed above.
 1. Make sure you have ruby-dev, bundler, and nodejs installed
-    
+   
     On most Linux distribution and [Windows Subsystem Linux](https://learn.microsoft.com/en-us/windows/wsl/about) the command is:
     ```bash
     sudo apt install ruby-dev ruby-bundler nodejs
@@ -78,7 +87,7 @@ Unfortunately, one logistical issue with a template theme like Academic Pages th
 
 ---
 <div align="center">
-    
+
 ![pages-build-deployment](https://github.com/academicpages/academicpages.github.io/actions/workflows/pages/pages-build-deployment/badge.svg)
 [![GitHub contributors](https://img.shields.io/github/contributors/academicpages/academicpages.github.io.svg)](https://github.com/academicpages/academicpages.github.io/graphs/contributors)
 [![GitHub release](https://img.shields.io/github/v/release/academicpages/academicpages.github.io)](https://github.com/academicpages/academicpages.github.io/releases/latest)
