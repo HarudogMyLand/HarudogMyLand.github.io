@@ -59,7 +59,7 @@ redirect_from:
 
 - [Liquid 语法](https://shopify.github.io/liquid/tags/control-flow/)
 - [MathJax 文档](https://docs.mathjax.org/en/latest/)
-- [HTML（超文本标记语言） | MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
+- [HTML（超文本标记语言） \| MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
 
 详见原文：[Markdown - Your Name / Site Title](https://academicpages.github.io/markdown/)
 
