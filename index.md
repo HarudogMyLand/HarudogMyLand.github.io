@@ -1,7 +1,3 @@
-
-
-# Introduciton
-
 This is Harudogs' blogs and academic webpage.
 
 This website is used as a shared oasis of knowledge and technology, also a place of thoughts and reflection.
