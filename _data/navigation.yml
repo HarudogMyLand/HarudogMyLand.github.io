@@ -11,8 +11,8 @@ main:
   - title: "Publications"
     url: /publications/ 
 
-  - title: "Teaching"
-    url: /teaching/    
+  # - title: "Teaching"
+  #   url: /teaching/    
     
         
   - title: "Blog Posts"
@@ -23,6 +23,7 @@ main:
     
   # - title: "CV"
   #   url: /cv-json/
+
   - title: "Note"
     url: /note/ 
     

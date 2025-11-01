@@ -9,13 +9,13 @@ redirect_from:
 
 # 关于我 About Me
 
-春犬君（Harudog）
+春犬（Harudog）
 
 - True Name：**Classified**
 - Nickname：**春犬君**
 - Birthday：Sep 1th
 - Affection:heart:: RPG games, reading and writing markdown pages, issue comment.
-- Hatred:imp:: Online Politics, Cyberbullying, Horror things.
+- Hatred:imp:: Cyberbullying, Bias and Hate
 
 Hi, I am Harudog. Currently a student in Beijing, China. I am a random person and ... nice to see you here!
 And I want to share my online resources with you! Here are some of them:
