@@ -1,14 +1,17 @@
 
- Welcome to my World
 
-您好！Hello! Bonjour !こんにちは！
+# Introduciton
 
-欢迎您来到春犬君的博客……这里很多东西都还在制作中，敬请期待！
+This is Harudogs' blogs and academic webpage.
 
-Welcome to the blog page of Harudog My Land. Here, we are still working on many things, so please wait for a while.
+This website is used as a shared oasis of knowledge and technology, also a place of thoughts and reflection.
 
-Bien le bonjour! Bienvenue sur le blog de Harudog My Land!
+If you have any ideas about this page, feel free to contact me.
 
-こんにちは! “Harudog My Land”のブログへようこそ！ここではまだ多くのことを作っていますので、しばらくお待ちください。ありがとうございます！
+# Profile
 
+**Harudog**
 
+A series of self-set original characters.
+
+Communists, Socialist with Chinese Characteristics, Computer-Finance Student.
