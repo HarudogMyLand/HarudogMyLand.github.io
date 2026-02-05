@@ -2,6 +2,17 @@
 
 <meta charset="utf-8">
 
+<script>
+(function() {
+  const darkModeKey = 'darkMode';
+  const isDark = localStorage.getItem(darkModeKey) === 'true' || 
+                 (!localStorage.getItem(darkModeKey) && window.matchMedia('(prefers-color-scheme: dark)').matches);
+  if (isDark) {
+    document.documentElement.classList.add('dark-mode');
+  }
+})();
+</script>
+
 {% include seo.html %}
 
 <link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ base_path }}/feed.xml{% endif %}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
