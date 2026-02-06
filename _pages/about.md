@@ -1,6 +1,6 @@
 ---
 permalink: /
-title: "Academic Pages is a ready-to-fork GitHub Pages template for academic personal websites"
+title: "About"
 author_profile: true
 redirect_from: 
   - /about/
@@ -9,19 +9,17 @@ redirect_from:
 
 # 关于我 About Me
 
-春犬（Harudog）
+Harudog
 
 - True Name：**Classified**
-- Nickname：**春犬君**
 - Birthday：Sep 1th
 - Affection:heart:: RPG games, reading and writing markdown pages, issue comment.
 - Hatred:imp:: Cyberbullying, Bias and Hate
 
 Hi, I am Harudog. Currently a student in Beijing, China. I am a random person and ... nice to see you here!
-And I want to share my online resources with you! Here are some of them:
 
 - [My GitHub](https://github.com/HarudogMyLand)
 - [My Blog](https://harudogmyland.github.io/)
 - I wish there were more resources here :(
 
-    Sorry for that this blog is still under construction. Hope you enjoy your stay! :)
+    Sorry for blog is still under construction. Hope you enjoy your stay! :)

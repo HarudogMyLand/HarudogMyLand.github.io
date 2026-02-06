@@ -27,7 +27,7 @@ author:
   pronouns         : # example: "she/her"  
   bio              : "struggling CS Student"
   location         : "Earth"
-  employer         : "BUAA student and Fighter"
+  employer         : "BUAA studen"
   uri              : "https://HarudogMyLand.github.io/about"
   email            : "lyx123qwert@163.com" 
 
@@ -240,6 +240,7 @@ defaults:
       comments: true
       share: true
       related: true
+      show_excerpts: false
   # _pages
   - scope:
       path: ""

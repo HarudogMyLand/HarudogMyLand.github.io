@@ -1,0 +1,59 @@
+---
+layout: single
+title: "Archive"
+permalink: /archive/
+author_profile: true
+sidebar:
+  nav: "docs"
+redirect_from:
+  - /resume
+---
+
+{% assign tags_max = 0 %}
+{% for tag in site.tags %}
+  {% if tag[1].size > tags_max %}
+    {% assign tags_max = tag[1].size %}
+  {% endif %}
+{% endfor %}
+
+<!-- 优化 1：标签云区域 -->
+<div class="taxonomy__index" style="margin-bottom: 2em;">
+  {% for i in (1..tags_max) reversed %}
+    {% for tag in site.tags %}
+      {% if tag[1].size == i %}
+        <!-- 这里加上了 class="btn" 样式，让标签变成按钮 -->
+        <a href="#{{ tag[0] | slugify }}" class="btn btn--inverse btn--small" style="margin: 2px;">
+          <strong>{{ tag[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
+        </a>
+      {% endif %}
+    {% endfor %}
+  {% endfor %}
+</div>
+
+<!-- 分割线 -->
+<hr>
+
+{% for i in (1..tags_max) reversed %}
+  {% for tag in site.tags %}
+    {% if tag[1].size == i %}
+      <section id="{{ tag[0] | slugify }}" class="taxonomy__section">
+        <!-- 标题稍微加大并加上背景色或下划线区分 -->
+        <h2 class="archive__subtitle" style="border-bottom: 1px solid #f2f3f3; padding-bottom: 10px;">
+          <i class="fas fa-tag"></i> {{ tag[0] }}
+        </h2>
+        
+        <div class="entries-list">
+          {% for post in tag[1] %}
+            <!-- 优化 2：使用主题自带的单篇文章模板，显示摘要和日期 -->
+            {% include archive-single.html type="list" %}
+          {% endfor %}
+        </div>
+        
+        <!-- 优化 3：美化回到顶部按钮 -->
+        <div style="text-align: right; margin-bottom: 2em;">
+          <a href="#main" class="btn btn--light btn--small">Back to Top &uarr;</a>
+        </div>
+      </section>
+    {% endif %}
+  {% endfor %}
+{% endfor %}
