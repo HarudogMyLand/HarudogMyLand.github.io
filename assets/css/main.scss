@@ -41,3 +41,38 @@
     "vendor/font-awesome/brands",
     "vendor/magnific-popup/magnific-popup"
 ;
+
+div[class*="language-"]::before {
+  display: none !important; /* 直接隐藏这个标签，这是最干净的做法 */
+}
+
+.highlighter-rouge, 
+div[class*="language-"] {
+  background-color: #1a1b26 !important; /* 调整为更深邃的背景色 */
+  border: 1px solid #2e3440 !important; /* 淡淡的边框线 */
+  border-radius: 8px !important;       /* 圆角 */
+  margin: 1.5em 0 !important;          /* 增加上下间距 */
+  overflow: hidden;                    /* 裁剪溢出 */
+}
+
+.highlight {
+  padding: 1.2em !important;           /* 增加内边距，让代码不再贴边 */
+  background: transparent !important;   /* 防止背景颜色打架 */
+}
+
+.highlight pre {
+  margin: 0 !important;
+  font-family: "Cascadia Code", "Fira Code", Consolas, monospace !important; /* 程序员字体 */
+  font-size: 0.9em !important;
+  line-height: 1.6 !important;
+}
+
+p code, li code {
+  color: #f7768e !important;           /* 稍微亮一点的颜色，突出它 */
+  background-color: #24283b !important; /* 稍微浅一点的背景 */
+  padding: 0.2em 0.4em !important;
+  border-radius: 4px !important;
+  font-size: 0.9em !important;
+  font-weight: normal !important;
+  margin: 0 2px;
+}
