@@ -1,0 +1,99 @@
+---
+layout: single
+title: "Learning Guides & Tutorials"
+permalink: /guide/
+author_profile: true
+---
+
+<p>Welcome to my tutorial hub! These guides are structured documentation powered by MkDocs. Click on the cards below to visit the dedicated tutorial sites.</p>
+
+<!-- 专属 CSS 样式：高仿 GitHub 仓库卡片 -->
+<style>
+  .repo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* 响应式：PC端双列，手机端单列 */
+    gap: 20px;
+    margin-top: 2em;
+  }
+
+  .repo-card {
+    display: flex;
+    flex-direction: column;
+    background-color: transparent;
+    border: 1px solid #30363d; /* GitHub 经典的暗色边框 */
+    border-radius: 6px;
+    padding: 20px;
+    text-decoration: none !important; /* 强制去掉下划线 */
+    transition: all 0.2s ease-in-out; /* 悬浮动画过渡 */
+    cursor: pointer;
+  }
+
+  /* 悬浮特效：边框变亮，卡片微微上浮，产生按钮感 */
+  .repo-card:hover {
+    border-color: #8b949e; 
+    transform: translateY(-3px);
+    background-color: rgba(255, 255, 255, 0.02); /* 微微变亮 */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+  }
+
+  .repo-title {
+    color: #58a6ff; /* GitHub 链接蓝 */
+    font-size: 1.1em;
+    font-weight: 600;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+  }
+
+  .repo-title i {
+    margin-right: 8px;
+    color: #8b949e; /* 图标颜色 */
+  }
+
+  .repo-desc {
+    color: #8b949e; /* GitHub 描述灰 */
+    font-size: 0.9em;
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
+
+<!-- 卡片网格容器 -->
+<div class="repo-grid">
+  
+  <!-- 第 1 个教程：Computer Science -->
+  <!-- 注意 URL 已经根据你截图里的仓库名配好了 -->
+  <a href="https://HarudogMyLand.github.io/cs-tutorial/" class="repo-card">
+    <div class="repo-title">
+      <i class="fas fa-book"></i> Computer Science
+    </div>
+    <p class="repo-desc">My notes on Computer Organization, WSL, Docker, and core CS concepts.</p>
+  </a>
+
+  <!-- 第 2 个教程：Machine Learning -->
+  <a href="https://HarudogMyLand.github.io/ml-tutorial/" class="repo-card">
+    <div class="repo-title">
+      <i class="fas fa-robot"></i> Machine Learning
+    </div>
+    <p class="repo-desc">Deep Learning, AI models, and practical implementations.</p>
+  </a>
+
+  <!-- 第 3 个教程：Mathematics -->
+  <!-- 对应截图仓库：FuckMathematicsNote -->
+  <a href="https://HarudogMyLand.github.io/math-tutorial/" class="repo-card">
+    <div class="repo-title">
+      <i class="fas fa-subscript"></i> Mathematics
+    </div>
+    <p class="repo-desc">Calculus, Linear Algebra, Probability, and discrete math notes.</p>
+  </a>
+
+  <!-- 第 4 个教程：Economics -->
+  <!-- 对应截图仓库：FuckEconomicNote -->
+  <a href="https://HarudogMyLand.github.io/economics-tutorial/" class="repo-card">
+    <div class="repo-title">
+      <i class="fas fa-chart-line"></i> Economics
+    </div>
+    <p class="repo-desc">Macroeconomics, microeconomics, and market theory analysis.</p>
+  </a>
+
+</div>
