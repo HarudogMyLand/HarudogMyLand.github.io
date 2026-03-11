@@ -4,33 +4,21 @@
 
 div.highlighter-rouge, figure.highlight {
   position: relative;
-  margin-bottom: 1em;
-  padding: 1em;
+  margin-bottom: 1.5em;
+  padding: 0.8em 1.2em; /* 调整后的内边距 */
   border: 1px solid var(--global-border-color);
   border-radius: $border-radius;
   background-color: var(--global-code-background-color);
-  box-shadow: $box-shadow;
-  font-size: $type-size-4;
+  /* 删除了那个奇怪的 font-size: $type-size-4 */
 
-  &:before {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 0.5em;
-    background-color: mix(#fff, #7a8288, 90%);
-    content: "\f121";
-    font-family: "Font Awesome 6 Free" !important;
-    font-size: $type-size-6;
-    line-height: 1;
-    text-transform: none;
-    speak: none;
-  }
+  /* 删除了之前的 &:before 块，彻底解决白色方块问题 */
 
   .highlight {
     margin: 0;
     font-family: $monospace;
-    font-size: $type-size-6;
-    line-height: 1.8;
+    font-size: 0.9em; /* 文字变大一点 */
+    line-height: 1.5; /* 行间距更紧凑 */
+    background: transparent !important; /* 确保不产生双重背景 */
   }
 }
 

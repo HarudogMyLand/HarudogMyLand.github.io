@@ -2,22 +2,19 @@
    MODERN DARK THEME (Refined for Academic Pages)
    ========================================================================== */
 
-/* 重新定义的现代深色调 */
 $gray          : #8b949e;
 $dark-gray     : #30363d;
 $darker-gray   : #21262d;
 $light-gray    : #c9d1d9;
 
-/* 背景与文字：采用深蓝黑，减少视觉疲劳 */
-$background         : #0d1117; // 经典的深黑蓝背景
-$background-light   : #161b22; // 稍微亮一点的卡片背景色
-$background-lighter : #21262d; // 悬停或边框色
-$text               : #f0f6fc; // 接近白色的浅灰（防止纯白刺眼）
-$link               : #58a6ff; // 柔和的科技蓝
-$link-dark          : #1f6feb; // 深蓝色（悬停使用）
-$link-light         : #a5d6ff; // 浅蓝色（访问过）
+$background         : #0d1117; 
+$background-light   : #161b22; 
+$background-lighter : #21262d; 
+$text               : #f0f6fc; 
+$link               : #58a6ff; 
+$link-dark          : #1f6feb; 
+$link-light         : #a5d6ff; 
 
-/* 功能色适配 */
 $danger-color       : #f85149;
 $info-color         : #388bfd;
 $notice-color       : #8b949e;
@@ -29,13 +26,12 @@ html[data-theme="dark"] {
     --global-bg-color             : #{$background};
     --global-border-color         : #{$background-lighter};
     
-    /* 关键修正：深色模式下的代码块不能是白色背景 */
     --global-code-background-color: #161b22; 
     --global-code-text-color      : #e6edf3;
     
     --global-fig-caption-color    : #{$gray};
     --global-link-color           : #{$link};
-    --global-link-color-hover     : #{$link-light}; // 悬停时变亮
+    --global-link-color-hover     : #{$link-light}; 
     --global-link-color-visited   : #{$link-dark};
     
     --global-masthead-link-color        : #{$text};
