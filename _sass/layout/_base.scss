@@ -124,7 +124,6 @@ a {
     outline: 0;
   }
 }
-
 /* code */
 
 tt, code, kbd, samp, pre {
@@ -132,27 +131,26 @@ tt, code, kbd, samp, pre {
 }
 
 pre {
-  overflow-x: auto; /* add scrollbars to wide code blocks*/
+  overflow-x: auto;
 }
 
+/* 优化行内代码 (Inline Code) 的样式 */
 a > code,
 figcaption > code,
 li > code,
 p > code,
-pre > code,
 td > code {
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
-  font-size: $type-size-6;
-  background: var(--global-code-background-color);
-  border: 1px solid var(--global-thead-color);
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  color: var(--global-code-text-color);
+  padding: 0.2em 0.4em;
+  font-size: 0.85em;
+  background: rgba(110, 118, 129, 0.3); /* GitHub Dark 风格的半透明灰色底色 */
+  border-radius: 6px;
+  color: #c9d1d9; /* 默认文字颜色 */
+  
+  /* 原版这里有丑陋的边框和阴影，全部删除了 */
 
   &:before, &:after {
     letter-spacing: -0.2em;
-    content: "\00a0"; /* non-breaking space*/
+    content: "\00a0"; /* non-breaking space */
   }
 }
 

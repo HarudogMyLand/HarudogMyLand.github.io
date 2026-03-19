@@ -40,3 +40,25 @@
     "vendor/font-awesome/brands",
     "vendor/magnific-popup/magnific-popup"
 ;
+
+div.highlighter-rouge, figure.highlight {
+  background: #0d1117 !important; /* 深邃的纯黑底色 */
+  border: 1px solid #30363d !important; /* 精致的暗色边框 */
+  border-radius: 8px !important;
+  margin: 1.5em 0 !important;
+  padding: 1em 1.2em !important;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2) !important;
+}
+
+.highlight pre { background: transparent !important; margin: 0 !important; }
+.highlight code { font-family: "Cascadia Code", "Fira Code", Consolas, monospace !important; font-size: 0.9em; line-height: 1.6; }
+
+/* 核心语法高亮颜色注入 */
+.highlight .c, .highlight .cm, .highlight .c1 { color: #8b949e !important; font-style: italic; } /* 注释 */
+.highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv { color: #ff7b72 !important; } /* 关键字 */
+.highlight .n, .highlight .nx, .highlight .p { color: #c9d1d9 !important; } /* 变量/标点 */
+.highlight .s, .highlight .s1, .highlight .s2 { color: #a5d6ff !important; } /* 字符串 */
+.highlight .m, .highlight .mi, .highlight .mf { color: #79c0ff !important; } /* 数字 */
+.highlight .o, .highlight .ow { color: #ff7b72 !important; } /* 操作符 */
+.highlight .nf, .highlight .nc { color: #d2a8ff !important; } /* 函数名/类名 */
+.highlight .na { color: #79c0ff !important; } /* 属性名 */

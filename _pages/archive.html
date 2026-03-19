@@ -1,59 +1,83 @@
 ---
 layout: single
-title: "Archive"
+title: "Archive & Tags"
 permalink: /archive/
 author_profile: true
-sidebar:
-  nav: "docs"
-redirect_from:
-  - /resume
 ---
 
-{% assign tags_max = 0 %}
-{% for tag in site.tags %}
-  {% if tag[1].size > tags_max %}
-    {% assign tags_max = tag[1].size %}
-  {% endif %}
-{% endfor %}
+<style>
+  /* 优化后的标签云 */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 3em; }
+  .tag-pill {
+    padding: 8px 16px; background-color: #161b22; border: 1px solid #30363d;
+    border-radius: 6px; color: #8b949e; text-decoration: none !important;
+    font-size: 0.9em; font-weight: 500; transition: all 0.2s ease;
+  }
+  .tag-pill:hover { background-color: #30363d; color: #e6edf3; transform: translateY(-2px); border-color: #8b949e;}
+  .tag-count { background: #21262d; padding: 2px 8px; border-radius: 12px; margin-left: 8px; font-size: 0.85em; color: #58a6ff; }
+  
+  /* 解决割裂感：引入卡片式列表容器 */
+  .archive-section {
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 12px;
+    padding: 20px 30px;
+    margin-bottom: 2em;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  }
+  .archive-section-title {
+    font-size: 1.6em; border-bottom: 1px solid #21262d; padding-bottom: 15px; margin-top: 0; margin-bottom: 15px; color: #e6edf3; display: flex; align-items: center; gap: 10px;
+  }
+  .archive-section-title i { color: #58a6ff; font-size: 0.8em; }
+  
+  /* 列表项优化 */
+  .archive-list { list-style: none; padding: 0; margin: 0; }
+  .archive-item {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 12px 0; border-bottom: 1px solid #21262d;
+  }
+  .archive-item:last-child { border-bottom: none; } /* 去掉最后一条线 */
+  
+  .archive-item a { color: #8b949e; text-decoration: none; font-size: 1.05em; transition: color 0.2s; font-weight: 500;}
+  .archive-item a:hover { color: #58a6ff; }
+  .archive-date { color: #484f58; font-family: "Cascadia Code", monospace; font-size: 0.85em; }
+</style>
 
-<!-- 优化 1：标签云区域 -->
-<div class="taxonomy__index" style="margin-bottom: 2em;">
+<!-- 1. 块状标签云 -->
+<div class="tag-cloud">
+  {% assign tags_max = 0 %}
+  {% for tag in site.tags %}
+    {% if tag[1].size > tags_max %}{% assign tags_max = tag[1].size %}{% endif %}
+  {% endfor %}
+  
   {% for i in (1..tags_max) reversed %}
     {% for tag in site.tags %}
       {% if tag[1].size == i %}
-        <!-- 这里加上了 class="btn" 样式，让标签变成按钮 -->
-        <a href="#{{ tag[0] | slugify }}" class="btn btn--inverse btn--small" style="margin: 2px;">
-          <strong>{{ tag[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
+        <a href="#{{ tag[0] | slugify }}" class="tag-pill">
+          {{ tag[0] }} <span class="tag-count">{{ i }}</span>
         </a>
       {% endif %}
     {% endfor %}
   {% endfor %}
 </div>
 
-<!-- 分割线 -->
-<hr>
-
+<!-- 2. 卡片式归档列表 -->
 {% for i in (1..tags_max) reversed %}
   {% for tag in site.tags %}
     {% if tag[1].size == i %}
-      <section id="{{ tag[0] | slugify }}" class="taxonomy__section">
-        <!-- 标题稍微加大并加上背景色或下划线区分 -->
-        <h2 class="archive__subtitle" style="border-bottom: 1px solid #f2f3f3; padding-bottom: 10px;">
-          <i class="fas fa-tag"></i> {{ tag[0] }}
+      <div class="archive-section" id="{{ tag[0] | slugify }}">
+        <h2 class="archive-section-title">
+          <i class="fas fa-hashtag"></i> {{ tag[0] }}
         </h2>
-        
-        <div class="entries-list">
+        <ul class="archive-list">
           {% for post in tag[1] %}
-            <!-- 优化 2：使用主题自带的单篇文章模板，显示摘要和日期 -->
-            {% include archive-single.html type="list" %}
+            <li class="archive-item">
+              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              <span class="archive-date">{{ post.date | date: "%Y / %m / %d" }}</span>
+            </li>
           {% endfor %}
-        </div>
-        
-        <!-- 优化 3：美化回到顶部按钮 -->
-        <div style="text-align: right; margin-bottom: 2em;">
-          <a href="#main" class="btn btn--light btn--small">Back to Top &uarr;</a>
-        </div>
-      </section>
+        </ul>
+      </div>
     {% endif %}
   {% endfor %}
 {% endfor %}
