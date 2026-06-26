@@ -18,7 +18,7 @@ columns:
 
 1. 顶部标题区域。
 2. 热力图，可以切换 Year、Month、Day。
-3. Guide 入口，沿用原来 Guide 页面的四个方向。
+3. Knowledge Graph，用节点关系图呈现文章、tag 和 column 的联系。
 4. Posts 与 Columns。
 
 这样设计以后，文章可以被多个系统同时组织：它既可以被 tag 搜到，也可以被专栏收录。

@@ -62,6 +62,34 @@ layout: default
         {% if page.link %}<div><a href="{{ page.link }}" class="btn">{{ site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
       </section>
 
+      {% if page.collection == 'posts' and page.columns %}
+        <section class="blog-column-affiliation" aria-labelledby="blog-column-affiliation-title">
+          <h2 id="blog-column-affiliation-title">Columns</h2>
+          {% for column_key in page.columns %}
+            {% assign column = site.data.blog_columns | where: "key", column_key | first %}
+            {% assign column_posts = site.posts | where_exp: "post", "post.columns contains column_key" %}
+            <div class="blog-column-affiliation__group">
+              <p class="blog-column-affiliation__label">
+                本文隶属于
+                <strong>{% if column %}{{ column.title }}{% else %}{{ column_key }}{% endif %}</strong>
+                专栏
+              </p>
+              {% if column and column.description %}
+                <p class="blog-column-affiliation__description">{{ column.description }}</p>
+              {% endif %}
+              <div class="blog-column-affiliation__posts" aria-label="{% if column %}{{ column.title }}{% else %}{{ column_key }}{% endif %} posts">
+                {% for column_post in column_posts %}
+                  <a class="blog-column-affiliation__post{% if column_post.url == page.url %} is-current{% endif %}" href="{{ column_post.url | relative_url }}">
+                    <span>{{ column_post.title }}</span>
+                    <time datetime="{{ column_post.date | date_to_xmlschema }}">{{ column_post.date | date: "%Y-%m-%d" }}</time>
+                  </a>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+        </section>
+      {% endif %}
+
       <footer class="page__meta">
         {% if site.data.ui-text[site.locale].meta_label %}
           <h4 class="page__meta-title">{{ site.data.ui-text[site.locale].meta_label }}</h4>
@@ -78,6 +106,58 @@ layout: default
       {% include comments.html %}
     {% endif %}
   </article>
+
+  {% if page.collection == 'posts' %}
+    <aside class="blog-floating-toc is-collapsed" aria-label="Article table of contents">
+      <button type="button" class="blog-floating-toc__toggle" aria-expanded="false" aria-label="Toggle article contents">
+        <i class="fas fa-list-ul" aria-hidden="true"></i>
+      </button>
+      <div class="blog-floating-toc__panel">
+        <strong>Contents</strong>
+        <nav class="blog-floating-toc__nav"></nav>
+      </div>
+    </aside>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var toc = document.querySelector('.blog-floating-toc');
+        var nav = document.querySelector('.blog-floating-toc__nav');
+        var toggle = document.querySelector('.blog-floating-toc__toggle');
+        var content = document.querySelector('.blog-post .page__content');
+        if (!toc || !nav || !toggle || !content) {
+          return;
+        }
+
+        var headings = Array.prototype.slice.call(content.querySelectorAll('h2, h3'));
+        if (!headings.length) {
+          toc.hidden = true;
+          return;
+        }
+
+        headings.forEach(function(heading, index) {
+          if (!heading.id) {
+            heading.id = 'section-' + (index + 1) + '-' + heading.textContent.trim().toLowerCase().replace(/[^a-z0-9\u4e00-\u9fa5]+/g, '-').replace(/^-|-$/g, '');
+          }
+          var link = document.createElement('a');
+          link.href = '#' + heading.id;
+          link.textContent = heading.textContent;
+          link.className = 'blog-floating-toc__link blog-floating-toc__link--' + heading.tagName.toLowerCase();
+          nav.appendChild(link);
+        });
+
+        function setCollapsed(isCollapsed) {
+          toc.classList.toggle('is-collapsed', isCollapsed);
+          toggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
+          localStorage.setItem('blogTocCollapsed', isCollapsed ? 'true' : 'false');
+        }
+
+        setCollapsed(localStorage.getItem('blogTocCollapsed') !== 'false');
+        toggle.addEventListener('click', function() {
+          setCollapsed(!toc.classList.contains('is-collapsed'));
+        });
+      });
+    </script>
+  {% endif %}
 
   {% comment %}<!-- only show related on a post page when not disabled -->{% endcomment %}
   {% if page.id and page.related and site.related_posts.size > 0 %}

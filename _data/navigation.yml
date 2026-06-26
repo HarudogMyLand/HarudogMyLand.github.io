@@ -24,8 +24,5 @@ main:
   # - title: "Note"
   #   url: /note/ 
     
-  - title: "Guide"
-    url: /guide/
-
   - title: "Archive"
     url: /archive/
