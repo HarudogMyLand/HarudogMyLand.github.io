@@ -497,6 +497,15 @@ html[data-theme="dark"] .blog-post .page__content td > code {
   gap: 1.5rem;
 }
 
+.blog-home__hero-tools {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex: 0 1 24rem;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
 .blog-home__eyebrow {
   margin: 0 0 0.4rem;
   color: var(--blog-text-muted);
@@ -678,6 +687,13 @@ html[data-theme="dark"] .blog-post .page__content td > code {
 }
 
 .blog-graph {
+  --graph-color-1: #58a6ff;
+  --graph-color-2: #f778ba;
+  --graph-color-3: #7ee787;
+  --graph-color-4: #d2a8ff;
+  --graph-color-5: #ffa657;
+  --graph-color-6: #56d4dd;
+  --graph-color-7: #ff7b72;
   background: rgba(88, 166, 255, 0.05);
 }
 
@@ -688,25 +704,100 @@ html[data-theme="dark"] .blog-post .page__content td > code {
   gap: 1rem;
   margin-bottom: 0.9rem;
   color: var(--blog-text-muted);
-  font-family: $monospace;
-  font-size: 0.74rem;
 }
 
-.blog-graph__control {
-  border: 0;
-  border-radius: 0;
-  padding: 0.62rem 0.9rem;
+.blog-graph__search {
+  display: inline-flex;
+  align-items: center;
+  flex: 1 1 14rem;
+  gap: 0.55rem;
+  max-width: 24rem;
+  padding: 0.62rem 0.8rem;
   background: var(--blog-accent-soft);
+  color: var(--blog-text-muted);
+}
+
+.blog-graph__search input {
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
   color: var(--blog-theme-text);
   font-family: $sans-serif;
+  font-size: 0.86rem;
+}
+
+.blog-graph__search input::placeholder {
+  color: var(--blog-text-muted);
+}
+
+.blog-graph__search--hero {
+  flex: 1 1 12rem;
+  min-width: 12rem;
+}
+
+.blog-graph__switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--blog-text-muted);
+  font-family: $sans-serif;
   font-size: 0.78rem;
-  line-height: 1;
   cursor: pointer;
 }
 
-.blog-graph__control:hover,
-.blog-graph__control.is-active {
-  background: rgba(88, 166, 255, 0.18);
+.blog-graph__switch input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.blog-graph__switch-track {
+  position: relative;
+  width: 2.75rem;
+  height: 1.42rem;
+  background: rgba(127, 139, 153, 0.28);
+}
+
+.blog-graph__switch-track::after {
+  position: absolute;
+  top: 0.2rem;
+  left: 0.22rem;
+  width: 1.02rem;
+  height: 1.02rem;
+  background: var(--blog-module-bg);
+  content: "";
+  transition: transform 0.18s ease;
+}
+
+.blog-graph__switch input:checked + .blog-graph__switch-track {
+  background: var(--blog-accent);
+}
+
+.blog-graph__switch input:checked + .blog-graph__switch-track::after {
+  transform: translateX(1.28rem);
+}
+
+.blog-graph__switch-text b {
+  color: var(--blog-accent);
+  font-weight: 700;
+}
+
+.blog-graph__switch input:not(:checked) ~ .blog-graph__switch-text b {
+  color: var(--blog-text-muted);
+  font-size: 0;
+}
+
+.blog-graph__switch input:not(:checked) ~ .blog-graph__switch-text b::after {
+  font-size: 0.78rem;
+  content: "Off";
+}
+
+.blog-graph__stage {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 11rem;
+  gap: 1rem;
 }
 
 .blog-graph__canvas {
@@ -714,32 +805,44 @@ html[data-theme="dark"] .blog-post .page__content td > code {
   width: 100%;
   min-height: 340px;
   overflow: hidden;
+  cursor: zoom-in;
   background:
     radial-gradient(circle at 18% 22%, rgba(88, 166, 255, 0.12), transparent 24%),
     radial-gradient(circle at 74% 64%, rgba(247, 120, 186, 0.1), transparent 22%),
     rgba(9, 17, 28, 0.04);
 }
 
-.blog-graph__cluster {
-  fill: var(--graph-cluster-color);
-  fill-opacity: 0.14;
-  stroke: var(--graph-cluster-color);
-  stroke-opacity: 0.42;
-  stroke-width: 1;
+.blog-graph__canvas.is-panning {
+  cursor: grabbing;
 }
 
-.blog-graph__cluster-label {
-  fill: var(--blog-text-muted);
+.blog-graph__inspector {
+  min-height: 8rem;
+  padding: 1rem;
+  background: var(--blog-accent-soft);
+  color: var(--blog-text-muted);
+}
+
+.blog-graph__inspector span {
+  display: block;
+  margin-bottom: 0.45rem;
   font-family: $monospace;
-  font-size: 0.72rem;
-  text-anchor: middle;
+  font-size: 0.7rem;
   text-transform: uppercase;
+}
+
+.blog-graph__inspector strong {
+  display: block;
+  color: var(--blog-theme-text);
+  font-size: 0.92rem;
+  line-height: 1.35;
 }
 
 .blog-graph__link {
   stroke: var(--blog-accent);
   stroke-opacity: 0.34;
   stroke-width: 1;
+  transition: stroke-opacity 0.18s ease;
 }
 
 .blog-graph__link--column {
@@ -766,6 +869,8 @@ html[data-theme="dark"] .blog-post .page__content td > code {
   transition: r 0.18s ease;
 }
 
+.blog-graph__node.is-hovered circle,
+.blog-graph__node.is-search-match circle,
 .blog-graph__node-link:hover circle,
 .blog-graph__node-link:focus circle {
   r: 13;
@@ -789,6 +894,14 @@ html[data-theme="dark"] .blog-post .page__content td > code {
 .blog-graph.is-label-muted .blog-graph__node-link:hover .blog-graph__node-label,
 .blog-graph.is-label-muted .blog-graph__node-link:focus .blog-graph__node-label {
   opacity: 1;
+}
+
+.blog-graph.is-searching .blog-graph__node.is-search-dimmed {
+  opacity: 0.24;
+}
+
+.blog-graph .blog-graph__link.is-search-dimmed {
+  stroke-opacity: 0.08;
 }
 
 .blog-tag-filter {
@@ -917,6 +1030,13 @@ body.blog-archive[data-blog-theme="source"] {
   --blog-rule: #d8d8d8;
   --blog-accent: #2e68aa;
   --blog-accent-soft: rgba(46, 104, 170, 0.12);
+  --graph-color-1: #2e68aa;
+  --graph-color-2: #2ca6cb;
+  --graph-color-3: #7b8fa5;
+  --graph-color-4: #5b7f9f;
+  --graph-color-5: #8aa6c1;
+  --graph-color-6: #527ca5;
+  --graph-color-7: #3d6f96;
   --blog-theme-font: "Helvetica Neue", "Microsoft YaHei", Arial, sans-serif;
   --blog-theme-heading-font: "Helvetica Neue", "Microsoft YaHei", Arial, sans-serif;
 }
@@ -968,6 +1088,13 @@ body.blog-archive[data-blog-theme="gov"] {
   --blog-rule: #d9e4f2;
   --blog-accent: #005bac;
   --blog-accent-soft: rgba(0, 91, 172, 0.1);
+  --graph-color-1: #005bac;
+  --graph-color-2: #b8222d;
+  --graph-color-3: #2f7d59;
+  --graph-color-4: #5a6f9f;
+  --graph-color-5: #d18b00;
+  --graph-color-6: #007c89;
+  --graph-color-7: #7a4e9b;
   --blog-theme-font: "Noto Sans", "Microsoft YaHei", Arial, sans-serif;
   --blog-theme-heading-font: "Noto Serif SC", "SimSun", serif;
 }
@@ -1016,6 +1143,13 @@ body.blog-archive[data-blog-theme="marx"] {
   --blog-rule: #d6e0ef;
   --blog-accent: #000080;
   --blog-accent-soft: #d1e9e9;
+  --graph-color-1: #000080;
+  --graph-color-2: #cc0000;
+  --graph-color-3: #007070;
+  --graph-color-4: #5c478c;
+  --graph-color-5: #8a6500;
+  --graph-color-6: #225c84;
+  --graph-color-7: #804060;
   --blog-theme-font: Tahoma, Verdana, Arial, sans-serif;
   --blog-theme-heading-font: "Times New Roman", "SimSun", serif;
 }
@@ -1066,6 +1200,13 @@ html[data-theme="dark"] body.blog-archive[data-blog-theme="source"] {
   --blog-rule: #2a3440;
   --blog-accent: #79b8ff;
   --blog-accent-soft: rgba(121, 184, 255, 0.16);
+  --graph-color-1: #79b8ff;
+  --graph-color-2: #56d4dd;
+  --graph-color-3: #9fb6cc;
+  --graph-color-4: #8bb7e0;
+  --graph-color-5: #bfd1e3;
+  --graph-color-6: #6ca6d9;
+  --graph-color-7: #a3c4e6;
 }
 
 html[data-theme="dark"] body.blog-archive[data-blog-theme="source"] .blog-column-card {
@@ -1093,6 +1234,13 @@ html[data-theme="dark"] body.blog-archive[data-blog-theme="gov"] {
   --blog-rule: #263a52;
   --blog-accent: #76b7ff;
   --blog-accent-soft: rgba(118, 183, 255, 0.14);
+  --graph-color-1: #76b7ff;
+  --graph-color-2: #ff8f99;
+  --graph-color-3: #72d6a1;
+  --graph-color-4: #a9b9ff;
+  --graph-color-5: #ffc36a;
+  --graph-color-6: #6edce7;
+  --graph-color-7: #d4a6ff;
 }
 
 html[data-theme="dark"] body.blog-archive[data-blog-theme="gov"] .blog-home__hero {
@@ -1141,6 +1289,13 @@ html[data-theme="dark"] body.blog-archive[data-blog-theme="marx"] {
   --blog-rule: #2b3950;
   --blog-accent: #9eb7ff;
   --blog-accent-soft: #243447;
+  --graph-color-1: #9eb7ff;
+  --graph-color-2: #ff8a8a;
+  --graph-color-3: #8ad8d8;
+  --graph-color-4: #c3a7ff;
+  --graph-color-5: #e8c878;
+  --graph-color-6: #8fbce8;
+  --graph-color-7: #e6a0be;
 }
 
 html[data-theme="dark"] body.blog-archive[data-blog-theme="marx"] .blog-home__hero,
@@ -1273,9 +1428,32 @@ html[data-theme="dark"] body.blog-archive .blog-heatmap__legend i[data-level="4"
     flex-direction: column;
   }
 
+  .blog-home__hero-tools {
+    align-items: stretch;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .blog-graph__search--hero {
+    min-width: 0;
+  }
+
   .blog-graph__toolbar {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .blog-graph__search {
+    max-width: none;
+    width: 100%;
+  }
+
+  .blog-graph__stage {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-graph__inspector {
+    min-height: auto;
   }
 
   .blog-graph__node-label {

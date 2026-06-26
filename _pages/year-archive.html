@@ -24,10 +24,16 @@ redirect_from:
           Essays, technical notes, experiments, and field reports from my CS learning path.
         </p>
       </div>
-      <button type="button" class="blog-theme-toggle" aria-label="Switch blog layout theme">
-        <i class="fas fa-palette" aria-hidden="true"></i>
-        <span>Theme: Source</span>
-      </button>
+      <div class="blog-home__hero-tools">
+        <label class="blog-graph__search blog-graph__search--hero">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input type="search" data-graph-search-mirror placeholder="Search graph" aria-label="Search graph from blog header">
+        </label>
+        <button type="button" class="blog-theme-toggle" aria-label="Switch blog layout theme">
+          <i class="fas fa-palette" aria-hidden="true"></i>
+          <span>Theme: Source</span>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -160,10 +166,23 @@ redirect_from:
 
     <div class="blog-graph" data-blog-graph>
       <div class="blog-graph__toolbar">
-        <button type="button" class="blog-graph__control is-active" data-graph-labels aria-pressed="true">Labels</button>
-        <span>Clustered by column first, tag fallback</span>
+        <label class="blog-graph__search">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input type="search" data-graph-search placeholder="Search posts" aria-label="Search graph posts">
+        </label>
+        <label class="blog-graph__switch">
+          <input type="checkbox" data-graph-labels checked>
+          <span class="blog-graph__switch-track" aria-hidden="true"></span>
+          <span class="blog-graph__switch-text">Labels <b>On</b></span>
+        </label>
       </div>
-      <svg class="blog-graph__canvas" role="img" aria-label="Obsidian-like graph of blog posts grouped by columns and tags"></svg>
+      <div class="blog-graph__stage">
+        <svg class="blog-graph__canvas" role="img" aria-label="Obsidian-like graph of blog posts grouped by columns and tags"></svg>
+        <aside class="blog-graph__inspector" aria-live="polite">
+          <span>Cluster</span>
+          <strong data-graph-cluster-name>Hover a node</strong>
+        </aside>
+      </div>
     </div>
 
     <script type="application/json" id="blog-graph-data">
@@ -446,13 +465,21 @@ redirect_from:
 
       var svg = graphRoot.querySelector('.blog-graph__canvas');
       var labelButton = graphRoot.querySelector('[data-graph-labels]');
+      var searchInputs = Array.prototype.slice.call(document.querySelectorAll('[data-graph-search], [data-graph-search-mirror]'));
+      var clusterName = graphRoot.querySelector('[data-graph-cluster-name]');
       if (!svg || nodes.length === 0) {
         graphRoot.classList.add('is-empty');
         return;
       }
 
       var ns = 'http://www.w3.org/2000/svg';
-      var clusterColor = ['#58a6ff', '#f778ba', '#7ee787', '#d2a8ff', '#ffa657', '#56d4dd', '#ff7b72'];
+      var clusterColor = ['var(--graph-color-1)', 'var(--graph-color-2)', 'var(--graph-color-3)', 'var(--graph-color-4)', 'var(--graph-color-5)', 'var(--graph-color-6)', 'var(--graph-color-7)'];
+      var searchTerm = '';
+      var zoom = {
+        scale: 1,
+        x: 0,
+        y: 0
+      };
 
       function createSvgElement(name, className) {
         var el = document.createElementNS(ns, name);
@@ -465,7 +492,8 @@ redirect_from:
       var animationFrame = null;
 
       function render() {
-        var width = Math.max(graphRoot.clientWidth, 320);
+        var svgBox = svg.getBoundingClientRect();
+        var width = Math.max(svgBox.width || graphRoot.clientWidth, 320);
         var height = width < 620 ? 340 : 420;
         var padding = width < 620 ? 28 : 46;
         var activeDrag = null;
@@ -519,27 +547,27 @@ redirect_from:
           node.color = cluster.color;
         });
 
-        var clusterLayer = createSvgElement('g', 'blog-graph__clusters');
         var linkLayer = createSvgElement('g', 'blog-graph__links');
         var nodeLayer = createSvgElement('g', 'blog-graph__nodes');
-        svg.appendChild(clusterLayer);
-        svg.appendChild(linkLayer);
-        svg.appendChild(nodeLayer);
+        var viewportLayer = createSvgElement('g', 'blog-graph__viewport');
+        viewportLayer.appendChild(linkLayer);
+        viewportLayer.appendChild(nodeLayer);
+        svg.appendChild(viewportLayer);
 
-        clusters.forEach(function(cluster) {
-          var circle = createSvgElement('circle', 'blog-graph__cluster');
-          circle.setAttribute('cx', cluster.x);
-          circle.setAttribute('cy', cluster.y);
-          circle.setAttribute('r', Math.max(46, Math.min(96, 34 + cluster.nodes.length * 12)));
-          circle.style.setProperty('--graph-cluster-color', cluster.color);
-          clusterLayer.appendChild(circle);
+        function updateZoomTransform() {
+          viewportLayer.setAttribute('transform', 'translate(' + zoom.x + ' ' + zoom.y + ') scale(' + zoom.scale + ')');
+        }
 
-          var label = createSvgElement('text', 'blog-graph__cluster-label');
-          label.setAttribute('x', cluster.x);
-          label.setAttribute('y', Math.max(18, cluster.y - Math.max(46, 34 + cluster.nodes.length * 12) - 8));
-          label.textContent = cluster.label;
-          clusterLayer.appendChild(label);
-        });
+        function eventToWorld(event) {
+          var point = svg.createSVGPoint();
+          point.x = event.clientX;
+          point.y = event.clientY;
+          var svgPoint = point.matrixTransform(svg.getScreenCTM().inverse());
+          return {
+            x: (svgPoint.x - zoom.x) / zoom.scale,
+            y: (svgPoint.y - zoom.y) / zoom.scale
+          };
+        }
 
         links.forEach(function(link) {
           var line = createSvgElement('line', 'blog-graph__link blog-graph__link--' + link.type);
@@ -561,6 +589,8 @@ redirect_from:
           });
 
           var group = createSvgElement('g', 'blog-graph__node');
+          group.setAttribute('data-title', node.title.toLowerCase());
+          group.setAttribute('data-cluster', (node.clusterLabel || '').toLowerCase());
           node.element = group;
 
           var title = createSvgElement('title');
@@ -581,7 +611,26 @@ redirect_from:
           anchor.appendChild(group);
           nodeLayer.appendChild(anchor);
 
+          group.addEventListener('mouseenter', function() {
+            if (clusterName) {
+              clusterName.textContent = node.clusterLabel || node.cluster || 'Uncategorized';
+            }
+            graphRoot.classList.add('is-node-hovered');
+            group.classList.add('is-hovered');
+          });
+
+          group.addEventListener('mouseleave', function() {
+            graphRoot.classList.remove('is-node-hovered');
+            group.classList.remove('is-hovered');
+            if (clusterName) {
+              clusterName.textContent = searchTerm ? 'Search: ' + searchTerm : 'Hover a node';
+            }
+          });
+
           group.addEventListener('pointerdown', function(event) {
+            if (event.button === 1) {
+              return;
+            }
             event.preventDefault();
             activeDrag = {
               node: node,
@@ -600,10 +649,7 @@ redirect_from:
             if (!activeDrag || activeDrag.node !== node || activeDrag.pointerId !== event.pointerId) {
               return;
             }
-            var point = svg.createSVGPoint();
-            point.x = event.clientX;
-            point.y = event.clientY;
-            var transformed = point.matrixTransform(svg.getScreenCTM().inverse());
+            var transformed = eventToWorld(event);
             node.fx = Math.min(width - padding, Math.max(padding, transformed.x));
             node.fy = Math.min(height - padding, Math.max(padding, transformed.y));
             node.x = node.fx;
@@ -621,6 +667,9 @@ redirect_from:
             }
             activeDrag = null;
             node.isDragging = false;
+            node.userX = node.x;
+            node.userY = node.y;
+            node.userPlaced = true;
             node.fx = null;
             node.fy = null;
             group.classList.remove('is-dragging');
@@ -630,6 +679,9 @@ redirect_from:
           group.addEventListener('pointercancel', function(event) {
             activeDrag = null;
             node.isDragging = false;
+            node.userX = node.x;
+            node.userY = node.y;
+            node.userPlaced = true;
             node.fx = null;
             node.fy = null;
             group.classList.remove('is-dragging');
@@ -651,6 +703,30 @@ redirect_from:
           });
         }
 
+        function applySearch() {
+          var term = searchTerm.trim().toLowerCase();
+          graphRoot.classList.toggle('is-searching', !!term);
+          nodes.forEach(function(node) {
+            var haystack = [
+              node.title,
+              node.clusterLabel,
+              node.date,
+              (node.tags || []).join(' '),
+              (node.columns || []).join(' ')
+            ].join(' ').toLowerCase();
+            node.isSearchMatch = !term || haystack.indexOf(term) >= 0;
+            node.element.classList.toggle('is-search-match', node.isSearchMatch && !!term);
+            node.element.classList.toggle('is-search-dimmed', !node.isSearchMatch && !!term);
+          });
+          links.forEach(function(link) {
+            var active = !term || (link.sourceNode.isSearchMatch && link.targetNode.isSearchMatch);
+            link.element.classList.toggle('is-search-dimmed', !active);
+          });
+          if (clusterName) {
+            clusterName.textContent = term ? 'Search: ' + searchTerm : 'Hover a node';
+          }
+        }
+
         function step() {
           links.forEach(function(link) {
             var source = link.sourceNode;
@@ -659,11 +735,11 @@ redirect_from:
             var dy = target.y - source.y;
             var distance = Math.sqrt(dx * dx + dy * dy) || 1;
             var sameCluster = source.cluster === target.cluster;
-            var targetDistance = link.weight > 1 ? 76 : 124;
+            var targetDistance = link.weight > 1 ? 92 : 142;
             if (!sameCluster) {
-              targetDistance += 46;
+              targetDistance += 58;
             }
-            var force = (distance - targetDistance) * 0.0036 * link.weight;
+            var force = (distance - targetDistance) * 0.0024 * link.weight;
             var fx = dx / distance * force;
             var fy = dy / distance * force;
             if (!source.isDragging) {
@@ -684,8 +760,10 @@ redirect_from:
               var dyRepel = b.y - a.y;
               var distanceRepel = Math.sqrt(dxRepel * dxRepel + dyRepel * dyRepel) || 1;
               var sameNodeCluster = a.cluster === b.cluster;
-              var repel = sameNodeCluster ? 780 : 2200;
-              var forceRepel = Math.min(sameNodeCluster ? 1.2 : 2.6, repel / (distanceRepel * distanceRepel));
+              var minDistance = (a.radius || 8) + (b.radius || 8) + (sameNodeCluster ? 14 : 26);
+              var overlapBoost = distanceRepel < minDistance ? (minDistance - distanceRepel) * 0.12 : 0;
+              var repel = sameNodeCluster ? 1100 : 2800;
+              var forceRepel = Math.min(sameNodeCluster ? 1.65 : 3.1, repel / (distanceRepel * distanceRepel) + overlapBoost);
               var rx = dxRepel / distanceRepel * forceRepel;
               var ry = dyRepel / distanceRepel * forceRepel;
               if (!a.isDragging) {
@@ -706,12 +784,17 @@ redirect_from:
               node.y = node.fy;
               return;
             }
-            node.vx += (cluster.x - node.x) * 0.009;
-            node.vy += (cluster.y - node.y) * 0.009;
-            node.vx += (centerX - node.x) * 0.0008;
-            node.vy += (centerY - node.y) * 0.0008;
-            node.vx *= 0.9;
-            node.vy *= 0.9;
+            var clusterPull = node.userPlaced ? 0.0011 : 0.0028;
+            node.vx += (cluster.x - node.x) * clusterPull;
+            node.vy += (cluster.y - node.y) * clusterPull;
+            if (node.userPlaced) {
+              node.vx += (node.userX - node.x) * 0.0022;
+              node.vy += (node.userY - node.y) * 0.0022;
+            }
+            node.vx += (centerX - node.x) * 0.00018;
+            node.vy += (centerY - node.y) * 0.00018;
+            node.vx *= 0.94;
+            node.vy *= 0.94;
             node.x = Math.min(width - padding, Math.max(padding, node.x + node.vx));
             node.y = Math.min(height - padding, Math.max(padding, node.y + node.vy));
             if (node.x === padding || node.x === width - padding) {
@@ -727,17 +810,121 @@ redirect_from:
         }
 
         updateElements();
+        updateZoomTransform();
+        applySearch();
+        graphRoot.blogGraphApplySearch = applySearch;
         if (animationFrame) {
           window.cancelAnimationFrame(animationFrame);
         }
         animationFrame = window.requestAnimationFrame(step);
+
+        var isPanning = false;
+        var panStart = {
+          x: 0,
+          y: 0,
+          zoomX: 0,
+          zoomY: 0
+        };
+
+        svg.onpointerdown = function(event) {
+          if (event.button !== 1) {
+            return;
+          }
+          event.preventDefault();
+          isPanning = true;
+          panStart.x = event.clientX;
+          panStart.y = event.clientY;
+          panStart.zoomX = zoom.x;
+          panStart.zoomY = zoom.y;
+          svg.classList.add('is-panning');
+          svg.setPointerCapture(event.pointerId);
+        };
+
+        svg.onpointermove = function(event) {
+          if (!isPanning) {
+            return;
+          }
+          event.preventDefault();
+          zoom.x = panStart.zoomX + event.clientX - panStart.x;
+          zoom.y = panStart.zoomY + event.clientY - panStart.y;
+          updateZoomTransform();
+        };
+
+        svg.onpointerup = function(event) {
+          if (!isPanning) {
+            return;
+          }
+          isPanning = false;
+          svg.classList.remove('is-panning');
+          if (svg.hasPointerCapture(event.pointerId)) {
+            svg.releasePointerCapture(event.pointerId);
+          }
+        };
+
+        svg.onpointercancel = function(event) {
+          isPanning = false;
+          svg.classList.remove('is-panning');
+          if (svg.hasPointerCapture(event.pointerId)) {
+            svg.releasePointerCapture(event.pointerId);
+          }
+        };
+
+        svg.onauxclick = function(event) {
+          if (event.button === 1) {
+            event.preventDefault();
+          }
+        };
+
+        svg.onmousedown = function(event) {
+          if (event.button === 1) {
+            event.preventDefault();
+          }
+        };
+
+        svg.onwheel = function(event) {
+          event.preventDefault();
+          var point = svg.createSVGPoint();
+          point.x = event.clientX;
+          point.y = event.clientY;
+          var svgPoint = point.matrixTransform(svg.getScreenCTM().inverse());
+          var oldScale = zoom.scale;
+          var delta = event.deltaY < 0 ? 1.12 : 0.89;
+          var nextScale = Math.min(2.4, Math.max(0.62, oldScale * delta));
+          var worldX = (svgPoint.x - zoom.x) / oldScale;
+          var worldY = (svgPoint.y - zoom.y) / oldScale;
+          zoom.scale = nextScale;
+          zoom.x = svgPoint.x - worldX * nextScale;
+          zoom.y = svgPoint.y - worldY * nextScale;
+          updateZoomTransform();
+        };
       }
 
       if (labelButton) {
-        labelButton.addEventListener('click', function() {
-          var isActive = !graphRoot.classList.toggle('is-label-muted');
-          labelButton.classList.toggle('is-active', isActive);
-          labelButton.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+        labelButton.addEventListener('change', function() {
+          graphRoot.classList.toggle('is-label-muted', !labelButton.checked);
+        });
+      }
+
+      if (searchInputs.length) {
+        searchInputs.forEach(function(input) {
+          input.addEventListener('input', function() {
+            searchTerm = input.value;
+            searchInputs.forEach(function(peer) {
+              if (peer !== input) {
+                peer.value = searchTerm;
+              }
+            });
+            nodes.forEach(function(node) {
+              if (node.isSearchMatch) {
+                node.vx += (Math.random() - 0.5) * 0.9;
+                node.vy += (Math.random() - 0.5) * 0.9;
+              }
+            });
+            var currentApply = graphRoot.blogGraphApplySearch;
+            if (currentApply) {
+              currentApply();
+            }
+          });
         });
       }
 
