@@ -15,9 +15,11 @@ layout: default
 <div id="main" role="main">
   {% include sidebar.html %}
 
-  <div class="archive">
+  <div class="archive{% if page.blog_home %} blog-home-shell{% endif %}">
     {% unless page.header.overlay_color or page.header.overlay_image %}
-      <h1 class="page__title">{{ page.title }}</h1>
+      {% unless page.blog_home %}
+        <h1 class="page__title">{{ page.title }}</h1>
+      {% endunless %}
     {% endunless %}
     {{ content }}
   </div>

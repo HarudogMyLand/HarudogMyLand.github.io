@@ -1,0 +1,14 @@
+- key: computer-organization
+  title: Computer Organization
+  description: Architecture, memory, operating systems, and low-level CS notes.
+  icon: fas fa-microchip
+
+- key: systems-tools
+  title: Systems & Tools
+  description: Docker, WSL, shells, storage, and development environment notes.
+  icon: fas fa-terminal
+
+- key: writing-lab
+  title: Writing Lab
+  description: Blogging workflow, Markdown, site maintenance, and publishing experiments.
+  icon: fas fa-pen-nib
