@@ -11,7 +11,7 @@ layout: compress
     {% include head/custom.html %}
   </head>
 
-  <body>
+  <body class="{% if page.collection == 'posts' %}blog-post{% elsif page.url == '/year-archive/' or page.url == '/archive/' %}blog-archive{% endif %}">
 
     {% include browser-upgrade.html %}
     {% include masthead.html %}
