@@ -1,0 +1,31 @@
+- key: computer-science
+  title: Computer Science
+  description: Systems, programming tools, site engineering, Markdown workflow, and CS learning notes.
+  icon: fas fa-laptop-code
+  accent: blue
+  columns:
+    - computer-organization
+    - systems-tools
+    - writing-lab
+  tags:
+    - AcademicPages
+    - Blog
+    - Docker
+    - JavaScript
+    - Jekyll
+    - Markdown
+    - Visualization
+
+- key: finance-science
+  title: Finance Science
+  description: Markets, financial systems, quantitative ideas, economics notes, and finance reading paths.
+  icon: fas fa-chart-line
+  accent: gold
+  columns:
+    - finance-science
+  tags:
+    - Finance
+    - Economics
+    - Markets
+    - Quant
+    - Investment

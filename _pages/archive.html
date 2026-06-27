@@ -1,83 +1,574 @@
 ---
-layout: single
-title: "Archive & Tags"
+layout: archive
+title: "Archive"
 permalink: /archive/
 author_profile: true
+blog_home: true
 ---
 
-<style>
-  /* 优化后的标签云 */
-  .tag-cloud { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 3em; }
-  .tag-pill {
-    padding: 8px 16px; background-color: #161b22; border: 1px solid #30363d;
-    border-radius: 6px; color: #8b949e; text-decoration: none !important;
-    font-size: 0.9em; font-weight: 500; transition: all 0.2s ease;
-  }
-  .tag-pill:hover { background-color: #30363d; color: #e6edf3; transform: translateY(-2px); border-color: #8b949e;}
-  .tag-count { background: #21262d; padding: 2px 8px; border-radius: 12px; margin-left: 8px; font-size: 0.85em; color: #58a6ff; }
-  
-  /* 解决割裂感：引入卡片式列表容器 */
-  .archive-section {
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 12px;
-    padding: 20px 30px;
-    margin-bottom: 2em;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  }
-  .archive-section-title {
-    font-size: 1.6em; border-bottom: 1px solid #21262d; padding-bottom: 15px; margin-top: 0; margin-bottom: 15px; color: #e6edf3; display: flex; align-items: center; gap: 10px;
-  }
-  .archive-section-title i { color: #58a6ff; font-size: 0.8em; }
-  
-  /* 列表项优化 */
-  .archive-list { list-style: none; padding: 0; margin: 0; }
-  .archive-item {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 12px 0; border-bottom: 1px solid #21262d;
-  }
-  .archive-item:last-child { border-bottom: none; } /* 去掉最后一条线 */
-  
-  .archive-item a { color: #8b949e; text-decoration: none; font-size: 1.05em; transition: color 0.2s; font-weight: 500;}
-  .archive-item a:hover { color: #58a6ff; }
-  .archive-date { color: #484f58; font-family: "Cascadia Code", monospace; font-size: 0.85em; }
-</style>
+{% include base_path %}
 
-<!-- 1. 块状标签云 -->
-<div class="tag-cloud">
-  {% assign tags_max = 0 %}
-  {% for tag in site.tags %}
-    {% if tag[1].size > tags_max %}{% assign tags_max = tag[1].size %}{% endif %}
-  {% endfor %}
-  
-  {% for i in (1..tags_max) reversed %}
-    {% for tag in site.tags %}
-      {% if tag[1].size == i %}
-        <a href="#{{ tag[0] | slugify }}" class="tag-pill">
-          {{ tag[0] }} <span class="tag-count">{{ i }}</span>
-        </a>
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
+<div class="archive-hub" data-archive-hub data-current-mode="time">
+  <header class="archive-hub__hero">
+    <p class="archive-hub__eyebrow">Harudog Index</p>
+    <h1>Archive</h1>
+    <p>
+      Browse posts by time when you want a historical trace, or by category when you want a reading path.
+    </p>
+  </header>
+
+  <div class="archive-hub__mode" role="tablist" aria-label="Archive organization mode">
+    <button type="button" class="archive-hub__mode-button is-active" data-archive-mode="time" role="tab" aria-selected="true">
+      <i class="fas fa-calendar-alt" aria-hidden="true"></i>
+      Time Archive
+    </button>
+    <button type="button" class="archive-hub__mode-button" data-archive-mode="category" role="tab" aria-selected="false">
+      <i class="fas fa-layer-group" aria-hidden="true"></i>
+      Category Index
+    </button>
+  </div>
+
+  <section class="archive-hub__panel is-active" data-archive-panel="time" aria-labelledby="archive-time-title">
+    <div class="archive-hub__section-head">
+      <div>
+        <h2 id="archive-time-title">Time Archive</h2>
+        <p>Compact calendar plus a filterable historical timeline.</p>
+      </div>
+      <div class="archive-time-tools">
+        <label class="archive-hub__year-select">
+          <span>Year</span>
+          <select data-archive-year aria-label="Choose archive year"></select>
+        </label>
+        <button type="button" class="archive-calendar-toggle" data-calendar-toggle aria-expanded="true">
+          <i class="fas fa-compress-alt" aria-hidden="true"></i>
+          <span>Collapse Calendar</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="archive-calendar-shell" data-calendar-shell>
+      <div class="archive-calendar" data-archive-calendar></div>
+    </div>
+
+    <div class="archive-range">
+      <div>
+        <span>Timeline Range</span>
+        <strong data-archive-range-title>All posts</strong>
+      </div>
+      <label>
+        From
+        <input type="date" data-archive-start aria-label="Timeline start date">
+      </label>
+      <label>
+        To
+        <input type="date" data-archive-end aria-label="Timeline end date">
+      </label>
+      <button type="button" data-archive-range-reset>Reset</button>
+    </div>
+
+    <div class="archive-timeline" data-archive-timeline aria-live="polite"></div>
+  </section>
+
+  <section class="archive-hub__panel" data-archive-panel="category" aria-labelledby="archive-category-title" hidden>
+    <div class="archive-hub__section-head">
+      <div>
+        <h2 id="archive-category-title">Category Index</h2>
+        <p>Curated categories are configured in <code>_data/archive_categories.yml</code>.</p>
+      </div>
+      <span>{{ site.data.archive_categories | size }} categories</span>
+    </div>
+
+    <div class="archive-category-carousel" aria-label="Archive categories">
+      <button type="button" class="archive-category-carousel__nav" data-category-prev aria-label="Previous category">
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
+      </button>
+      <div class="archive-category-carousel__viewport">
+        <div class="archive-category-strip" data-category-track>
+          {% for category in site.data.archive_categories %}
+            {% assign category_count = 0 %}
+            {% for post in site.posts %}
+              {% assign category_match = false %}
+              {% if category.columns %}
+                {% for column_key in category.columns %}
+                  {% if post.columns contains column_key %}
+                    {% assign category_match = true %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% if category.tags %}
+                {% for tag_name in category.tags %}
+                  {% if post.tags contains tag_name %}
+                    {% assign category_match = true %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% if category_match %}
+                {% assign category_count = category_count | plus: 1 %}
+              {% endif %}
+            {% endfor %}
+
+            <button type="button" class="archive-category-card{% if forloop.first %} is-active{% endif %}" data-archive-category="{{ category.key }}" data-card-index="{{ forloop.index0 }}" aria-expanded="{% if forloop.first %}true{% else %}false{% endif %}">
+              <span class="archive-category-card__shine" aria-hidden="true"></span>
+              <span class="archive-category-card__icon">
+                <i class="{{ category.icon | default: 'fas fa-folder-open' }}" aria-hidden="true"></i>
+              </span>
+              <span class="archive-category-card__body">
+                <strong>{{ category.title }}</strong>
+                <em>{{ category.description }}</em>
+              </span>
+              <span class="archive-category-card__count">{{ category_count }} posts</span>
+            </button>
+          {% endfor %}
+        </div>
+      </div>
+      <button type="button" class="archive-category-carousel__nav" data-category-next aria-label="Next category">
+        <i class="fas fa-chevron-right" aria-hidden="true"></i>
+      </button>
+    </div>
+
+    <div class="archive-category-tools">
+      <label class="archive-category-search">
+        <i class="fas fa-search" aria-hidden="true"></i>
+        <input type="search" data-category-search placeholder="Search current category" aria-label="Search current category posts">
+      </label>
+      <button type="button" class="archive-category-tag-toggle" data-category-tag-toggle aria-expanded="false">
+        <i class="fas fa-tags" aria-hidden="true"></i>
+        <span>Tags</span>
+      </button>
+    </div>
+
+    <div class="archive-category-tags is-collapsed" data-category-tags>
+      <button type="button" class="archive-category-tag is-active" data-category-tag="all">All</button>
+      {% assign archive_tags_max = 0 %}
+      {% for tag in site.tags %}
+        {% if tag[1].size > archive_tags_max %}{% assign archive_tags_max = tag[1].size %}{% endif %}
+      {% endfor %}
+      {% for i in (1..archive_tags_max) reversed %}
+        {% for tag in site.tags %}
+          {% if tag[1].size == i %}
+            <button type="button" class="archive-category-tag" data-category-tag="{{ tag[0] | downcase | escape }}">
+              {{ tag[0] }} <span>{{ i }}</span>
+            </button>
+          {% endif %}
+        {% endfor %}
+      {% endfor %}
+    </div>
+
+    <div class="archive-category-panels">
+      {% for category in site.data.archive_categories %}
+        <section class="archive-category-panel{% if forloop.first %} is-active{% endif %}" data-archive-category-panel="{{ category.key }}" {% unless forloop.first %}hidden{% endunless %}>
+          <div class="archive-category-panel__head">
+            <div>
+              <p>Category</p>
+              <h3>{{ category.title }}</h3>
+            </div>
+            <span>{{ category.key }}</span>
+          </div>
+
+          <div class="archive-category-panel__posts">
+            {% assign has_category_posts = false %}
+            {% for post in site.posts %}
+              {% assign category_match = false %}
+              {% if category.columns %}
+                {% for column_key in category.columns %}
+                  {% if post.columns contains column_key %}
+                    {% assign category_match = true %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+              {% if category.tags %}
+                {% for tag_name in category.tags %}
+                  {% if post.tags contains tag_name %}
+                    {% assign category_match = true %}
+                  {% endif %}
+                {% endfor %}
+              {% endif %}
+
+              {% if category_match %}
+                {% assign has_category_posts = true %}
+                <article class="archive-category-post" data-category-post data-search="{{ post.title | append: ' ' | append: post.excerpt | strip_html | downcase | escape }}" data-tags="{% for tag in post.tags %}{{ tag | downcase | escape }}{% unless forloop.last %}|{% endunless %}{% endfor %}">
+                  <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y-%m-%d" }}</time>
+                  <h4><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h4>
+                  {% if post.excerpt %}
+                    <p>{{ post.excerpt | markdownify | strip_html | truncate: 132 }}</p>
+                  {% endif %}
+                  <div class="archive-category-post__meta">
+                    {% if post.columns %}
+                      {% for column_key in post.columns %}
+                        {% assign column = site.data.blog_columns | where: "key", column_key | first %}
+                        <span>{% if column %}{{ column.title }}{% else %}{{ column_key }}{% endif %}</span>
+                      {% endfor %}
+                    {% endif %}
+                    {% for tag in post.tags limit: 4 %}
+                      <span>#{{ tag }}</span>
+                    {% endfor %}
+                  </div>
+                </article>
+              {% endif %}
+            {% endfor %}
+
+            {% unless has_category_posts %}
+              <div class="archive-category-empty">
+                <i class="{{ category.icon | default: 'fas fa-folder-open' }}" aria-hidden="true"></i>
+                <strong>No posts yet</strong>
+                <p>Add matching columns or tags to posts and they will appear here automatically.</p>
+              </div>
+            {% endunless %}
+            <div class="archive-category-no-results" data-category-filter-empty hidden>
+              No posts match the current search and tag filter.
+            </div>
+          </div>
+        </section>
+      {% endfor %}
+    </div>
+  </section>
 </div>
 
-<!-- 2. 卡片式归档列表 -->
-{% for i in (1..tags_max) reversed %}
-  {% for tag in site.tags %}
-    {% if tag[1].size == i %}
-      <div class="archive-section" id="{{ tag[0] | slugify }}">
-        <h2 class="archive-section-title">
-          <i class="fas fa-hashtag"></i> {{ tag[0] }}
-        </h2>
-        <ul class="archive-list">
-          {% for post in tag[1] %}
-            <li class="archive-item">
-              <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-              <span class="archive-date">{{ post.date | date: "%Y / %m / %d" }}</span>
-            </li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
+<script type="application/json" id="archive-post-data">
+[
+  {% for post in site.posts %}
+    {
+      "title": {{ post.title | jsonify }},
+      "url": {{ post.url | relative_url | jsonify }},
+      "date": {{ post.date | date: "%Y-%m-%d" | jsonify }},
+      "month": {{ post.date | date: "%b" | jsonify }},
+      "excerpt": {{ post.excerpt | markdownify | strip_html | truncate: 150 | jsonify }},
+      "tags": [{% for tag in post.tags %}{{ tag | jsonify }}{% unless forloop.last %},{% endunless %}{% endfor %}]
+    }{% unless forloop.last %},{% endunless %}
   {% endfor %}
-{% endfor %}
+]
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var root = document.querySelector('[data-archive-hub]');
+    var dataEl = document.getElementById('archive-post-data');
+    if (!root || !dataEl) {
+      return;
+    }
+
+    var posts = [];
+    try {
+      posts = JSON.parse(dataEl.textContent);
+    } catch (error) {
+      posts = [];
+    }
+    posts.sort(function(a, b) {
+      return b.date.localeCompare(a.date);
+    });
+
+    var modeButtons = root.querySelectorAll('[data-archive-mode]');
+    var panels = root.querySelectorAll('[data-archive-panel]');
+    modeButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        var mode = button.getAttribute('data-archive-mode');
+        root.setAttribute('data-current-mode', mode);
+        modeButtons.forEach(function(peer) {
+          var active = peer === button;
+          peer.classList.toggle('is-active', active);
+          peer.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        panels.forEach(function(panel) {
+          var active = panel.getAttribute('data-archive-panel') === mode;
+          panel.classList.toggle('is-active', active);
+          panel.hidden = !active;
+        });
+      });
+    });
+
+    var categoryCards = root.querySelectorAll('[data-archive-category]');
+    var categoryPanels = root.querySelectorAll('[data-archive-category-panel]');
+    var categoryPrev = root.querySelector('[data-category-prev]');
+    var categoryNext = root.querySelector('[data-category-next]');
+    var categorySearch = root.querySelector('[data-category-search]');
+    var categoryTagToggle = root.querySelector('[data-category-tag-toggle]');
+    var categoryTags = root.querySelector('[data-category-tags]');
+    var categoryTagButtons = root.querySelectorAll('[data-category-tag]');
+    var activeCategoryIndex = 0;
+    var activeCategoryTag = 'all';
+
+    function applyCategoryFilters() {
+      var activePanel = root.querySelector('.archive-category-panel.is-active');
+      if (!activePanel) {
+        return;
+      }
+      var term = categorySearch ? categorySearch.value.trim().toLowerCase() : '';
+      var items = activePanel.querySelectorAll('[data-category-post]');
+      var emptyFilter = activePanel.querySelector('[data-category-filter-empty]');
+      var visibleCount = 0;
+
+      items.forEach(function(item) {
+        var haystack = item.getAttribute('data-search') || '';
+        var tags = (item.getAttribute('data-tags') || '').split('|');
+        var matchesSearch = !term || haystack.indexOf(term) >= 0;
+        var matchesTag = activeCategoryTag === 'all' || tags.indexOf(activeCategoryTag) >= 0;
+        var visible = matchesSearch && matchesTag;
+        item.hidden = !visible;
+        if (visible) {
+          visibleCount += 1;
+        }
+      });
+
+      if (emptyFilter) {
+        emptyFilter.hidden = visibleCount > 0 || items.length === 0;
+      }
+    }
+
+    function activateCategory(index) {
+      if (!categoryCards.length) {
+        return;
+      }
+      activeCategoryIndex = Math.max(0, Math.min(categoryCards.length - 1, index));
+      var activeCard = categoryCards[activeCategoryIndex];
+      var key = activeCard.getAttribute('data-archive-category');
+
+      categoryCards.forEach(function(peer, peerIndex) {
+        var active = peer === activeCard;
+        var offset = peerIndex - activeCategoryIndex;
+        peer.classList.toggle('is-active', active);
+        peer.classList.toggle('is-before', offset < 0);
+        peer.classList.toggle('is-after', offset > 0);
+        peer.style.setProperty('--card-offset', offset);
+        peer.setAttribute('aria-expanded', active ? 'true' : 'false');
+      });
+
+      categoryPanels.forEach(function(panel) {
+        var active = panel.getAttribute('data-archive-category-panel') === key;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+
+      applyCategoryFilters();
+
+      activeCard.scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center'
+      });
+    }
+
+    categoryCards.forEach(function(card, index) {
+      card.addEventListener('click', function() {
+        activateCategory(index);
+      });
+    });
+
+    if (categoryPrev) {
+      categoryPrev.addEventListener('click', function() {
+        activateCategory(activeCategoryIndex - 1);
+      });
+    }
+
+    if (categoryNext) {
+      categoryNext.addEventListener('click', function() {
+        activateCategory(activeCategoryIndex + 1);
+      });
+    }
+
+    activateCategory(0);
+
+    if (categorySearch) {
+      categorySearch.addEventListener('input', applyCategoryFilters);
+    }
+
+    if (categoryTagToggle && categoryTags) {
+      categoryTagToggle.addEventListener('click', function() {
+        var collapsed = categoryTags.classList.toggle('is-collapsed');
+        categoryTagToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+      });
+    }
+
+    categoryTagButtons.forEach(function(button) {
+      button.addEventListener('click', function() {
+        activeCategoryTag = button.getAttribute('data-category-tag') || 'all';
+        categoryTagButtons.forEach(function(peer) {
+          peer.classList.toggle('is-active', peer === button);
+        });
+        applyCategoryFilters();
+      });
+    });
+
+    var postsByDate = posts.reduce(function(map, post) {
+      if (!map[post.date]) {
+        map[post.date] = [];
+      }
+      map[post.date].push(post);
+      return map;
+    }, {});
+
+    var years = posts.map(function(post) {
+      return post.date.slice(0, 4);
+    }).filter(function(year, index, list) {
+      return list.indexOf(year) === index;
+    }).sort().reverse();
+
+    var yearSelect = root.querySelector('[data-archive-year]');
+    var calendar = root.querySelector('[data-archive-calendar]');
+    var calendarShell = root.querySelector('[data-calendar-shell]');
+    var calendarToggle = root.querySelector('[data-calendar-toggle]');
+    var rangeTitle = root.querySelector('[data-archive-range-title]');
+    var startInput = root.querySelector('[data-archive-start]');
+    var endInput = root.querySelector('[data-archive-end]');
+    var rangeReset = root.querySelector('[data-archive-range-reset]');
+    var timeline = root.querySelector('[data-archive-timeline]');
+
+    function pad(value) {
+      return value < 10 ? '0' + value : String(value);
+    }
+
+    function escapeHtml(value) {
+      return String(value || '').replace(/[&<>"']/g, function(character) {
+        return {
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;'
+        }[character];
+      });
+    }
+
+    function renderTimeline() {
+      if (!timeline || !rangeTitle) {
+        return;
+      }
+      var startDate = startInput && startInput.value ? startInput.value : '';
+      var endDate = endInput && endInput.value ? endInput.value : '';
+      var filteredPosts = posts.filter(function(post) {
+        if (startDate && post.date < startDate) {
+          return false;
+        }
+        if (endDate && post.date > endDate) {
+          return false;
+        }
+        return true;
+      });
+
+      if (startDate || endDate) {
+        rangeTitle.textContent = (startDate || 'Start') + ' - ' + (endDate || 'Now');
+      } else {
+        rangeTitle.textContent = 'All posts';
+      }
+
+      if (!filteredPosts.length) {
+        timeline.innerHTML = '<div class="archive-timeline__empty">No posts in this range.</div>';
+        return;
+      }
+
+      timeline.innerHTML = filteredPosts.map(function(post) {
+        return '<article class="archive-timeline__item">' +
+          '<time datetime="' + escapeHtml(post.date) + '">' + escapeHtml(post.date) + '</time>' +
+          '<div class="archive-timeline__body">' +
+          '<h3><a href="' + escapeHtml(post.url) + '">' + escapeHtml(post.title) + '</a></h3>' +
+          '<p>' + escapeHtml(post.excerpt || '') + '</p>' +
+          '<span>' + escapeHtml((post.tags || []).slice(0, 4).join(' / ')) + '</span>' +
+          '</div>' +
+          '</article>';
+      }).join('');
+    }
+
+    function renderCalendar(year) {
+      if (!calendar) {
+        return;
+      }
+      var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      calendar.innerHTML = monthNames.map(function(monthName, monthIndex) {
+        var first = new Date(Number(year), monthIndex, 1);
+        var daysInMonth = new Date(Number(year), monthIndex + 1, 0).getDate();
+        var leading = first.getDay();
+        var cells = [];
+        for (var blank = 0; blank < leading; blank += 1) {
+          cells.push('<span class="archive-calendar__day archive-calendar__day--blank"></span>');
+        }
+        for (var day = 1; day <= daysInMonth; day += 1) {
+          var dateKey = year + '-' + pad(monthIndex + 1) + '-' + pad(day);
+          var count = postsByDate[dateKey] ? postsByDate[dateKey].length : 0;
+          var level = count === 0 ? 0 : count === 1 ? 1 : count === 2 ? 2 : 3;
+          cells.push('<button type="button" class="archive-calendar__day" data-date="' + dateKey + '" data-level="' + level + '" title="' + dateKey + ': ' + count + ' posts">' + day + '</button>');
+        }
+        return '<section class="archive-calendar__month">' +
+          '<h3>' + monthName + '</h3>' +
+          '<div class="archive-calendar__weekdays"><span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span></div>' +
+          '<div class="archive-calendar__grid">' + cells.join('') + '</div>' +
+          '</section>';
+      }).join('');
+
+      calendar.querySelectorAll('[data-date]').forEach(function(dayButton) {
+        dayButton.addEventListener('click', function() {
+          calendar.querySelectorAll('.archive-calendar__day.is-selected').forEach(function(selected) {
+            selected.classList.remove('is-selected');
+          });
+          dayButton.classList.add('is-selected');
+          if (startInput && endInput) {
+            startInput.value = dayButton.getAttribute('data-date');
+            endInput.value = dayButton.getAttribute('data-date');
+          }
+          renderTimeline();
+        });
+      });
+
+      var firstDate = posts.filter(function(post) {
+        return post.date.slice(0, 4) === year;
+      }).map(function(post) {
+        return post.date;
+      }).sort().reverse()[0];
+      if (firstDate) {
+        var firstButton = calendar.querySelector('[data-date="' + firstDate + '"]');
+        if (firstButton) {
+          firstButton.classList.add('is-selected');
+        }
+      }
+    }
+
+    if (yearSelect && calendar) {
+      if (!years.length) {
+        years = [String(new Date().getFullYear())];
+      }
+      yearSelect.innerHTML = years.map(function(year) {
+        return '<option value="' + year + '">' + year + '</option>';
+      }).join('');
+      yearSelect.addEventListener('change', function() {
+        renderCalendar(yearSelect.value);
+      });
+      renderCalendar(yearSelect.value);
+    }
+
+    if (posts.length && startInput && endInput) {
+      var minDate = posts[posts.length - 1].date;
+      var maxDate = posts[0].date;
+      startInput.min = minDate;
+      startInput.max = maxDate;
+      endInput.min = minDate;
+      endInput.max = maxDate;
+      startInput.value = minDate;
+      endInput.value = maxDate;
+      startInput.addEventListener('change', renderTimeline);
+      endInput.addEventListener('change', renderTimeline);
+    }
+
+    if (rangeReset) {
+      rangeReset.addEventListener('click', function() {
+        if (posts.length && startInput && endInput) {
+          startInput.value = posts[posts.length - 1].date;
+          endInput.value = posts[0].date;
+        }
+        if (calendar) {
+          calendar.querySelectorAll('.archive-calendar__day.is-selected').forEach(function(selected) {
+            selected.classList.remove('is-selected');
+          });
+        }
+        renderTimeline();
+      });
+    }
+
+    if (calendarToggle && calendarShell) {
+      calendarToggle.addEventListener('click', function() {
+        var collapsed = calendarShell.classList.toggle('is-collapsed');
+        calendarToggle.setAttribute('aria-expanded', collapsed ? 'false' : 'true');
+        calendarToggle.querySelector('span').textContent = collapsed ? 'Expand Calendar' : 'Collapse Calendar';
+      });
+    }
+
+    renderTimeline();
+  });
+</script>
