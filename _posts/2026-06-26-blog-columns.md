@@ -10,22 +10,24 @@ columns:
   - writing-lab
 ---
 
-博客首页改版，我给 `Blog` 页面加了一个新的 **Columns** 模块。设计参考了CSDN或者知乎的专栏设置。tag 是文章的关键词，而专栏更是一系列文章集合。
+> 特别声明，本文含 AIGC 内容。
+
+更新了博客首页的一些功能，力图让内容更加整齐。
 
 ## 改了啥
 
-博客首页现在有四块主要内容：
+博客页的首页现在有四块主要内容：
 
-1. 顶部标题区域。
-2. 热力图，可以切换 Year、Month、Day。
-3. Knowledge Graph，用节点关系图呈现文章、tag 和 column 的联系。
-4. Posts 与 Columns。
+1. 顶部标题区域；
+2. 热力图，可以切换 Year、Month、Day；
+3. Knowledge Graph，用节点关系图呈现文章、tag 和 column 的联系；
+4. Posts 与 Columns；
 
-这样设计以后，文章可以被多个系统同时组织：它既可以被 tag 搜到，也可以被专栏收录。
+这样设计以后，文章可以被多个系统同时组织。它既可以被 tag 搜到，也可以被专栏收录。
 
 ## 技术栈
 
-没有引入新的大型框架，主要使用了 Jekyll 站点原本就有的技术：
+主要使用了 Jekyll 站点原本就有的技术：
 
 - **Jekyll**：负责静态站点生成。
 - **YAML Front Matter**：给文章声明 `tags` 和 `columns`。
@@ -36,19 +38,13 @@ columns:
 
 这里最关键的是 Jekyll Data Files 和 Liquid。
 
-专栏本身写在：
+专栏本身定义
 
-```text
+```yaml
 _data/blog_columns.yml
 ```
 
-博客首页会通过：
-
-```liquid
-site.data.blog_columns
-```
-
-读取所有专栏配置。
+博客首页会通过 `site.data.blog_columns` 读取所有专栏配置。
 
 然后用 Liquid 的 `where_exp` 找到显式加入该专栏的文章：
 
@@ -105,7 +101,6 @@ tags:
   - Docker
 columns:
   - systems-tools
-  - computer-organization
 ---
 ```
 
@@ -113,8 +108,6 @@ columns:
 
 ## Why This Matters
 
-博客一开始只有几篇文章时，tag 足够用了。但文章数量变多以后，tag 会越来越像一堆松散的关键词。专栏的作用，是把这些文章重新组织成可以阅读的路线。
-
-希望未来的博客不是一串时间倒序的碎片，而是一组持续生长的笔记。
+博客一开始只有几篇文章时，tag 足够用了。但文章数量变多以后，tag 变得庞杂混淆。专栏的作用，是把这些文章重新组织成可以阅读的路线。
 
 这次的 Columns 模块，就是朝这个方向迈出的一小步。

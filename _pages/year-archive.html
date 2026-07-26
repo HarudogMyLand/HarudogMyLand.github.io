@@ -29,10 +29,7 @@ redirect_from:
           <i class="fas fa-search" aria-hidden="true"></i>
           <input type="search" data-graph-search-mirror placeholder="Search graph" aria-label="Search graph from blog header">
         </label>
-        <button type="button" class="blog-theme-toggle" aria-label="Switch blog layout theme">
-          <i class="fas fa-palette" aria-hidden="true"></i>
-          <span>Theme: Source</span>
-        </button>
+        {% include blog-theme-picker.html id="blog-home-theme-choice" %}
       </div>
     </div>
   </section>
@@ -349,7 +346,6 @@ redirect_from:
     var headings = Array.prototype.slice.call(document.querySelectorAll('.blog-year-heading'));
     var heatmapTabs = Array.prototype.slice.call(document.querySelectorAll('.blog-heatmap-tab'));
     var heatmapPanels = Array.prototype.slice.call(document.querySelectorAll('.blog-heatmap-panel'));
-    var themeButton = document.querySelector('.blog-theme-toggle');
     var graphRoot = document.querySelector('[data-blog-graph]');
 
     function updateYearHeadings() {
@@ -396,41 +392,6 @@ redirect_from:
         });
       });
     });
-
-    var blogThemes = [
-      { key: 'source', label: 'Source' },
-      { key: 'gov', label: 'Gov' },
-      { key: 'marx', label: 'Archive' }
-    ];
-
-    function setBlogTheme(themeKey) {
-      var selected = blogThemes.filter(function(theme) {
-        return theme.key === themeKey;
-      })[0] || blogThemes[0];
-
-      document.body.setAttribute('data-blog-theme', selected.key);
-      localStorage.setItem('blogTheme', selected.key);
-
-      if (themeButton) {
-        themeButton.setAttribute('aria-label', 'Switch blog layout theme, current: ' + selected.label);
-        var label = themeButton.querySelector('span');
-        if (label) {
-          label.textContent = 'Theme: ' + selected.label;
-        }
-      }
-    }
-
-    if (themeButton) {
-      setBlogTheme(localStorage.getItem('blogTheme') || 'source');
-      themeButton.addEventListener('click', function() {
-        var current = document.body.getAttribute('data-blog-theme') || 'source';
-        var index = blogThemes.map(function(theme) {
-          return theme.key;
-        }).indexOf(current);
-        var next = blogThemes[(index + 1) % blogThemes.length];
-        setBlogTheme(next.key);
-      });
-    }
 
     function initBlogGraph() {
       var dataEl = document.getElementById('blog-graph-data');

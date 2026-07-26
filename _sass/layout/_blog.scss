@@ -18,6 +18,83 @@
   --blog-theme-heading-font: #{$sans-serif};
 }
 
+.blog-theme-picker {
+  position: relative;
+  z-index: 8;
+  width: max-content;
+  min-width: 10.5rem;
+  color: var(--blog-theme-text);
+  font-family: $sans-serif;
+  font-size: 0.8rem;
+}
+
+.blog-theme-picker summary {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--blog-rule);
+  border-radius: 6px;
+  background: var(--blog-module-bg);
+  cursor: pointer;
+  list-style: none;
+}
+
+.blog-theme-picker summary::-webkit-details-marker {
+  display: none;
+}
+
+.blog-theme-picker summary::after {
+  margin-left: auto;
+  color: var(--blog-text-muted);
+  content: "▾";
+}
+
+.blog-theme-picker[open] summary::after {
+  content: "▴";
+}
+
+.blog-theme-picker summary b {
+  color: var(--blog-accent);
+  font-weight: 600;
+}
+
+.blog-theme-picker > label,
+.blog-theme-picker > select {
+  display: block;
+}
+
+.blog-theme-picker > label {
+  margin: 0.7rem 0 0.35rem;
+  color: var(--blog-text-muted);
+  font-size: 0.72rem;
+}
+
+.blog-theme-picker > select {
+  width: 100%;
+  padding: 0.45rem 0.5rem;
+  border: 1px solid var(--blog-rule);
+  border-radius: 4px;
+  background: var(--blog-module-bg);
+  color: inherit;
+  font: inherit;
+}
+
+.blog-theme-picker[open] {
+  padding: 0 0.75rem 0.75rem;
+  border: 1px solid var(--blog-rule);
+  border-radius: 6px;
+  background: var(--blog-module-bg);
+  box-shadow: 0 12px 28px rgba(20, 38, 33, 0.12);
+}
+
+.blog-theme-picker[open] summary {
+  margin: 0 -0.75rem;
+  border: 0;
+  border-bottom: 1px solid var(--blog-rule);
+  border-radius: 6px 6px 0 0;
+}
+
 html[data-theme="dark"] {
   --blog-bg-soft: #101514;
   --blog-card-bg: #141b1a;
@@ -1458,5 +1535,221 @@ html[data-theme="dark"] body.blog-archive .blog-heatmap__legend i[data-level="4"
 
   .blog-graph__node-label {
     font-size: 0.66rem;
+  }
+}
+
+/* Tutorial reading surface: inspired by the calm, card-based PyTorch course layout. */
+body.blog-post[data-blog-theme="tutorial"] {
+  --blog-home-bg: #f5f7fa;
+  --blog-module-bg: #ffffff;
+  --blog-theme-text: #1f2937;
+  --blog-text-muted: #6b7280;
+  --blog-rule: #e5e7eb;
+  --blog-accent: #3b82f6;
+  background: #f5f7fa;
+}
+
+body.blog-post[data-blog-theme="tutorial"] .page__inner-wrap > header,
+body.blog-post[data-blog-theme="tutorial"] .page__content,
+body.blog-post[data-blog-theme="tutorial"] .blog-column-affiliation {
+  border: 1px solid var(--blog-rule);
+  border-radius: 10px;
+  background: var(--blog-module-bg);
+  box-shadow: 0 8px 24px rgba(31, 41, 55, 0.06);
+}
+
+body.blog-post[data-blog-theme="tutorial"] .page__inner-wrap > header {
+  margin-bottom: 1.25rem;
+}
+
+body.blog-post[data-blog-theme="tutorial"] .page__content {
+  padding: 2.5rem 3rem;
+  font-size: 1.05rem;
+  line-height: 1.85;
+}
+
+body.blog-post[data-blog-theme="tutorial"] .page__title {
+  color: #111827;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  font-weight: 750;
+  letter-spacing: -0.035em;
+}
+
+body.blog-post[data-blog-theme="tutorial"] .page__content h2 {
+  margin-top: 2.8rem;
+  padding: 0;
+  border: 0;
+  color: #111827;
+  font-size: 1.7rem;
+}
+
+body.blog-post[data-blog-theme="tutorial"] .page__content h3 {
+  color: #1f2937;
+  font-size: 1.3rem;
+}
+
+body.blog-post[data-blog-theme="tutorial"] .blog-theme-picker {
+  margin-top: 1.25rem;
+}
+
+/* BARE intentionally removes all dashboards and card decoration. */
+body[data-blog-theme="bare"] {
+  background: #ffffff;
+  color: #000000;
+  font-family: "Times New Roman", Times, serif;
+}
+
+body[data-blog-theme="bare"] .masthead,
+body[data-blog-theme="bare"] .page__footer,
+body[data-blog-theme="bare"] .sidebar,
+body[data-blog-theme="bare"] .blog-floating-toc,
+body[data-blog-theme="bare"] .page__meta,
+body[data-blog-theme="bare"] .page__share,
+body[data-blog-theme="bare"] .page__related,
+body[data-blog-theme="bare"] .blog-column-affiliation,
+body[data-blog-theme="bare"] .blog-home__hero,
+body.blog-archive[data-blog-theme="bare"] .blog-home__section:not([aria-labelledby="blog-post-list-title"]):not([aria-labelledby="blog-columns-title"]),
+body.blog-archive[data-blog-theme="bare"] .blog-tag-filter {
+  display: none !important;
+}
+
+body[data-blog-theme="bare"] #main,
+body.blog-archive[data-blog-theme="bare"] #main {
+  max-width: 720px;
+  margin: 2.25rem auto;
+  padding: 0 1rem;
+}
+
+body[data-blog-theme="bare"] .page,
+body[data-blog-theme="bare"] .archive {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+body[data-blog-theme="bare"] .page__inner-wrap,
+body[data-blog-theme="bare"] .page__inner-wrap > header,
+body[data-blog-theme="bare"] .page__content,
+body[data-blog-theme="bare"] .blog-home__section,
+body[data-blog-theme="bare"] .blog-column-card {
+  display: block;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-blog-theme="bare"] .page__title,
+body[data-blog-theme="bare"] .blog-home__section-head h2 {
+  margin: 0 0 0.6rem;
+  color: #000000;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 0;
+}
+
+body[data-blog-theme="bare"] .page__content,
+body[data-blog-theme="bare"] .page__content p,
+body[data-blog-theme="bare"] .page__content li {
+  color: #000000;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1rem;
+  line-height: 1.45;
+}
+
+body[data-blog-theme="bare"] .page__content h2,
+body[data-blog-theme="bare"] .page__content h3 {
+  margin-top: 1.6rem;
+  padding: 0;
+  border: 0;
+  color: #000000;
+  font-family: "Times New Roman", Times, serif;
+}
+
+body[data-blog-theme="bare"] a,
+body[data-blog-theme="bare"] .blog-column-card,
+body[data-blog-theme="bare"] .blog-column-card:hover {
+  color: #0000ee !important;
+  text-decoration: underline !important;
+}
+
+body.blog-archive[data-blog-theme="bare"] .blog-home__section {
+  margin: 0 0 2rem;
+}
+
+body.blog-archive[data-blog-theme="bare"] .blog-home__section-head {
+  display: block;
+  margin: 0 0 0.65rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+body.blog-archive[data-blog-theme="bare"] .blog-home__section-head span,
+body.blog-archive[data-blog-theme="bare"] .blog-post-row .archive__item-excerpt,
+body.blog-archive[data-blog-theme="bare"] .blog-post-row .archive__item-teaser {
+  display: none;
+}
+
+body.blog-archive[data-blog-theme="bare"] .blog-filtered-posts,
+body.blog-archive[data-blog-theme="bare"] .blog-column-grid {
+  display: block;
+}
+
+body.blog-archive[data-blog-theme="bare"] .blog-year-heading {
+  margin: 1.2rem 0 0.4rem;
+  color: #000000;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1.1rem;
+}
+
+body.blog-archive[data-blog-theme="bare"] .archive__item,
+body.blog-archive[data-blog-theme="bare"] .blog-column-card {
+  min-height: 0;
+  margin: 0 0 0.35rem;
+}
+
+body.blog-archive[data-blog-theme="bare"] .archive__item-title,
+body.blog-archive[data-blog-theme="bare"] .blog-column-card strong,
+body.blog-archive[data-blog-theme="bare"] .blog-column-card span,
+body.blog-archive[data-blog-theme="bare"] .blog-column-card em,
+body.blog-archive[data-blog-theme="bare"] .blog-column-card i {
+  display: inline;
+  color: inherit;
+  font-family: "Times New Roman", Times, serif;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: normal;
+}
+
+body.blog-archive[data-blog-theme="bare"] .blog-column-card::before {
+  content: "• ";
+  color: #000000;
+}
+
+body[data-blog-theme="bare"] .blog-theme-picker {
+  position: fixed;
+  top: 0.65rem;
+  right: 0.65rem;
+  z-index: 100;
+  min-width: 8rem;
+  color: #000000;
+  font-family: Arial, sans-serif;
+}
+
+body[data-blog-theme="bare"] .blog-theme-picker summary,
+body[data-blog-theme="bare"] .blog-theme-picker > select,
+body[data-blog-theme="bare"] .blog-theme-picker[open] {
+  border: 1px solid #999999;
+  border-radius: 0;
+  background: #ffffff;
+  box-shadow: none;
+}
+
+@media (max-width: 600px) {
+  body.blog-post[data-blog-theme="tutorial"] .page__content {
+    padding: 1.5rem;
   }
 }

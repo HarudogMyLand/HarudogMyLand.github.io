@@ -1,0 +1,12 @@
+<details class="blog-theme-picker">
+  <summary>
+    <i class="fas fa-palette" aria-hidden="true"></i>
+    <span>Style</span>
+    <b data-blog-theme-label>Tutorial</b>
+  </summary>
+  <label for="{{ include.id | default: 'blog-theme-choice' }}">Choose blog style</label>
+  <select id="{{ include.id | default: 'blog-theme-choice' }}" data-blog-theme-choice>
+    <option value="tutorial">Tutorial</option>
+    <option value="bare">BARE</option>
+  </select>
+</details>
