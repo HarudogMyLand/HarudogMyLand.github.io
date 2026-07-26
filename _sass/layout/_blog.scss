@@ -1538,6 +1538,8 @@ html[data-theme="dark"] body.blog-archive .blog-heatmap__legend i[data-level="4"
   }
 }
 
+/* Superseded by layout/_blog_modes.scss. */
+@if false {
 /* Tutorial reading surface: inspired by the calm, card-based PyTorch course layout. */
 body.blog-post[data-blog-theme="tutorial"] {
   --blog-home-bg: #f5f7fa;
@@ -1752,4 +1754,5 @@ body[data-blog-theme="bare"] .blog-theme-picker[open] {
   body.blog-post[data-blog-theme="tutorial"] .page__content {
     padding: 1.5rem;
   }
+}
 }

@@ -66,6 +66,14 @@ layout: default
       </section>
 
       {% if page.collection == 'posts' and page.columns %}
+        <nav class="bare-post-columns" aria-label="Post columns">
+          <span>Columns:</span>
+          {% for column_key in page.columns %}
+            {% assign column = site.data.blog_columns | where: "key", column_key | first %}
+            {% assign column_url = '/columns/' | append: column_key | append: '/' %}
+            <a href="{{ column_url | relative_url }}">{% if column %}{{ column.title }}{% else %}{{ column_key }}{% endif %}</a>{% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        </nav>
         <section class="blog-column-affiliation" aria-labelledby="blog-column-affiliation-title">
           <h2 id="blog-column-affiliation-title">Columns</h2>
           {% for column_key in page.columns %}

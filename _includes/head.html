@@ -4,11 +4,11 @@
 
 <script>
 (function() {
-  const darkModeKey = 'darkMode';
-  const isDark = localStorage.getItem(darkModeKey) === 'true' || 
-                 (!localStorage.getItem(darkModeKey) && window.matchMedia('(prefers-color-scheme: dark)').matches);
-  if (isDark) {
-    document.documentElement.classList.add('dark-mode');
+  const storedTheme = localStorage.getItem('theme');
+  const isBlogPage = {% if page.collection == 'posts' or page.url == '/year-archive/' or page.blog_column %}true{% else %}false{% endif %};
+  const isBare = isBlogPage && localStorage.getItem('blogTheme') === 'bare';
+  if (storedTheme === 'dark' && !isBare) {
+    document.documentElement.setAttribute('data-theme', 'dark');
   }
 })();
 </script>

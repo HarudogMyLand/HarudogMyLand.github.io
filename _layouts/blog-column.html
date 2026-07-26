@@ -1,0 +1,23 @@
+---
+layout: archive
+---
+
+{% assign column = site.data.blog_columns | where: "key", page.column_key | first %}
+{% assign column_posts = site.posts | where_exp: "post", "post.columns contains page.column_key" %}
+
+<div class="blog-theme-toolbar">
+  {% include blog-theme-picker.html id="blog-column-theme-choice" %}
+</div>
+
+<article class="blog-column-page">
+  <p><a href="{{ '/year-archive/' | relative_url }}">← All blog posts</a></p>
+  <h1>{% if column %}{{ column.title }}{% else %}{{ page.column_key }}{% endif %}</h1>
+  {% if column and column.description %}<p>{{ column.description }}</p>{% endif %}
+  <ul>
+    {% for post in column_posts %}
+      <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+    {% else %}
+      <li>No posts yet.</li>
+    {% endfor %}
+  </ul>
+</article>
