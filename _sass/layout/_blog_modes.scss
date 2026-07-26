@@ -24,6 +24,11 @@
   margin-bottom: 0.55rem;
 }
 
+body.blog-post {
+  --post-body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+  --post-heading-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+}
+
 /* Post modes share the same structure but keep their original palettes. */
 body.blog-post[data-blog-theme="source"] {
   --blog-bg-soft: #e8ebed;
@@ -32,6 +37,8 @@ body.blog-post[data-blog-theme="source"] {
   --blog-text-muted: #687078;
   --blog-rule: #d8d8d8;
   --blog-accent: #2e68aa;
+  --post-body-font: "Helvetica Neue", "Microsoft YaHei", Arial, sans-serif;
+  --post-heading-font: "Helvetica Neue", "Microsoft YaHei", Arial, sans-serif;
 }
 
 body.blog-post[data-blog-theme="gov"] {
@@ -41,12 +48,8 @@ body.blog-post[data-blog-theme="gov"] {
   --blog-text-muted: #5b6778;
   --blog-rule: #d9e4f2;
   --blog-accent: #005bac;
-}
-
-body.blog-post[data-blog-theme="gov"] .page__title,
-body.blog-post[data-blog-theme="gov"] .page__content h2,
-body.blog-post[data-blog-theme="gov"] .page__content h3 {
-  font-family: "Noto Serif SC", "SimSun", serif;
+  --post-body-font: "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+  --post-heading-font: "Noto Serif SC", "Songti SC", "SimSun", serif;
 }
 
 body.blog-post[data-blog-theme="marx"] {
@@ -56,13 +59,14 @@ body.blog-post[data-blog-theme="marx"] {
   --blog-text-muted: #3d4f72;
   --blog-rule: #d6e0ef;
   --blog-accent: #000080;
+  --post-body-font: Tahoma, "Microsoft YaHei", Arial, sans-serif;
+  --post-heading-font: Georgia, "Times New Roman", "Songti SC", serif;
 }
 
 body.blog-post[data-blog-theme="marx"] .page__title,
 body.blog-post[data-blog-theme="marx"] .page__content h2,
 body.blog-post[data-blog-theme="marx"] .page__content h3 {
   color: #000080;
-  font-family: "Times New Roman", "SimSun", serif;
 }
 
 body.blog-post[data-blog-theme="tutorial"] {
@@ -72,6 +76,8 @@ body.blog-post[data-blog-theme="tutorial"] {
   --blog-text-muted: #697386;
   --blog-rule: #e1e5eb;
   --blog-accent: #3478f6;
+  --post-body-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+  --post-heading-font: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
   background: #f3f5f8;
   color: #1f2937;
 }
@@ -122,6 +128,113 @@ body.blog-post[data-blog-theme="tutorial"] .page__content h2 {
 
 body.blog-post[data-blog-theme="tutorial"] .blog-theme-picker {
   margin-top: 1.25rem;
+}
+
+/* Shared article geometry and typography, based on the compact ML article reference. */
+body.blog-post:not([data-blog-theme="bare"]) #main {
+  max-width: 1200px;
+  padding-right: 2rem;
+  padding-left: 2rem;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page {
+  max-width: 920px;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__inner-wrap > header {
+  padding: 2rem 2.5rem;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__content,
+body.blog-post:not([data-blog-theme="bare"]) .page__content p,
+body.blog-post:not([data-blog-theme="bare"]) .page__content li,
+body.blog-post:not([data-blog-theme="bare"]) .page__content td,
+body.blog-post:not([data-blog-theme="bare"]) .page__content th {
+  font-family: var(--post-body-font);
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__content {
+  width: 100%;
+  max-width: none;
+  padding-right: 1.25rem;
+  padding-left: 1.25rem;
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__content p,
+body.blog-post:not([data-blog-theme="bare"]) .page__content li {
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__content li {
+  margin-top: 0.45rem;
+  margin-bottom: 0.45rem;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__title,
+body.blog-post:not([data-blog-theme="bare"]) .page__content h1,
+body.blog-post:not([data-blog-theme="bare"]) .page__content h2,
+body.blog-post:not([data-blog-theme="bare"]) .page__content h3,
+body.blog-post:not([data-blog-theme="bare"]) .page__content h4 {
+  font-family: var(--post-heading-font);
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__title {
+  font-size: clamp(1.9rem, 3.2vw, 2.5rem);
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__content h2 {
+  margin: 2rem 0 0.75rem;
+  font-size: 1.6rem;
+  line-height: 1.35;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__content h3 {
+  margin: 2rem 0 1rem;
+  font-size: 1.4rem;
+  line-height: 1.4;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__content h4 {
+  margin: 1.5rem 0 0.75rem;
+  font-size: 1.1rem;
+  line-height: 1.45;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__content table {
+  font-size: 14px;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__content p > code,
+body.blog-post:not([data-blog-theme="bare"]) .page__content li > code,
+body.blog-post:not([data-blog-theme="bare"]) .page__content td > code,
+body.blog-post:not([data-blog-theme="bare"]) .page__content pre code {
+  font-size: 13px;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .blog-column-affiliation,
+body.blog-post:not([data-blog-theme="bare"]) .page__meta,
+body.blog-post:not([data-blog-theme="bare"]) .page__share {
+  font-family: var(--post-body-font);
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .page__date,
+body.blog-post:not([data-blog-theme="bare"]) .page__meta {
+  font-family: var(--post-body-font);
+  font-size: 13px;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .blog-column-affiliation__label {
+  font-size: 15px;
+}
+
+body.blog-post:not([data-blog-theme="bare"]) .blog-column-affiliation__description,
+body.blog-post:not([data-blog-theme="bare"]) .blog-column-affiliation__post {
+  font-size: 13px;
 }
 
 html[data-theme="dark"] body.blog-post[data-blog-theme="source"] {
@@ -199,7 +312,7 @@ body[data-blog-theme="bare"] {
   --blog-accent: #0000cc;
   background: #ffffff !important;
   color: #111111 !important;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, "Microsoft YaHei", Helvetica, sans-serif;
 }
 
 body[data-blog-theme="bare"] .masthead {
@@ -219,7 +332,7 @@ body[data-blog-theme="bare"] .masthead__menu-item {
 
 body[data-blog-theme="bare"] .masthead a {
   color: #0000cc;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, "Microsoft YaHei", Helvetica, sans-serif;
   font-weight: normal;
   text-decoration: underline;
 }
@@ -264,7 +377,7 @@ body.blog-archive[data-blog-theme="bare"] .bare-blog-home {
 .bare-blog-home h1 {
   margin: 0 0 0.45rem;
   color: #111111;
-  font: bold 2.25rem/1.15 Arial, Helvetica, sans-serif;
+  font: bold 2rem/1.2 Arial, "Microsoft YaHei", Helvetica, sans-serif;
 }
 
 .bare-blog-home p {
@@ -281,7 +394,7 @@ body.blog-archive[data-blog-theme="bare"] .bare-blog-home {
 .bare-blog-grid h2 {
   margin: 0 0 1rem;
   color: #111111;
-  font: bold 1.75rem/1.2 Arial, Helvetica, sans-serif;
+  font: bold 1.55rem/1.25 Arial, "Microsoft YaHei", Helvetica, sans-serif;
 }
 
 .bare-blog-grid ul,
@@ -316,7 +429,7 @@ body[data-blog-theme="bare"] .blog-theme-toolbar {
 
 body[data-blog-theme="bare"] .blog-theme-picker {
   color: #111111;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, "Microsoft YaHei", Helvetica, sans-serif;
 }
 
 body[data-blog-theme="bare"] .blog-theme-picker summary,
@@ -350,7 +463,7 @@ body.blog-post[data-blog-theme="bare"] .page__inner-wrap > header {
 body.blog-post[data-blog-theme="bare"] .page__title {
   margin: 0 0 0.65rem;
   color: #111111;
-  font: bold 2rem/1.2 Arial, Helvetica, sans-serif;
+  font: bold 1.9rem/1.25 Arial, "Microsoft YaHei", Helvetica, sans-serif;
   letter-spacing: 0;
 }
 
@@ -360,13 +473,19 @@ body.blog-post[data-blog-theme="bare"] .page__content li,
 body.blog-post[data-blog-theme="bare"] .page__content h2,
 body.blog-post[data-blog-theme="bare"] .page__content h3 {
   color: #111111;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Arial, "Microsoft YaHei", Helvetica, sans-serif;
 }
 
 body.blog-post[data-blog-theme="bare"] .page__content {
-  max-width: 780px;
-  font-size: 1rem;
-  line-height: 1.55;
+  max-width: 920px;
+  font-size: 15px;
+  line-height: 1.6;
+}
+
+body.blog-post[data-blog-theme="bare"] .page__content p,
+body.blog-post[data-blog-theme="bare"] .page__content li {
+  font-size: 15px;
+  line-height: 1.6;
 }
 
 body.blog-post[data-blog-theme="bare"] .page__content h2,
@@ -378,7 +497,7 @@ body.blog-post[data-blog-theme="bare"] .page__content h3 {
 
 body.blog-post[data-blog-theme="bare"] .bare-post-columns {
   display: block;
-  max-width: 780px;
+  max-width: 920px;
   margin: 1.5rem 0 0;
   color: #333333;
   font-size: 0.9rem;
@@ -394,12 +513,22 @@ body[data-blog-theme="bare"] .blog-column-page {
 
 body[data-blog-theme="bare"] .blog-column-page h1 {
   color: #111111;
-  font: bold 2rem/1.2 Arial, Helvetica, sans-serif;
+  font: bold 1.9rem/1.25 Arial, "Microsoft YaHei", Helvetica, sans-serif;
 }
 
 @media (max-width: 720px) {
-  body.blog-post[data-blog-theme="tutorial"] .page__content {
+  body.blog-post:not([data-blog-theme="bare"]) #main {
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  body.blog-post:not([data-blog-theme="bare"]) .page__inner-wrap > header {
     padding: 1.5rem;
+  }
+
+  body.blog-post:not([data-blog-theme="bare"]) .page__content {
+    padding-right: 0.35rem;
+    padding-left: 0.35rem;
   }
 
   .bare-blog-grid {
