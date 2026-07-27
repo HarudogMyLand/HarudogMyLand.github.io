@@ -170,11 +170,17 @@ redirect_from:
           <i class="fas fa-search" aria-hidden="true"></i>
           <input type="search" data-graph-search placeholder="Search posts" aria-label="Search graph posts">
         </label>
-        <label class="blog-graph__switch">
-          <input type="checkbox" data-graph-labels checked>
-          <span class="blog-graph__switch-track" aria-hidden="true"></span>
-          <span class="blog-graph__switch-text">Labels <b>On</b></span>
-        </label>
+        <div class="blog-graph__controls" aria-label="Knowledge graph controls">
+          <button type="button" data-graph-zoom-out aria-label="Zoom graph out">−</button>
+          <button type="button" data-graph-reset aria-label="Reset graph view"><i class="fas fa-compress-arrows-alt" aria-hidden="true"></i></button>
+          <button type="button" data-graph-zoom-in aria-label="Zoom graph in">+</button>
+          <button type="button" data-graph-pause aria-pressed="false">Pause motion</button>
+          <label class="blog-graph__switch">
+            <input type="checkbox" data-graph-labels checked>
+            <span class="blog-graph__switch-track" aria-hidden="true"></span>
+            <span class="blog-graph__switch-text">Labels <b>On</b></span>
+          </label>
+        </div>
       </div>
       <div class="blog-graph__stage">
         <svg class="blog-graph__canvas" role="img" aria-label="Obsidian-like graph of blog posts grouped by columns and tags"></svg>
@@ -184,6 +190,15 @@ redirect_from:
         </aside>
       </div>
     </div>
+
+    <details class="blog-graph__list-fallback">
+      <summary>Browse graph posts as a list</summary>
+      <ul>
+        {% for post in site.posts %}
+          <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+        {% endfor %}
+      </ul>
+    </details>
 
     <script type="application/json" id="blog-graph-data">
       {
@@ -461,6 +476,10 @@ redirect_from:
 
       var svg = graphRoot.querySelector('.blog-graph__canvas');
       var labelButton = graphRoot.querySelector('[data-graph-labels]');
+      var pauseButton = graphRoot.querySelector('[data-graph-pause]');
+      var resetButton = graphRoot.querySelector('[data-graph-reset]');
+      var zoomInButton = graphRoot.querySelector('[data-graph-zoom-in]');
+      var zoomOutButton = graphRoot.querySelector('[data-graph-zoom-out]');
       var searchInputs = Array.prototype.slice.call(document.querySelectorAll('[data-graph-search], [data-graph-search-mirror]'));
       var clusterName = graphRoot.querySelector('[data-graph-cluster-name]');
       if (!svg || nodes.length === 0) {
@@ -471,6 +490,8 @@ redirect_from:
       var ns = 'http://www.w3.org/2000/svg';
       var clusterColor = ['var(--graph-color-1)', 'var(--graph-color-2)', 'var(--graph-color-3)', 'var(--graph-color-4)', 'var(--graph-color-5)', 'var(--graph-color-6)', 'var(--graph-color-7)'];
       var searchTerm = '';
+      var prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var graphPaused = prefersReducedMotion;
       var zoom = {
         scale: 1,
         x: 0,
@@ -487,12 +508,25 @@ redirect_from:
 
       var animationFrame = null;
 
+      function updatePauseButton() {
+        if (!pauseButton) {
+          return;
+        }
+        pauseButton.textContent = graphPaused ? 'Resume motion' : 'Pause motion';
+        pauseButton.setAttribute('aria-pressed', graphPaused ? 'true' : 'false');
+      }
+
       function render() {
+        if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = null;
+        }
         var svgBox = svg.getBoundingClientRect();
         var width = Math.max(svgBox.width || graphRoot.clientWidth, 320);
         var height = width < 620 ? 340 : 420;
         var padding = width < 620 ? 28 : 46;
         var activeDrag = null;
+        var frameCount = 0;
         svg.innerHTML = '';
         svg.setAttribute('viewBox', '0 0 ' + width + ' ' + height);
         svg.setAttribute('width', '100%');
@@ -623,6 +657,22 @@ redirect_from:
             }
           });
 
+          anchor.addEventListener('focus', function() {
+            if (clusterName) {
+              clusterName.textContent = node.clusterLabel || node.cluster || 'Uncategorized';
+            }
+            graphRoot.classList.add('is-node-hovered');
+            group.classList.add('is-hovered');
+          });
+
+          anchor.addEventListener('blur', function() {
+            graphRoot.classList.remove('is-node-hovered');
+            group.classList.remove('is-hovered');
+            if (clusterName) {
+              clusterName.textContent = searchTerm ? 'Search: ' + searchTerm : 'Focus or hover a node';
+            }
+          });
+
           group.addEventListener('pointerdown', function(event) {
             if (event.button === 1) {
               return;
@@ -639,6 +689,7 @@ redirect_from:
             node.fy = node.y;
             group.classList.add('is-dragging');
             group.setPointerCapture(event.pointerId);
+            startSimulation();
           });
 
           group.addEventListener('pointermove', function(event) {
@@ -652,6 +703,7 @@ redirect_from:
             node.y = node.fy;
             node.vx = 0;
             node.vy = 0;
+            updateElements();
             if (Math.abs(event.clientX - activeDrag.startX) + Math.abs(event.clientY - activeDrag.startY) > 5) {
               node.wasDragged = true;
             }
@@ -724,6 +776,11 @@ redirect_from:
         }
 
         function step() {
+          animationFrame = null;
+          if (graphPaused || document.hidden) {
+            return;
+          }
+          var movement = 0;
           links.forEach(function(link) {
             var source = link.sourceNode;
             var target = link.targetNode;
@@ -791,6 +848,7 @@ redirect_from:
             node.vy += (centerY - node.y) * 0.00018;
             node.vx *= 0.94;
             node.vy *= 0.94;
+            movement += Math.abs(node.vx) + Math.abs(node.vy);
             node.x = Math.min(width - padding, Math.max(padding, node.x + node.vx));
             node.y = Math.min(height - padding, Math.max(padding, node.y + node.vy));
             if (node.x === padding || node.x === width - padding) {
@@ -802,6 +860,17 @@ redirect_from:
           });
 
           updateElements();
+          frameCount += 1;
+          if (frameCount < 480 && (frameCount < 120 || movement > 0.04)) {
+            animationFrame = window.requestAnimationFrame(step);
+          }
+        }
+
+        function startSimulation() {
+          if (graphPaused || document.hidden || animationFrame) {
+            return;
+          }
+          frameCount = 0;
           animationFrame = window.requestAnimationFrame(step);
         }
 
@@ -809,10 +878,20 @@ redirect_from:
         updateZoomTransform();
         applySearch();
         graphRoot.blogGraphApplySearch = applySearch;
-        if (animationFrame) {
-          window.cancelAnimationFrame(animationFrame);
-        }
-        animationFrame = window.requestAnimationFrame(step);
+        graphRoot.blogGraphStart = startSimulation;
+        graphRoot.blogGraphAdjustZoom = function(factor) {
+          var oldScale = zoom.scale;
+          var nextScale = Math.min(2.4, Math.max(0.62, oldScale * factor));
+          var centerPointX = width / 2;
+          var centerPointY = height / 2;
+          var worldX = (centerPointX - zoom.x) / oldScale;
+          var worldY = (centerPointY - zoom.y) / oldScale;
+          zoom.scale = nextScale;
+          zoom.x = centerPointX - worldX * nextScale;
+          zoom.y = centerPointY - worldY * nextScale;
+          updateZoomTransform();
+        };
+        startSimulation();
 
         var isPanning = false;
         var panStart = {
@@ -823,7 +902,10 @@ redirect_from:
         };
 
         svg.onpointerdown = function(event) {
-          if (event.button !== 1) {
+          if (event.target.closest && event.target.closest('.blog-graph__node-link')) {
+            return;
+          }
+          if (event.button !== 0 && event.button !== 1) {
             return;
           }
           event.preventDefault();
@@ -901,6 +983,54 @@ redirect_from:
         });
       }
 
+      updatePauseButton();
+
+      if (pauseButton) {
+        pauseButton.addEventListener('click', function() {
+          graphPaused = !graphPaused;
+          if (graphPaused && animationFrame) {
+            window.cancelAnimationFrame(animationFrame);
+            animationFrame = null;
+          }
+          updatePauseButton();
+          if (!graphPaused && graphRoot.blogGraphStart) {
+            graphRoot.blogGraphStart();
+          }
+        });
+      }
+
+      if (resetButton) {
+        resetButton.addEventListener('click', function() {
+          zoom = { scale: 1, x: 0, y: 0 };
+          nodes.forEach(function(node) {
+            delete node.x;
+            delete node.y;
+            delete node.userX;
+            delete node.userY;
+            node.userPlaced = false;
+            node.vx = 0;
+            node.vy = 0;
+          });
+          render();
+        });
+      }
+
+      if (zoomInButton) {
+        zoomInButton.addEventListener('click', function() {
+          if (graphRoot.blogGraphAdjustZoom) {
+            graphRoot.blogGraphAdjustZoom(1.2);
+          }
+        });
+      }
+
+      if (zoomOutButton) {
+        zoomOutButton.addEventListener('click', function() {
+          if (graphRoot.blogGraphAdjustZoom) {
+            graphRoot.blogGraphAdjustZoom(0.83);
+          }
+        });
+      }
+
       if (searchInputs.length) {
         searchInputs.forEach(function(input) {
           input.addEventListener('input', function() {
@@ -920,6 +1050,9 @@ redirect_from:
             if (currentApply) {
               currentApply();
             }
+            if (graphRoot.blogGraphStart) {
+              graphRoot.blogGraphStart();
+            }
           });
         });
       }
@@ -928,6 +1061,11 @@ redirect_from:
       window.addEventListener('resize', function() {
         window.clearTimeout(graphRoot.blogGraphResizeTimer);
         graphRoot.blogGraphResizeTimer = window.setTimeout(render, 160);
+      });
+      document.addEventListener('visibilitychange', function() {
+        if (!document.hidden && !graphPaused && graphRoot.blogGraphStart) {
+          graphRoot.blogGraphStart();
+        }
       });
     }
 

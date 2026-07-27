@@ -13,6 +13,19 @@ layout: compress
 
   <body class="{% if page.collection == 'posts' %}blog-post{% elsif page.url == '/year-archive/' or page.url == '/archive/' or page.blog_column %}blog-archive{% endif %}"{% if page.collection == 'posts' %} data-blog-theme="tutorial"{% elsif page.url == '/year-archive/' or page.blog_column %} data-blog-theme="source"{% endif %}>
 
+    <script>
+      (function() {
+        if (!document.body.hasAttribute('data-blog-theme')) return;
+        var allowedThemes = ['tutorial', 'source', 'gov', 'marx', 'bare'];
+        var defaultTheme = document.body.classList.contains('blog-post') ? 'tutorial' : 'source';
+        var storedTheme = null;
+        try {
+          storedTheme = window.localStorage.getItem('blogTheme');
+        } catch (error) {}
+        document.body.setAttribute('data-blog-theme', allowedThemes.indexOf(storedTheme) >= 0 ? storedTheme : defaultTheme);
+      })();
+    </script>
+
     {% include browser-upgrade.html %}
     {% include masthead.html %}
 

@@ -159,10 +159,16 @@ layout: default
         function setCollapsed(isCollapsed) {
           toc.classList.toggle('is-collapsed', isCollapsed);
           toggle.setAttribute('aria-expanded', isCollapsed ? 'false' : 'true');
-          localStorage.setItem('blogTocCollapsed', isCollapsed ? 'true' : 'false');
+          try {
+            localStorage.setItem('blogTocCollapsed', isCollapsed ? 'true' : 'false');
+          } catch (error) {}
         }
 
-        setCollapsed(localStorage.getItem('blogTocCollapsed') !== 'false');
+        var storedCollapsed = null;
+        try {
+          storedCollapsed = localStorage.getItem('blogTocCollapsed');
+        } catch (error) {}
+        setCollapsed(storedCollapsed !== 'false');
         toggle.addEventListener('click', function() {
           setCollapsed(!toc.classList.contains('is-collapsed'));
         });

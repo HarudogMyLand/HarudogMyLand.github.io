@@ -783,6 +783,31 @@ html[data-theme="dark"] .blog-post .page__content td > code {
   color: var(--blog-text-muted);
 }
 
+.blog-graph__controls {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.45rem;
+}
+
+.blog-graph__controls button {
+  min-height: 2rem;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid var(--blog-rule);
+  border-radius: 0;
+  background: var(--blog-module-bg);
+  color: var(--blog-theme-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.blog-graph__controls button:hover,
+.blog-graph__controls button:focus-visible {
+  border-color: var(--blog-accent);
+  color: var(--blog-accent);
+}
+
 .blog-graph__search {
   display: inline-flex;
   align-items: center;
@@ -913,6 +938,28 @@ html[data-theme="dark"] .blog-post .page__content td > code {
   color: var(--blog-theme-text);
   font-size: 0.92rem;
   line-height: 1.35;
+}
+
+.blog-graph__list-fallback {
+  margin-top: 1rem;
+  color: var(--blog-text-muted);
+}
+
+.blog-graph__list-fallback summary {
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.blog-graph__list-fallback ul {
+  columns: 2;
+  margin-top: 0.75rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-graph__link,
+  .blog-graph__switch-track::after {
+    transition: none;
+  }
 }
 
 .blog-graph__link {
@@ -1520,6 +1567,11 @@ html[data-theme="dark"] body.blog-archive .blog-heatmap__legend i[data-level="4"
     flex-direction: column;
   }
 
+  .blog-graph__controls {
+    justify-content: flex-start;
+    width: 100%;
+  }
+
   .blog-graph__search {
     max-width: none;
     width: 100%;
@@ -1531,6 +1583,10 @@ html[data-theme="dark"] body.blog-archive .blog-heatmap__legend i[data-level="4"
 
   .blog-graph__inspector {
     min-height: auto;
+  }
+
+  .blog-graph__list-fallback ul {
+    columns: 1;
   }
 
   .blog-graph__node-label {

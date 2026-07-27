@@ -10,8 +10,6 @@ redirect_from:
 {% include base_path %}
 
 <link rel="stylesheet" href="{{ base_path }}/assets/css/cv-style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
 <style>
   .archive {
     width: 80%;
@@ -29,7 +27,10 @@ redirect_from:
 
 {% include cv-template.html %}
 
+{% assign cv_pdf = site.static_files | where: "path", "/files/cv.pdf" | first %}
 <div class="cv-download-links">
-  <a href="{{ base_path }}/files/cv.pdf" class="btn btn--primary">Download CV as PDF</a>
-  <a href="{{ base_path }}" class="btn btn--inverse">View Markdown CV</a>
+  {% if cv_pdf %}
+    <a href="{{ base_path }}/files/cv.pdf" class="btn btn--primary">Download CV as PDF</a>
+  {% endif %}
+  <a href="{{ '/cv/' | relative_url }}" class="btn btn--inverse">View Markdown CV</a>
 </div>

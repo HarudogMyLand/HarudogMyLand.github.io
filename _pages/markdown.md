@@ -2,6 +2,7 @@
 permalink: /markdown/
 title: "Markdown"
 author_profile: true
+mathjax: true
 redirect_from: 
   - /md/
   - /markdown.html
@@ -67,4 +68,3 @@ Attention: Markdown Escape Character may infect MathJax, read [this method](http
 - [HTML, MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML)
 
 Original passage: [Markdown - Your Name / Site Title](https://academicpages.github.io/markdown/)
-

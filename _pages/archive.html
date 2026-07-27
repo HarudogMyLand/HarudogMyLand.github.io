@@ -18,17 +18,17 @@ blog_home: true
   </header>
 
   <div class="archive-hub__mode" role="tablist" aria-label="Archive organization mode">
-    <button type="button" class="archive-hub__mode-button is-active" data-archive-mode="time" role="tab" aria-selected="true">
+    <button type="button" id="archive-tab-time" class="archive-hub__mode-button is-active" data-archive-mode="time" role="tab" aria-selected="true" aria-controls="archive-panel-time" tabindex="0">
       <i class="fas fa-calendar-alt" aria-hidden="true"></i>
       Time Archive
     </button>
-    <button type="button" class="archive-hub__mode-button" data-archive-mode="category" role="tab" aria-selected="false">
+    <button type="button" id="archive-tab-category" class="archive-hub__mode-button" data-archive-mode="category" role="tab" aria-selected="false" aria-controls="archive-panel-category" tabindex="-1">
       <i class="fas fa-layer-group" aria-hidden="true"></i>
       Category Index
     </button>
   </div>
 
-  <section class="archive-hub__panel is-active" data-archive-panel="time" aria-labelledby="archive-time-title">
+  <section id="archive-panel-time" class="archive-hub__panel is-active" data-archive-panel="time" role="tabpanel" aria-labelledby="archive-tab-time">
     <div class="archive-hub__section-head">
       <div>
         <h2 id="archive-time-title">Time Archive</h2>
@@ -69,7 +69,7 @@ blog_home: true
     <div class="archive-timeline" data-archive-timeline aria-live="polite"></div>
   </section>
 
-  <section class="archive-hub__panel" data-archive-panel="category" aria-labelledby="archive-category-title" hidden>
+  <section id="archive-panel-category" class="archive-hub__panel" data-archive-panel="category" role="tabpanel" aria-labelledby="archive-tab-category" hidden>
     <div class="archive-hub__section-head">
       <div>
         <h2 id="archive-category-title">Category Index</h2>
@@ -259,20 +259,47 @@ blog_home: true
 
     var modeButtons = root.querySelectorAll('[data-archive-mode]');
     var panels = root.querySelectorAll('[data-archive-panel]');
+
+    function activateMode(button, moveFocus) {
+      var mode = button.getAttribute('data-archive-mode');
+      root.setAttribute('data-current-mode', mode);
+      modeButtons.forEach(function(peer) {
+        var active = peer === button;
+        peer.classList.toggle('is-active', active);
+        peer.setAttribute('aria-selected', active ? 'true' : 'false');
+        peer.setAttribute('tabindex', active ? '0' : '-1');
+      });
+      panels.forEach(function(panel) {
+        var active = panel.getAttribute('data-archive-panel') === mode;
+        panel.classList.toggle('is-active', active);
+        panel.hidden = !active;
+      });
+      if (moveFocus) {
+        button.focus();
+      }
+    }
+
     modeButtons.forEach(function(button) {
       button.addEventListener('click', function() {
-        var mode = button.getAttribute('data-archive-mode');
-        root.setAttribute('data-current-mode', mode);
-        modeButtons.forEach(function(peer) {
-          var active = peer === button;
-          peer.classList.toggle('is-active', active);
-          peer.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-        panels.forEach(function(panel) {
-          var active = panel.getAttribute('data-archive-panel') === mode;
-          panel.classList.toggle('is-active', active);
-          panel.hidden = !active;
-        });
+        activateMode(button, false);
+      });
+      button.addEventListener('keydown', function(event) {
+        var buttons = Array.prototype.slice.call(modeButtons);
+        var currentIndex = buttons.indexOf(button);
+        var nextIndex = currentIndex;
+        if (event.key === 'ArrowRight') {
+          nextIndex = (currentIndex + 1) % buttons.length;
+        } else if (event.key === 'ArrowLeft') {
+          nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+        } else if (event.key === 'Home') {
+          nextIndex = 0;
+        } else if (event.key === 'End') {
+          nextIndex = buttons.length - 1;
+        } else {
+          return;
+        }
+        event.preventDefault();
+        activateMode(buttons[nextIndex], true);
       });
     });
 
@@ -341,7 +368,7 @@ blog_home: true
       applyCategoryFilters();
 
       activeCard.scrollIntoView({
-        behavior: 'smooth',
+        behavior: window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
         block: 'nearest',
         inline: 'center'
       });

@@ -12,14 +12,28 @@
     return document.body.hasAttribute('data-blog-theme');
   }
 
+  function getStoredValue(key) {
+    try {
+      return window.localStorage.getItem(key);
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function setStoredValue(key, value) {
+    try {
+      window.localStorage.setItem(key, value);
+    } catch (error) {}
+  }
+
   function setTheme(theme) {
     var defaultTheme = document.body.classList.contains('blog-post') ? 'tutorial' : 'source';
     var selectedTheme = labels[theme] ? theme : defaultTheme;
-    var colorTheme = window.localStorage.getItem('theme');
+    var colorTheme = getStoredValue('theme');
     var themeToggle = document.getElementById('theme-toggle');
 
     document.body.setAttribute('data-blog-theme', selectedTheme);
-    window.localStorage.setItem(storageKey, selectedTheme);
+    setStoredValue(storageKey, selectedTheme);
 
     if (selectedTheme === 'bare') {
       document.documentElement.removeAttribute('data-theme');
@@ -55,7 +69,7 @@
       return;
     }
 
-    setTheme(window.localStorage.getItem(storageKey) || 'tutorial');
+    setTheme(getStoredValue(storageKey));
     Array.prototype.forEach.call(document.querySelectorAll('[data-blog-theme-choice]'), function(choice) {
       choice.addEventListener('change', function() {
         setTheme(choice.value);
