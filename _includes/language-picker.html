@@ -1,0 +1,34 @@
+<details class="language-picker" data-language-picker data-language-source="{{ page.path | escape }}">
+  <summary aria-label="Choose language">
+    <i class="fas fa-language" aria-hidden="true"></i>
+    <span class="language-picker__label">Language</span>
+    <b data-language-current>EN</b>
+  </summary>
+  <div class="language-picker__menu">
+    <p>Choose language</p>
+    <div data-language-options></div>
+    <noscript><small>Use the language suffix in the page URL to open a translation.</small></noscript>
+  </div>
+
+  <div data-language-documents hidden aria-hidden="true">
+    {% for document in site.pages %}
+      {% if document.url and document.published != false %}
+        <a data-language-document data-language-path="{{ document.path | escape }}" href="{{ document.url | relative_url }}"></a>
+      {% endif %}
+    {% endfor %}
+    {% for document in site.posts %}
+      {% if document.url and document.published != false %}
+        <a data-language-document data-language-path="{{ document.path | escape }}" href="{{ document.url | relative_url }}"></a>
+      {% endif %}
+    {% endfor %}
+    {% for collection in site.collections %}
+      {% unless collection.label == "posts" %}
+        {% for document in collection.docs %}
+          {% if document.url and document.published != false %}
+            <a data-language-document data-language-path="{{ document.path | escape }}" href="{{ document.url | relative_url }}"></a>
+          {% endif %}
+        {% endfor %}
+      {% endunless %}
+    {% endfor %}
+  </div>
+</details>
