@@ -189,7 +189,7 @@
     }
   }
 
-  button {
+  > button {
     position: absolute;
     height: 2.5rem;
     right: 0;
@@ -295,7 +295,9 @@
     }
 
     .language-picker__option {
+      position: static;
       display: flex;
+      height: auto;
       align-items: center;
       justify-content: space-between;
       gap: 1rem;

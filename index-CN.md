@@ -1,6 +1,7 @@
 ---
 layout: single
 permalink: /index-CN/
+lang: zh-CN
 title: "你好，世界！我是 Harudog"
 excerpt: "关于我"
 author_profile: true

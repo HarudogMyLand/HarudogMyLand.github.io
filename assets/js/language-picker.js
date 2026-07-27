@@ -1,6 +1,5 @@
 (function() {
-  var defaultLanguage = 'EN';
-  var knownLanguageCodes = ['CN', 'DE', 'EH', 'EN', 'ES', 'FR', 'JP', 'KR', 'RU'];
+  var defaultLanguage = 'EH';
   var languageLabels = {
     CN: '中文',
     EH: 'English',
@@ -48,17 +47,24 @@
     path = path.replace(/\/+$/, '').replace(/\.[^./]+$/, '');
     var suffixMatch = path.match(/-([a-z0-9]{2,})$/i);
     var language = defaultLanguage;
+    var hasLanguageSuffix = false;
     if (suffixMatch) {
       var candidate = suffixMatch[1].toUpperCase();
-      if (suffixMatch[1] === suffixMatch[1].toUpperCase() || knownLanguageCodes.indexOf(candidate) >= 0) {
+      if (suffixMatch[1] === suffixMatch[1].toUpperCase()) {
         language = candidate;
+        hasLanguageSuffix = true;
         path = path.slice(0, suffixMatch.index);
       }
     }
     return {
       key: path.toLowerCase(),
-      language: language
+      language: language,
+      hasLanguageSuffix: hasLanguageSuffix
     };
+  }
+
+  function isHomepage(documentEntry) {
+    return /(^|\/)index$/.test(documentEntry.sourceKey);
   }
 
   function parseTranslations(element) {
@@ -88,6 +94,7 @@
         sourceKey: source.key,
         urlKey: url.key,
         language: source.language === defaultLanguage && url.language !== defaultLanguage ? url.language : source.language,
+        hasLanguageSuffix: source.hasLanguageSuffix,
         url: element.getAttribute('href')
       };
     });
@@ -108,9 +115,22 @@
       languageByCode[documentEntry.language] = documentEntry;
     });
 
+    var siteLanguages = {};
+    documents.forEach(function(documentEntry) {
+      if (!documentEntry.hasLanguageSuffix) {
+        return;
+      }
+      if (!siteLanguages[documentEntry.language] || isHomepage(documentEntry)) {
+        siteLanguages[documentEntry.language] = documentEntry;
+      }
+    });
+    if (!siteLanguages[currentLanguage]) {
+      siteLanguages[currentLanguage] = languageByCode[currentLanguage] || null;
+    }
+
     var options = picker.querySelector('[data-language-options]');
     var currentLabel = picker.querySelector('[data-language-current]');
-    var availableLanguages = Object.keys(languageByCode).sort(function(left, right) {
+    var availableLanguages = Object.keys(siteLanguages).sort(function(left, right) {
       if (left === defaultLanguage) return -1;
       if (right === defaultLanguage) return 1;
       return left.localeCompare(right);
@@ -121,7 +141,7 @@
     }
 
     availableLanguages.forEach(function(language) {
-      var documentEntry = languageByCode[language];
+      var documentEntry = languageByCode[language] || siteLanguages[language];
       var option = document.createElement('button');
       option.type = 'button';
       option.className = 'language-picker__option';
@@ -132,6 +152,7 @@
       option.querySelector('span').textContent = languageLabels[language] || language;
       option.addEventListener('click', function() {
         writePreference(language);
+        picker.open = false;
         if (documentEntry && documentEntry.url && documentEntry.url !== window.location.pathname) {
           window.location.href = documentEntry.url;
         }
