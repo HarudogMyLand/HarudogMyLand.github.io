@@ -234,6 +234,98 @@
       }
     }
 
+    .language-picker {
+      position: relative;
+
+      summary {
+        display: flex;
+        align-items: center;
+        gap: 0.35rem;
+        margin: 0 0 0 1rem;
+        padding: 0.5rem 0;
+        color: var(--global-masthead-link-color);
+        cursor: pointer;
+        list-style: none;
+
+        &::-webkit-details-marker {
+          display: none;
+        }
+
+        &:hover,
+        &:focus-visible {
+          color: var(--global-masthead-link-color-hover);
+        }
+
+        i {
+          font-size: 1.05em;
+        }
+
+        b {
+          font-size: 0.78em;
+          font-weight: 700;
+        }
+      }
+    }
+
+    .language-picker__menu {
+      position: absolute;
+      top: calc(100% + 0.65rem);
+      right: 0;
+      z-index: 30;
+      min-width: 10rem;
+      padding: 0.55rem;
+      border: 1px solid var(--global-border-color);
+      border-radius: $border-radius;
+      background: var(--global-bg-color);
+      box-shadow: 0 0.4rem 1.2rem rgba(#000, 0.2);
+
+      p {
+        margin: 0.25rem 0.45rem 0.4rem;
+        color: var(--global-text-color-light);
+        font-size: 0.75em;
+      }
+
+      noscript {
+        display: block;
+        margin: 0.45rem;
+        color: var(--global-text-color-light);
+        font-size: 0.75em;
+        white-space: normal;
+      }
+    }
+
+    .language-picker__option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 100%;
+      margin: 0;
+      padding: 0.5rem 0.45rem;
+      border: 0;
+      background: transparent;
+      color: var(--global-text-color);
+      font: inherit;
+      text-align: left;
+      cursor: pointer;
+
+      &:hover,
+      &:focus-visible,
+      &[aria-pressed="true"] {
+        background: var(--global-border-color);
+        color: var(--global-masthead-link-color-hover);
+      }
+
+      b {
+        color: var(--global-masthead-link-color-hover);
+        font-size: 0.78em;
+      }
+
+      span {
+        flex: 1;
+      }
+    }
+
     a {
       position: relative;
 

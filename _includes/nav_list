@@ -14,7 +14,7 @@
             {% assign domain = base_path %}
           {% endif %}
 
-          <a href="{{ domain }}{{ nav.url }}"><span class="nav__sub-title">{{ nav.title }}</span></a>
+          <a data-language-link data-nav-title="{{ nav.title | escape }}" data-nav-translations="{{ nav.translations | jsonify | escape }}" href="{{ domain }}{{ nav.url }}"><span class="nav__sub-title" data-nav-label>{{ nav.title }}</span></a>
         {% else %}
           <span class="nav__sub-title">{{ nav.title }}</span>
         {% endif %}
@@ -36,7 +36,7 @@
               {% assign active = "" %}
             {% endif %}
 
-            <li><a href="{{ domain }}{{ child.url }}" class="{{ active }}">{{ child.title }}</a></li>
+            <li><a data-language-link data-nav-title="{{ child.title | escape }}" data-nav-translations="{{ child.translations | jsonify | escape }}" href="{{ domain }}{{ child.url }}" class="{{ active }}"><span data-nav-label>{{ child.title }}</span></a></li>
           {% endfor %}
         </ul>
         {% endif %}
