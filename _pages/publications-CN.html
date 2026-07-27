@@ -1,0 +1,41 @@
+---
+layout: archive
+title: "出版物"
+permalink: /publications-CN/
+lang: zh-CN
+author_profile: true
+---
+
+{% if site.author.googlescholar %}
+  <div class="wordwrap">你也可以在<a href="{{site.author.googlescholar}}">我的 Google Scholar 主页</a>查看文章。</div>
+{% endif %}
+
+{% include base_path %}
+
+{% assign published_publications = site.publications | where_exp: "post", "post.published != false" %}
+
+{% if published_publications.size == 0 %}
+  <p>目前还没有列出的出版物。</p>
+{% endif %}
+
+<!-- New style rendering if publication categories are defined -->
+{% if site.publication_category %}
+  {% for category in site.publication_category  %}
+    {% assign title_shown = false %}
+    {% for post in published_publications reversed %}
+      {% if post.category != category[0] %}
+        {% continue %}
+      {% endif %}
+      {% unless title_shown %}
+        <h2>{{ category[1].title }}</h2><hr />
+        {% assign title_shown = true %}
+      {% endunless %}
+      {% include archive-single.html %}
+    {% endfor %}
+  {% endfor %}
+{% else %}
+  {% for post in published_publications reversed %}
+    {% include archive-single.html %}
+  {% endfor %}
+{% endif %}
+
