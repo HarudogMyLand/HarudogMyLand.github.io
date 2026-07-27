@@ -53,7 +53,7 @@
     }
 
     Array.prototype.forEach.call(document.querySelectorAll('[data-blog-theme-choice]'), function(choice) {
-      choice.value = selectedTheme;
+      choice.setAttribute('aria-pressed', choice.value === selectedTheme ? 'true' : 'false');
     });
     Array.prototype.forEach.call(document.querySelectorAll('[data-blog-theme-label]'), function(label) {
       label.textContent = labels[selectedTheme];
@@ -71,7 +71,7 @@
 
     setTheme(getStoredValue(storageKey));
     Array.prototype.forEach.call(document.querySelectorAll('[data-blog-theme-choice]'), function(choice) {
-      choice.addEventListener('change', function() {
+      choice.addEventListener('click', function() {
         setTheme(choice.value);
         var picker = choice.closest('details');
         if (picker) {

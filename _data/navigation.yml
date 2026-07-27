@@ -12,7 +12,6 @@ main:
     url: /publications/ 
     translations:
       EN: "Publications"
-      CH: "出版物"
       CN: "出版物"
       EH: "Publications"
 
@@ -24,7 +23,6 @@ main:
     url: /year-archive/
     translations:
       EN: "Blog Posts"
-      CH: "博客文章"
       CN: "博客文章"
       EH: "Blog Posts"
     
@@ -32,7 +30,6 @@ main:
     url: /cv/
     translations:
       EN: "CV"
-      CH: "个人简历"
       CN: "个人简历"
       EH: "CV"
     
@@ -43,6 +40,5 @@ main:
     url: /archive/
     translations:
       EN: "Archive"
-      CH: "归档"
       CN: "归档"
       EH: "Archive"

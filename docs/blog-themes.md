@@ -191,16 +191,16 @@ columns:
 顶部导航的 Language 控件会根据页面文件名自动寻找语言版本。
 
 - 不带语言后缀的文件视为默认英文版本，例如 `markdown.md`。
-- 语言后缀放在扩展名之前，例如 `markdown-CH.md`、`markdown-EN.html`。
+- 语言后缀放在扩展名之前，例如 `markdown-CN.md`、`markdown-EN.html`。
 - 配对依据是去掉扩展名和最后语言后缀后的文件路径，因此 `.md`、`.html` 等扩展名不影响配对。
-- 语言代码使用大写字母；当前内置 `EN`、`EH` 为英文，`CH`、`CN` 为中文，也支持其他两字母代码。
+- 语言代码使用大写字母；当前内置 `EN`、`EH` 为英文，`CN` 为中文，也支持其他两字母代码。
 - 新增翻译页面时，建议保持原文件所在目录、基础文件名和 permalink 结构一致。
 
 例如：
 
 ```text
 _pages/markdown.md
-_pages/markdown-CH.md
+_pages/markdown-CN.md
 _pages/markdown-EN.html
 ```
 
