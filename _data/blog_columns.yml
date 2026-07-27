@@ -1,14 +1,20 @@
 - key: computer-organization
   title: Computer Organization
+  title_cn: 计算机组成
   description: Architecture, memory, operating systems, and low-level CS notes.
+  description_cn: 体系结构、内存、操作系统与底层计算机知识笔记。
   icon: fas fa-microchip
 
 - key: systems-tools
   title: Systems & Tools
+  title_cn: 系统与工具
   description: Docker, WSL, shells, storage, and development environment notes.
+  description_cn: Docker、WSL、Shell、存储与开发环境笔记。
   icon: fas fa-terminal
 
 - key: writing-lab
   title: Writing Lab
+  title_cn: 写作实验室
   description: Blogging workflow, Markdown, site maintenance, and publishing experiments.
+  description_cn: 博客工作流、Markdown、网站维护与发布实验。
   icon: fas fa-pen-nib

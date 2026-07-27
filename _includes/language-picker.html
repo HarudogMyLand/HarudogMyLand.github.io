@@ -1,13 +1,17 @@
+{% assign language_picker_is_cn = false %}
+{% if page.lang == "zh-CN" %}
+  {% assign language_picker_is_cn = true %}
+{% endif %}
 <details class="language-picker" data-language-picker data-language-source="{{ page.path | escape }}">
-  <summary aria-label="Choose language">
+  <summary aria-label="{% if language_picker_is_cn %}选择语言{% else %}Choose language{% endif %}">
     <i class="fas fa-language" aria-hidden="true"></i>
-    <span class="language-picker__label">Language</span>
+    <span class="language-picker__label">{% if language_picker_is_cn %}语言{% else %}Language{% endif %}</span>
     <b data-language-current>EH</b>
   </summary>
   <div class="language-picker__menu">
-    <p>Choose language</p>
+    <p>{% if language_picker_is_cn %}选择语言{% else %}Choose language{% endif %}</p>
     <div data-language-options></div>
-    <noscript><small>Use the language suffix in the page URL to open a translation.</small></noscript>
+    <noscript><small>{% if language_picker_is_cn %}请通过页面 URL 中的语言后缀打开对应译文。{% else %}Use the language suffix in the page URL to open a translation.{% endif %}</small></noscript>
   </div>
 
   <div data-language-documents hidden aria-hidden="true">

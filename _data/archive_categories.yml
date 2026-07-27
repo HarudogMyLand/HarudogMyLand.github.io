@@ -1,6 +1,8 @@
 - key: computer-science
   title: Computer Science
+  title_cn: 计算机科学
   description: Systems, programming tools, site engineering, Markdown workflow, and CS learning notes.
+  description_cn: 系统、编程工具、网站工程、Markdown 工作流与计算机学习笔记。
   icon: fas fa-laptop-code
   accent: blue
   columns:
@@ -18,7 +20,9 @@
 
 - key: finance-science
   title: Finance Science
+  title_cn: 金融科学
   description: Markets, financial systems, quantitative ideas, economics notes, and finance reading paths.
+  description_cn: 市场、金融系统、量化思想、经济学笔记与金融阅读路径。
   icon: fas fa-chart-line
   accent: gold
   columns:
