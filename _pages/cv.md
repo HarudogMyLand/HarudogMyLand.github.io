@@ -13,7 +13,7 @@ redirect_from:
 
 ## Harudog_79323
 
-
+No this is not me in real life but
 
 | Attribute               | Information           |
 | ----------------------- | --------------------- |
@@ -33,8 +33,8 @@ A Sophomore student majoring in Computer Science and Finance in Beihang Universi
 **Beihang University** (Beijing University of Aeronautics and Astronautics)
 *B.S. in Computer Science and Finance* | *Expected Graduation: 2028*
 
-- **Relevant Coursework:** Computer Architecture(*Studying*), Data Structures and Algorithms(*Studying*), Operating Systems(*Future*), Principles of Compilers(*Future*), Financial Management(*Future*), Investment Science(*Future*), Software Engineering(*Future*).
-- **Thesis / Senior Project:** (*Maybe Future*)
+**Central University of Finance and Economics**
+A joint plan.
 
 ## Research & Project Experience
 
