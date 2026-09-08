@@ -1,0 +1,43 @@
+/* Harudog personal homepage refresh */
+:root {
+  --haru-ink: #18212f;
+  --haru-muted: #6b778c;
+  --haru-accent: #5378d8;
+  --haru-accent-soft: #edf2ff;
+  --haru-line: #e7ebf2;
+  --haru-paper: #ffffff;
+  --haru-bg: #f7f9fc;
+}
+
+html { background: var(--haru-bg); }
+body {
+  background: var(--haru-bg);
+  color: var(--haru-ink);
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  line-height: 1.8;
+}
+.masthead {
+  background: rgba(255,255,255,.88);
+  border-bottom: 1px solid var(--haru-line);
+  box-shadow: 0 4px 24px rgba(38,55,85,.04);
+  backdrop-filter: blur(12px);
+}
+.masthead__inner-wrap { max-width: 1180px; }
+.greedy-nav { background: transparent; }
+.greedy-nav .visible-links a { color: var(--haru-muted); font-size: .88rem; letter-spacing: .02em; }
+.greedy-nav .visible-links a:hover { color: var(--haru-accent); }
+.masthead__menu-item--lg a { color: var(--haru-ink) !important; font-size: 1.05rem !important; font-weight: 750; letter-spacing: .04em; }
+#main { max-width: 1180px; margin: 0 auto; padding: 3.5rem 2rem 5rem; }
+.sidebar { width: 240px; }
+.sidebar .author__avatar img { width: 150px; height: 150px; object-fit: cover; border: 6px solid #fff; box-shadow: 0 12px 30px rgba(53,73,110,.16); }
+.author__name { color: var(--haru-ink); font-weight: 750; }
+.author__bio, .author__urls-wrapper { color: var(--haru-muted); }
+.page, .archive { background: var(--haru-paper); border: 1px solid var(--haru-line); border-radius: 20px; box-shadow: 0 16px 45px rgba(47,66,99,.06); padding: 2.8rem 3.5rem; }
+.page__title, .archive .page__title { color: var(--haru-ink); font-size: clamp(2rem, 4vw, 3.2rem); letter-spacing: -.04em; margin-top: 0; }
+.page__content h2 { color: var(--haru-ink); font-size: 1.45rem; border-bottom: 1px solid var(--haru-line); padding-bottom: .45rem; margin-top: 2.4rem; }
+.page__content a, .archive a { color: var(--haru-accent); }
+.page__content blockquote { background: var(--haru-accent-soft); border-left: 4px solid var(--haru-accent); border-radius: 0 10px 10px 0; padding: .8rem 1.2rem; }
+.page__footer { background: transparent; border-top: 1px solid var(--haru-line); color: var(--haru-muted); }
+.btn, button, input[type=submit] { border-radius: 999px; background: var(--haru-accent); border-color: var(--haru-accent); }
+@media (max-width: 900px) { #main { padding: 2rem 1rem 3rem; } .page, .archive { padding: 2rem 1.25rem; } .sidebar { width: auto; } }
+[data-theme="dark"] { --haru-bg:#111827; --haru-paper:#182231; --haru-ink:#edf2f7; --haru-muted:#aab5c5; --haru-line:#2b384a; --haru-accent-soft:#202e4d; }
