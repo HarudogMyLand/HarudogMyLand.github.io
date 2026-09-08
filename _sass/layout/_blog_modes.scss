@@ -66,7 +66,7 @@ body.blog-post[data-blog-theme="marx"] {
 body.blog-post[data-blog-theme="marx"] .page__title,
 body.blog-post[data-blog-theme="marx"] .page__content h2,
 body.blog-post[data-blog-theme="marx"] .page__content h3 {
-  color: #000080;
+  color: var(--blog-accent);
 }
 
 body.blog-post[data-blog-theme="tutorial"] {
@@ -359,6 +359,10 @@ body.blog-archive[data-blog-theme="bare"] #main {
 
 body[data-blog-theme="bare"] .archive,
 body[data-blog-theme="bare"] .page {
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
   float: none;
   width: 100%;
   max-width: none;
@@ -561,4 +565,38 @@ body[data-blog-theme="bare"] .blog-column-page h1 {
     grid-template-columns: 1fr;
     gap: 2rem;
   }
+}
+
+/* Typography shared by article and index modes. System fallbacks work offline. */
+body[data-blog-theme="tutorial"],
+body[data-blog-theme="source"],
+body[data-blog-theme="gov"],
+body[data-blog-theme="marx"] {
+  --reading-sans: "Segoe UI", "PingFang SC", "Noto Sans CJK SC", "Microsoft YaHei", sans-serif;
+  --reading-serif: Georgia, "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "SimSun", serif;
+  --post-body-font: var(--reading-sans);
+  --post-heading-font: var(--reading-sans);
+  --blog-theme-font: var(--post-body-font);
+  --blog-theme-heading-font: var(--post-heading-font);
+}
+body[data-blog-theme="source"] {
+  --post-body-font: "Segoe UI", "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --post-heading-font: "Bahnschrift", "Aptos Display", "PingFang SC", "Microsoft YaHei", sans-serif;
+}
+body[data-blog-theme="gov"] {
+  --post-heading-font: var(--reading-serif);
+}
+body[data-blog-theme="marx"] {
+  --post-body-font: "Charter", "Sitka Text", var(--reading-serif);
+  --post-heading-font: "Palatino Linotype", "Book Antiqua", var(--reading-serif);
+}
+body.blog-post:not([data-blog-theme="bare"]),
+body.blog-archive:not([data-blog-theme="bare"]) {
+  font-family: var(--post-body-font, var(--reading-sans));
+}
+body.blog-archive:not([data-blog-theme="bare"]) .archive__item-title,
+body.blog-archive:not([data-blog-theme="bare"]) .page__title,
+body.blog-archive:not([data-blog-theme="bare"]) .blog-home h2,
+body.blog-archive:not([data-blog-theme="bare"]) .blog-home h3 {
+  font-family: var(--post-heading-font);
 }
