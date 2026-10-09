@@ -11,6 +11,10 @@
     KR: '한국어',
     RU: 'Русский'
   };
+  // Codes shown to visitors; "EH" is an internal suffix, not a real language code.
+  var languageDisplayCodes = {
+    EH: 'EN'
+  };
   var languageHtml = {
     CN: 'zh-CN',
     EH: 'en',
@@ -22,6 +26,10 @@
     KR: 'ko',
     RU: 'ru'
   };
+
+  function displayCode(language) {
+    return languageDisplayCodes[language] || language;
+  }
 
   function readPreference() {
     try {
@@ -79,23 +87,42 @@
     return translations[language] || translations[language.toLowerCase()] || fallback;
   }
 
+  // The document list is generated once at /assets/data/language-documents.json
+  // instead of being embedded in every page.
+  function loadDocuments(picker, callback) {
+    var indexUrl = picker.getAttribute('data-language-index');
+    if (!indexUrl || !window.fetch) {
+      callback([]);
+      return;
+    }
+    window.fetch(indexUrl).then(function(response) {
+      return response.ok ? response.json() : [];
+    }).then(callback, function() {
+      callback([]);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function() {
     var picker = document.querySelector('[data-language-picker]');
     if (!picker) {
       return;
     }
+    loadDocuments(picker, function(entries) {
+      initPicker(picker, entries);
+    });
+  });
 
+  function initPicker(picker, entries) {
     var sourceInfo = normalizePath(picker.getAttribute('data-language-source'));
-    var documents = Array.prototype.slice.call(picker.querySelectorAll('[data-language-document]')).map(function(element) {
-      var source = normalizePath(element.getAttribute('data-language-path'));
-      var url = normalizePath(element.getAttribute('href'));
+    var documents = (entries || []).map(function(entry) {
+      var source = normalizePath(entry.path);
+      var url = normalizePath(entry.url);
       return {
-        element: element,
         sourceKey: source.key,
         urlKey: url.key,
         language: source.language === defaultLanguage && url.language !== defaultLanguage ? url.language : source.language,
         hasLanguageSuffix: source.hasLanguageSuffix,
-        url: element.getAttribute('href')
+        url: entry.url
       };
     });
 
@@ -148,7 +175,7 @@
       option.dataset.languageOption = language;
       option.setAttribute('aria-pressed', language === currentLanguage ? 'true' : 'false');
       option.innerHTML = '<b></b><span></span>';
-      option.querySelector('b').textContent = language;
+      option.querySelector('b').textContent = displayCode(language);
       option.querySelector('span').textContent = languageLabels[language] || language;
       option.addEventListener('click', function() {
         writePreference(language);
@@ -161,7 +188,7 @@
     });
 
     if (currentLabel) {
-      currentLabel.textContent = currentLanguage;
+      currentLabel.textContent = displayCode(currentLanguage);
       currentLabel.title = languageLabels[currentLanguage] || currentLanguage;
     }
 
@@ -191,5 +218,5 @@
     if (preferredDocument && preferredDocument.url && preferredLanguage !== currentLanguage && preferredDocument.url !== window.location.pathname) {
       window.location.replace(preferredDocument.url);
     }
-  });
+  }
 })();

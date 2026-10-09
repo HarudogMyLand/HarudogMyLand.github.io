@@ -4,6 +4,21 @@ layout: compress
 
 {% include base_path %}
 
+{% comment %}
+  Blog pages are recognised by front matter rather than URL so translated copies
+  (e.g. /year-archive-CN/) get the same styling. Pages with `blog_themes: false`
+  keep the blog styling but have no style picker.
+{% endcomment %}
+{% assign blog_body_class = "" %}
+{% assign blog_theme = "" %}
+{% if page.collection == 'posts' %}
+  {% assign blog_body_class = "blog-post" %}
+  {% assign blog_theme = "tutorial" %}
+{% elsif page.blog_home or page.blog_column %}
+  {% assign blog_body_class = "blog-archive" %}
+  {% unless page.blog_themes == false %}{% assign blog_theme = "tutorial" %}{% endunless %}
+{% endif %}
+
 <!doctype html>
 <html lang="{{ site.locale | slice: 0,2 }}" class="no-js"{% if site.site_theme == "dark" %} data-theme="dark"{% endif %}>
   <head>
@@ -11,13 +26,13 @@ layout: compress
     {% include head/custom.html %}
   </head>
 
-  <body class="{% if page.collection == 'posts' %}blog-post{% elsif page.url == '/year-archive/' or page.url == '/archive/' or page.blog_column %}blog-archive{% endif %}"{% if page.collection == 'posts' %} data-blog-theme="tutorial"{% elsif page.url == '/year-archive/' or page.blog_column %} data-blog-theme="source"{% endif %}>
+  <body class="{{ blog_body_class }}"{% if blog_theme != "" %} data-blog-theme="{{ blog_theme }}"{% endif %}>
 
     <script>
       (function() {
         if (!document.body.hasAttribute('data-blog-theme')) return;
-        var allowedThemes = ['tutorial', 'source', 'gov', 'marx', 'bare'];
-        var defaultTheme = document.body.classList.contains('blog-post') ? 'tutorial' : 'source';
+        var allowedThemes = ['tutorial', 'bare'];
+        var defaultTheme = 'tutorial';
         var storedTheme = null;
         try {
           storedTheme = window.localStorage.getItem('blogTheme');

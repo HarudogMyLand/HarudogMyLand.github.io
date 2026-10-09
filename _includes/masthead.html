@@ -4,7 +4,7 @@
   <div class="masthead__inner-wrap">
     <div class="masthead__menu">
       <nav id="site-nav" class="greedy-nav">
-        <button><div class="navicon"></div></button>
+        <button type="button" aria-label="Toggle menu" aria-expanded="false"><div class="navicon"></div></button>
         <ul class="visible-links">
           <li class="masthead__menu-item masthead__menu-item--lg persist"><a href="{{ base_path }}/">{{ site.title }}</a></li>
           {% for link in site.data.navigation.main %}
@@ -16,9 +16,11 @@
             <li class="masthead__menu-item"><a data-language-link data-nav-title="{{ link.title | escape }}" data-nav-translations="{{ link.translations | jsonify | escape }}" href="{{ domain }}{{ link.url }}"><span data-nav-label>{{ link.title }}</span></a></li>
           {% endfor %}
           <li id="theme-toggle" class="masthead__menu-item persist tail">
-            <a><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true" title="toggle theme"></i></a>
+            <a href="#" role="button" class="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode"><i id="theme-icon" class="fa-solid fa-sun" aria-hidden="true"></i></a>
           </li>
-          <li class="masthead__menu-item persist tail">
+          {% comment %} Only the first trailing item carries `tail`: greedy-nav
+             inserts restored links before every `.tail`, so two would clone them. {% endcomment %}
+          <li class="masthead__menu-item persist">
             {% include language-picker.html %}
           </li>
         </ul>

@@ -7,8 +7,8 @@
 
 div.highlighter-rouge, figure.highlight {
   position: relative;
-  margin-bottom: 1.5em;
-  padding: 1.2em 1.5em; /* 舒适的内边距 */
+  margin: 1.5em 0;
+  padding: 1em 1.2em; /* 舒适的内边距 */
   background: #0d1117; /* GitHub Dark 纯黑底色 */
   border: 1px solid #30363d; /* 精致的暗色边框 */
   border-radius: 8px; /* 圆角 */
@@ -28,6 +28,8 @@ div.highlighter-rouge, figure.highlight {
 
 .highlight table td { padding: 5px; }
 .highlight table pre { margin: 0; background: transparent; border: none; }
+.highlight pre { margin: 0; background: transparent; }
+.highlight code { font-family: "Cascadia Code", "Fira Code", Consolas, monospace; font-size: 0.9em; line-height: 1.6; }
 
 /*
    GitHub Dark Theme Colors for Rouge (Jekyll syntax highlighter)
@@ -45,14 +47,15 @@ div.highlighter-rouge, figure.highlight {
 .highlight .kc { color: #79c0ff; } /* Keyword.Constant */
 .highlight .kd { color: #ff7b72; } /* Keyword.Declaration */
 .highlight .kn { color: #ff7b72; } /* Keyword.Namespace */
-.highlight .kp { color: #79c0ff; } /* Keyword.Pseudo */
+.highlight .kp { color: #ff7b72; } /* Keyword.Pseudo */
 .highlight .kr { color: #ff7b72; } /* Keyword.Reserved */
 .highlight .kt { color: #ff7b72; } /* Keyword.Type */
+.highlight .kv { color: #ff7b72; } /* Keyword.Variable */
 
 .highlight .n  { color: #c9d1d9; } /* Name */
 .highlight .na { color: #79c0ff; } /* Name.Attribute */
 .highlight .nb { color: #79c0ff; } /* Name.Builtin */
-.highlight .nc { color: #f0883e; } /* Name.Class */
+.highlight .nc { color: #d2a8ff; } /* Name.Class */
 .highlight .no { color: #79c0ff; } /* Name.Constant */
 .highlight .nd { color: #d2a8ff; } /* Name.Decorator */
 .highlight .ni { color: #ffa657; } /* Name.Entity */
@@ -66,6 +69,8 @@ div.highlighter-rouge, figure.highlight {
 
 .highlight .o  { color: #ff7b72; } /* Operator */
 .highlight .ow { color: #ff7b72; } /* Operator.Word */
+
+.highlight .p  { color: #c9d1d9; } /* Punctuation */
 
 .highlight .s  { color: #a5d6ff; } /* Literal.String */
 .highlight .sa { color: #a5d6ff; } /* Literal.String.Affix */

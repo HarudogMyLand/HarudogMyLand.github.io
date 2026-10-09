@@ -2,37 +2,15 @@
 {% if page.lang == "zh-CN" %}
   {% assign language_picker_is_cn = true %}
 {% endif %}
-<details class="language-picker" data-language-picker data-language-source="{{ page.path | escape }}">
+<details class="language-picker" data-language-picker data-language-source="{{ page.path | escape }}" data-language-index="{{ '/assets/data/language-documents.json' | relative_url }}?v={{ site.time | date: '%s' }}">
   <summary aria-label="{% if language_picker_is_cn %}选择语言{% else %}Choose language{% endif %}">
     <i class="fas fa-language" aria-hidden="true"></i>
     <span class="language-picker__label">{% if language_picker_is_cn %}语言{% else %}Language{% endif %}</span>
-    <b data-language-current>EH</b>
+    <b data-language-current>EN</b>
   </summary>
   <div class="language-picker__menu">
     <p>{% if language_picker_is_cn %}选择语言{% else %}Choose language{% endif %}</p>
     <div data-language-options></div>
     <noscript><small>{% if language_picker_is_cn %}请通过页面 URL 中的语言后缀打开对应译文。{% else %}Use the language suffix in the page URL to open a translation.{% endif %}</small></noscript>
-  </div>
-
-  <div data-language-documents hidden aria-hidden="true">
-    {% for document in site.pages %}
-      {% if document.url and document.published != false %}
-        <a data-language-document data-language-path="{{ document.path | escape }}" href="{{ document.url | relative_url }}"></a>
-      {% endif %}
-    {% endfor %}
-    {% for document in site.posts %}
-      {% if document.url and document.published != false %}
-        <a data-language-document data-language-path="{{ document.path | escape }}" href="{{ document.url | relative_url }}"></a>
-      {% endif %}
-    {% endfor %}
-    {% for collection in site.collections %}
-      {% unless collection.label == "posts" %}
-        {% for document in collection.docs %}
-          {% if document.url and document.published != false %}
-            <a data-language-document data-language-path="{{ document.path | escape }}" href="{{ document.url | relative_url }}"></a>
-          {% endif %}
-        {% endfor %}
-      {% endunless %}
-    {% endfor %}
   </div>
 </details>

@@ -1,10 +1,7 @@
 (function() {
   var storageKey = 'blogTheme';
   var labels = {
-    tutorial: 'Tutorial',
-    source: 'Source',
-    gov: 'Gov',
-    marx: 'Archive',
+    tutorial: 'Paper',
     bare: 'Bare'
   };
 
@@ -27,7 +24,7 @@
   }
 
   function setTheme(theme) {
-    var defaultTheme = document.body.classList.contains('blog-post') ? 'tutorial' : 'source';
+    var defaultTheme = 'tutorial';
     var selectedTheme = labels[theme] ? theme : defaultTheme;
     var colorTheme = getStoredValue('theme');
     var themeToggle = document.getElementById('theme-toggle');
@@ -42,7 +39,10 @@
         themeToggle.hidden = true;
       }
     } else {
-      if (colorTheme === 'dark') {
+      // Same rule as the early script in head.html: a stored choice wins,
+      // otherwise follow the system setting.
+      var prefersDark = !colorTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if (colorTheme === 'dark' || prefersDark) {
         document.documentElement.setAttribute('data-theme', 'dark');
       } else {
         document.documentElement.removeAttribute('data-theme');

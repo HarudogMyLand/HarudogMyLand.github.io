@@ -1,0 +1,24 @@
+---
+layout: null
+sitemap: false
+---
+{% comment %}
+  Every published document as {path, url}. language-picker.js loads this once
+  to pair translations by filename (cv.md <-> cv-CN.md).
+{% endcomment %}
+{% assign entries = "" | split: "" %}
+{% for document in site.pages %}
+  {% if document.url and document.published != false %}
+    {% capture entry %}{"path":{{ document.path | jsonify }},"url":{{ document.url | relative_url | jsonify }}}{% endcapture %}
+    {% assign entries = entries | push: entry %}
+  {% endif %}
+{% endfor %}
+{% for collection in site.collections %}
+  {% for document in collection.docs %}
+    {% if document.url and document.published != false %}
+      {% capture entry %}{"path":{{ document.path | jsonify }},"url":{{ document.url | relative_url | jsonify }}}{% endcapture %}
+      {% assign entries = entries | push: entry %}
+    {% endif %}
+  {% endfor %}
+{% endfor %}
+[{{ entries | join: "," }}]

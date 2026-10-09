@@ -18,3 +18,10 @@
   description: Blogging workflow, Markdown, site maintenance, and publishing experiments.
   description_cn: 博客工作流、Markdown、网站维护与发布实验。
   icon: fas fa-pen-nib
+
+- key: finance-science
+  title: Finance Science
+  title_cn: 金融科学
+  description: Markets, financial systems, quantitative ideas, and economics notes.
+  description_cn: 市场、金融系统、量化思想与经济学笔记。
+  icon: fas fa-chart-line

@@ -34,6 +34,7 @@ Whenever I am coding, writing, or drawing, Harudog is the persona that accompani
 My current study interests include (but are not limited to):
 *   **Computer Systems & Architecture** 
 *   **Financial & Economy**
+
 I am always open to learning new technologies and collaborating on interesting projects.
 
 ---

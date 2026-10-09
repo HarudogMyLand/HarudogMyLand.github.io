@@ -66,6 +66,8 @@ layout: default
       </section>
 
       {% if page.collection == 'posts' and page.columns %}
+        {% assign column_lang = page.lang | default: "en" %}
+        {% assign column_i18n = site.data.blog_i18n[column_lang] | default: site.data.blog_i18n.en %}
         <nav class="bare-post-columns" aria-label="Post columns">
           <span>Columns:</span>
           {% for column_key in page.columns %}
@@ -81,12 +83,12 @@ layout: default
             {% assign column_posts = site.posts | where_exp: "post", "post.columns contains column_key" %}
             <div class="blog-column-affiliation__group">
               <p class="blog-column-affiliation__label">
-                本文隶属于
-                <strong>{% if column %}{{ column.title }}{% else %}{{ column_key }}{% endif %}</strong>
-                专栏
+                {{ column_i18n.post.column_prefix }}
+                <strong>{% if column %}{{ column[column_i18n.title_field] | default: column.title }}{% else %}{{ column_key }}{% endif %}</strong>
+                {{ column_i18n.post.column_suffix }}
               </p>
               {% if column and column.description %}
-                <p class="blog-column-affiliation__description">{{ column.description }}</p>
+                <p class="blog-column-affiliation__description">{{ column[column_i18n.description_field] | default: column.description }}</p>
               {% endif %}
               <div class="blog-column-affiliation__posts" aria-label="{% if column %}{{ column.title }}{% else %}{{ column_key }}{% endif %} posts">
                 {% for column_post in column_posts %}

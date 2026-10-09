@@ -5,9 +5,10 @@
 <script>
 (function() {
   const storedTheme = localStorage.getItem('theme');
-  const isBlogPage = {% if page.collection == 'posts' or page.url == '/year-archive/' or page.blog_column %}true{% else %}false{% endif %};
+  const isBlogPage = {% if blog_theme and blog_theme != "" %}true{% else %}false{% endif %};
   const isBare = isBlogPage && localStorage.getItem('blogTheme') === 'bare';
-  if (storedTheme === 'dark' && !isBare) {
+  const prefersDark = !storedTheme && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if ((storedTheme === 'dark' || prefersDark) && !isBare) {
     document.documentElement.setAttribute('data-theme', 'dark');
   }
 })();
