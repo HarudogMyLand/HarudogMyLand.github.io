@@ -7,6 +7,7 @@
   accent: blue
   columns:
     - computer-organization
+    - operating-systems
     - systems-tools
     - writing-lab
   tags:
@@ -27,9 +28,25 @@
   accent: gold
   columns:
     - finance-science
+    - microeconomics
+    - macroeconomics
+    - financial-engineering
+    - corporate-finance
   tags:
     - Finance
     - Economics
     - Markets
     - Quant
     - Investment
+
+- key: mathematics
+  title: Mathematics
+  title_cn: 数学
+  description: Calculus, discrete mathematics, and worked problem notes.
+  description_cn: 微积分、离散数学与例题笔记。
+  icon: fas fa-square-root-alt
+  accent: green
+  columns:
+    - mathematics
+  tags:
+    - Math

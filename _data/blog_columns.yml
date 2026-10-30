@@ -1,9 +1,16 @@
 - key: computer-organization
   title: Computer Organization
   title_cn: 计算机组成
-  description: Architecture, memory, operating systems, and low-level CS notes.
-  description_cn: 体系结构、内存、操作系统与底层计算机知识笔记。
+  description: BUAA CO course notes on MIPS, Verilog, Logisim, and CPU design.
+  description_cn: 北航计组课程笔记：MIPS、Verilog、Logisim 与 CPU 设计。
   icon: fas fa-microchip
+
+- key: operating-systems
+  title: Operating Systems
+  title_cn: 操作系统
+  description: BUAA OS (MOS) lab notes on booting, memory, processes, syscalls, file systems, and the shell.
+  description_cn: 北航 OS（MOS）实验笔记：引导、内存管理、进程、系统调用、文件系统与 Shell。
+  icon: fas fa-server
 
 - key: systems-tools
   title: Systems & Tools
@@ -25,3 +32,38 @@
   description: Markets, financial systems, quantitative ideas, and economics notes.
   description_cn: 市场、金融系统、量化思想与经济学笔记。
   icon: fas fa-chart-line
+
+- key: microeconomics
+  title: Microeconomics
+  title_cn: 微观经济学
+  description: Consumer theory, producer theory, and market structures.
+  description_cn: 消费者理论、生产者理论与市场结构。
+  icon: fas fa-shopping-basket
+
+- key: macroeconomics
+  title: Macroeconomics
+  title_cn: 宏观经济学
+  description: Goods and financial markets, IS-LM, labor market, Phillips curve, and growth.
+  description_cn: 商品与金融市场、IS-LM、劳动力市场、菲利普斯曲线与经济增长。
+  icon: fas fa-globe-asia
+
+- key: financial-engineering
+  title: Financial Engineering
+  title_cn: 金融工程
+  description: Forwards, futures, options, swaps, no-arbitrage pricing, and hedging.
+  description_cn: 远期、期货、期权、互换、无套利定价与套期保值。
+  icon: fas fa-calculator
+
+- key: corporate-finance
+  title: Corporate Finance
+  title_cn: 公司理财
+  description: Corporate finance framework, financial statements, and cash flow.
+  description_cn: 公司理财框架、会计报表与现金流量。
+  icon: fas fa-building
+
+- key: mathematics
+  title: Mathematics
+  title_cn: 数学
+  description: Calculus and discrete mathematics notes and worked examples.
+  description_cn: 微积分与离散数学笔记及例题。
+  icon: fas fa-square-root-alt

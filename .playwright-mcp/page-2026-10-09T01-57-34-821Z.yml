@@ -1,0 +1,346 @@
+- generic [active] [ref=f2e1]:
+  - navigation [ref=f2e5]:
+    - list [ref=f2e6]:
+      - listitem [ref=f2e7]:
+        - link "Harudog" [ref=f2e8] [cursor=pointer]:
+          - /url: http://localhost:4000/
+      - listitem [ref=f2e9]:
+        - link "Publications" [ref=f2e10] [cursor=pointer]:
+          - /url: http://localhost:4000/publications/
+      - listitem [ref=f2e11]:
+        - link "Blog Posts" [ref=f2e12] [cursor=pointer]:
+          - /url: http://localhost:4000/year-archive/
+      - listitem [ref=f2e13]:
+        - link "CV" [ref=f2e14] [cursor=pointer]:
+          - /url: http://localhost:4000/cv/
+      - listitem [ref=f2e15]:
+        - link "Archive" [ref=f2e16] [cursor=pointer]:
+          - /url: http://localhost:4000/archive/
+      - listitem [ref=f2e17]:
+        - button "Toggle dark mode" [ref=f2e18] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f2e19]: 
+      - listitem [ref=f2e20]:
+        - group [ref=f2e21]:
+          - generic "Choose language" [ref=f2e22] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f2e23]: 
+            - generic [ref=f2e24]: Language
+            - generic "English" [ref=f2e25]: EH
+  - main [ref=f2e26]:
+    - text:     
+    - generic [ref=f2e27]:
+      - group [ref=f2e29]:
+        - generic "Style Paper ▾" [ref=f2e30] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f2e31]: 
+          - generic [ref=f2e32]: Style
+          - generic [ref=f2e33]: Paper
+          - text: ▾
+      - generic [ref=f2e34]:
+        - region [ref=f2e35]:
+          - generic [ref=f2e36]:
+            - generic [ref=f2e37]:
+              - paragraph [ref=f2e38]: Harudog Notes
+              - heading "Blog" [level=1] [ref=f2e39]
+              - paragraph [ref=f2e40]: Essays, technical notes, experiments, and field reports from my CS learning path.
+            - generic [ref=f2e42] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f2e43]: 
+              - searchbox "Search graph from blog header" [ref=f2e44]
+        - region [ref=f2e45]:
+          - generic [ref=f2e46]:
+            - heading "Posting Activity" [level=2] [ref=f2e47]
+            - generic [ref=f2e48]: 10 posts
+          - generic "Choose contribution period" [ref=f2e49]:
+            - button "Year" [ref=f2e50] [cursor=pointer]
+            - button "Month" [pressed] [ref=f2e51] [cursor=pointer]
+            - button "Day" [ref=f2e52] [cursor=pointer]
+          - img "Blog posting heatmap by month" [ref=f2e54]:
+            - 'generic "2025-11: 0 posts" [ref=f2e55]':
+              - generic [ref=f2e56]: Nov
+              - emphasis [ref=f2e57]: "0"
+            - 'generic "2025-12: 0 posts" [ref=f2e58]':
+              - generic [ref=f2e59]: Dec
+              - emphasis [ref=f2e60]: "0"
+            - 'generic "2026-01: 0 posts" [ref=f2e61]':
+              - generic [ref=f2e62]: Jan
+              - emphasis [ref=f2e63]: "0"
+            - 'generic "2026-02: 0 posts" [ref=f2e64]':
+              - generic [ref=f2e65]: Feb
+              - emphasis [ref=f2e66]: "0"
+            - 'generic "2026-03: 1 posts" [ref=f2e67]':
+              - generic [ref=f2e68]: Mar
+              - emphasis [ref=f2e69]: "1"
+            - 'generic "2026-04: 0 posts" [ref=f2e70]':
+              - generic [ref=f2e71]: Apr
+              - emphasis [ref=f2e72]: "0"
+            - 'generic "2026-05: 0 posts" [ref=f2e73]':
+              - generic [ref=f2e74]: May
+              - emphasis [ref=f2e75]: "0"
+            - 'generic "2026-06: 2 posts" [ref=f2e76]':
+              - generic [ref=f2e77]: Jun
+              - emphasis [ref=f2e78]: "2"
+            - 'generic "2026-07: 6 posts" [ref=f2e79]':
+              - generic [ref=f2e80]: Jul
+              - emphasis [ref=f2e81]: "6"
+            - 'generic "2026-08: 0 posts" [ref=f2e82]':
+              - generic [ref=f2e83]: Aug
+              - emphasis [ref=f2e84]: "0"
+            - 'generic "2026-09: 0 posts" [ref=f2e85]':
+              - generic [ref=f2e86]: Sep
+              - emphasis [ref=f2e87]: "0"
+            - 'generic "2026-10: 0 posts" [ref=f2e88]':
+              - generic [ref=f2e89]: Oct
+              - emphasis [ref=f2e90]: "0"
+          - generic [aria-hidden] [ref=f2e91]:
+            - generic [ref=f2e92]: Less
+            - generic [ref=f2e98]: More
+        - region [ref=f2e99]:
+          - generic [ref=f2e100]:
+            - heading "Knowledge Graph" [level=2] [ref=f2e101]
+            - generic [ref=f2e102]: Columns + tags
+          - generic [ref=f2e103]:
+            - generic [ref=f2e104]:
+              - generic [ref=f2e105] [cursor=pointer]:
+                - generic [aria-hidden] [ref=f2e106]: 
+                - searchbox "Search graph posts" [ref=f2e107]
+              - generic "Knowledge graph controls" [ref=f2e108]:
+                - button "Zoom graph out" [ref=f2e109] [cursor=pointer]: −
+                - button "Reset graph view" [ref=f2e110] [cursor=pointer]:
+                  - generic [aria-hidden] [ref=f2e111]: 
+                - button "Zoom graph in" [ref=f2e112] [cursor=pointer]: +
+                - button "Pause motion" [ref=f2e113] [cursor=pointer]
+                - generic [ref=f2e114] [cursor=pointer]:
+                  - checkbox "Labels On" [checked]
+                  - generic [ref=f2e116]: Labels On
+            - generic [ref=f2e117]:
+              - img "Obsidian-like graph of blog posts grouped by columns and tags" [ref=f2e118]:
+                - generic [ref=f2e142]:
+                  - link "Lab6 管道与 Shell - Computer Organization" [ref=f2e143]:
+                    - /url: /lab6/
+                    - generic "Lab6 管道与 Shell / Computer Organization / 2026-07-27" [ref=f2e144]: Lab6 管道与 Shell
+                  - link "Lab5 文件系统 - Computer Organization" [ref=f2e146]:
+                    - /url: /lab5/
+                    - generic "Lab5 文件系统 / Computer Organization / 2026-07-23" [ref=f2e147]: Lab5 文件系统
+                  - link "Lab4 系统调用、系统间通信 - Computer Organization" [ref=f2e149]:
+                    - /url: /lab4/
+                    - generic "Lab4 系统调用、系统间通信 / Computer Organization / 2026-07-17" [ref=f2e150]: Lab4 系统调用、系统间通信
+                  - link "Lab3 进程管理 - Computer Organization" [ref=f2e152]:
+                    - /url: /lab3/
+                    - generic "Lab3 进程管理 / Computer Organization / 2026-07-14" [ref=f2e153]: Lab3 进程管理
+                  - link "Lab2 内存管理 - Computer Organization" [ref=f2e155]:
+                    - /url: /lab2/
+                    - generic "Lab2 内存管理 / Computer Organization / 2026-07-07" [ref=f2e156]: Lab2 内存管理
+                  - link "Lab1 操作系统引导 - Computer Organization" [ref=f2e158]:
+                    - /url: /lab1/
+                    - generic "Lab1 操作系统引导 / Computer Organization / 2026-07-05" [ref=f2e159]: Lab1 操作系统引导
+                  - link "Building an Obsidian-like Knowledge Graph for My Blog - Writing Lab" [ref=f2e161]:
+                    - /url: /blog-knowledge-graph/
+                    - generic "Building an Obsidian-like Knowledge Graph for My Blog / Writing Lab / 2026-06-26" [ref=f2e162]: Building an Obsidian-like Knowledge Graph for My Blog
+                  - link "How I Added Columns To My Blog - Writing Lab" [ref=f2e164]:
+                    - /url: /blog-columns/
+                    - generic "How I Added Columns To My Blog / Writing Lab / 2026-06-26" [ref=f2e165]: How I Added Columns To My Blog
+                  - link "Death of C Disk - Systems & Tools" [ref=f2e167]:
+                    - /url: /blogs/
+                    - generic "Death of C Disk / Systems & Tools / 2026-03-10" [ref=f2e168]: Death of C Disk
+                  - link "Markdown Syntax and Publishing Blogs in AcademicPages - Writing Lab" [ref=f2e170]:
+                    - /url: /posts/2025/09/blog-test/
+                    - generic "Markdown Syntax and Publishing Blogs in AcademicPages / Writing Lab / 2025-09-06" [ref=f2e171]: Markdown Syntax and Publishing Blogs in AcademicPages
+              - complementary [ref=f2e173]:
+                - generic [ref=f2e174]: Cluster
+                - strong [ref=f2e175]: Hover a node
+          - group [ref=f2e176]:
+            - generic "Browse graph posts as a list" [ref=f2e177] [cursor=pointer]
+        - region [ref=f2e178]:
+          - generic [ref=f2e179]:
+            - heading "Posts" [level=2] [ref=f2e180]
+            - generic [ref=f2e181]: Filter by tag
+          - generic "Filter blog posts by tag" [ref=f2e182]:
+            - button "All 10" [ref=f2e183] [cursor=pointer]:
+              - text: All
+              - generic [ref=f2e184]: "10"
+            - button "OS 6" [ref=f2e185] [cursor=pointer]:
+              - text: OS
+              - generic [ref=f2e186]: "6"
+            - button "MOS 6" [ref=f2e187] [cursor=pointer]:
+              - text: MOS
+              - generic [ref=f2e188]: "6"
+            - button "Blog 4" [ref=f2e189] [cursor=pointer]:
+              - text: Blog
+              - generic [ref=f2e190]: "4"
+            - button "Jekyll 2" [ref=f2e191] [cursor=pointer]:
+              - text: Jekyll
+              - generic [ref=f2e192]: "2"
+            - button "Markdown 1" [ref=f2e193] [cursor=pointer]:
+              - text: Markdown
+              - generic [ref=f2e194]: "1"
+            - button "AcademicPages 1" [ref=f2e195] [cursor=pointer]:
+              - text: AcademicPages
+              - generic [ref=f2e196]: "1"
+            - button "Docker 1" [ref=f2e197] [cursor=pointer]:
+              - text: Docker
+              - generic [ref=f2e198]: "1"
+            - button "Frontend 1" [ref=f2e199] [cursor=pointer]:
+              - text: Frontend
+              - generic [ref=f2e200]: "1"
+            - button "JavaScript 1" [ref=f2e201] [cursor=pointer]:
+              - text: JavaScript
+              - generic [ref=f2e202]: "1"
+            - button "Visualization 1" [ref=f2e203] [cursor=pointer]:
+              - text: Visualization
+              - generic [ref=f2e204]: "1"
+          - generic [ref=f2e205]:
+            - heading "2026" [level=3] [ref=f2e206]
+            - article [ref=f2e209]:
+              - time [ref=f2e211]: July 27, 2026
+              - generic [ref=f2e212]:
+                - heading [level=2] [ref=f2e213]:
+                  - link "Lab6 管道与 Shell" [ref=f2e214] [cursor=pointer]:
+                    - /url: /lab6/
+                - paragraph [ref=f2e215]:
+                  - text: 由于大部分同学已经完成了5次实验，没有必要再进行代码精讲了。
+                  - link "Read more" [ref=f2e216] [cursor=pointer]:
+                    - /url: /lab6/
+            - article [ref=f2e219]:
+              - time [ref=f2e221]: July 23, 2026
+              - generic [ref=f2e222]:
+                - heading [level=2] [ref=f2e223]:
+                  - link "Lab5 文件系统" [ref=f2e224] [cursor=pointer]:
+                    - /url: /lab5/
+                - paragraph [ref=f2e225]:
+                  - text: 文件系统教程分为四个部分。
+                  - link "Read more" [ref=f2e226] [cursor=pointer]:
+                    - /url: /lab5/
+            - article [ref=f2e229]:
+              - time [ref=f2e231]: July 17, 2026
+              - generic [ref=f2e232]:
+                - heading [level=2] [ref=f2e233]:
+                  - link "Lab4 系统调用、系统间通信" [ref=f2e234] [cursor=pointer]:
+                    - /url: /lab4/
+                - paragraph [ref=f2e235]:
+                  - text: 内核态的运行逐步趋于完善，Lab4不再继续添加大型的数据结构。内核态完善了，用户态怎么办？用户态目前仍是一片空白，尽管我们能编写一些裸机代码（bare中），期望的C语言代码还是无法实现。
+                  - link "Read more" [ref=f2e236] [cursor=pointer]:
+                    - /url: /lab4/
+            - article [ref=f2e239]:
+              - time [ref=f2e241]: July 14, 2026
+              - generic [ref=f2e242]:
+                - heading [level=2] [ref=f2e243]:
+                  - link "Lab3 进程管理" [ref=f2e244] [cursor=pointer]:
+                    - /url: /lab3/
+                - paragraph [ref=f2e245]:
+                  - text: Lab3的主要流程，讲解操作系统如何创建，管理与感知进程的。操作系统通过进程控制块感知进程，通过队列调度这些控制块并调度他们的运行。
+                  - link "Read more" [ref=f2e246] [cursor=pointer]:
+                    - /url: /lab3/
+            - article [ref=f2e249]:
+              - time [ref=f2e251]: July 07, 2026
+              - generic [ref=f2e252]:
+                - heading [level=2] [ref=f2e253]:
+                  - link "Lab2 内存管理" [ref=f2e254] [cursor=pointer]:
+                    - /url: /lab2/
+                - paragraph [ref=f2e255]:
+                  - text: 这里还只有棍母，似乎我没有书写这一部分内容。不过我记得 lab2 的内容是内存管理……
+                  - link "Read more" [ref=f2e256] [cursor=pointer]:
+                    - /url: /lab2/
+            - article [ref=f2e259]:
+              - time [ref=f2e261]: July 05, 2026
+              - generic [ref=f2e262]:
+                - heading [level=2] [ref=f2e263]:
+                  - link "Lab1 操作系统引导" [ref=f2e264] [cursor=pointer]:
+                    - /url: /lab1/
+                - paragraph [ref=f2e265]:
+                  - text: 这里还只有棍母，似乎我没有书写这一部分内容。不过我记得 lab1 的内容是操作系统引导……
+                  - link "Read more" [ref=f2e266] [cursor=pointer]:
+                    - /url: /lab1/
+            - article [ref=f2e269]:
+              - time [ref=f2e271]: June 26, 2026
+              - generic [ref=f2e272]:
+                - heading [level=2] [ref=f2e273]:
+                  - link "Building an Obsidian-like Knowledge Graph for My Blog" [ref=f2e274] [cursor=pointer]:
+                    - /url: /blog-knowledge-graph/
+                - paragraph [ref=f2e275]:
+                  - text: How the blog knowledge graph is generated, rendered, searched, zoomed, and connected to columns and tags.
+                  - link "Read more" [ref=f2e276] [cursor=pointer]:
+                    - /url: /blog-knowledge-graph/
+            - article [ref=f2e279]:
+              - time [ref=f2e281]: June 26, 2026
+              - generic [ref=f2e282]:
+                - heading [level=2] [ref=f2e283]:
+                  - link "How I Added Columns To My Blog" [ref=f2e284] [cursor=pointer]:
+                    - /url: /blog-columns/
+                - paragraph [ref=f2e285]:
+                  - text: A short note on the new blog column system, its implementation, and how to use it.
+                  - link "Read more" [ref=f2e286] [cursor=pointer]:
+                    - /url: /blog-columns/
+            - article [ref=f2e289]:
+              - time [ref=f2e291]: March 10, 2026
+              - generic [ref=f2e292]:
+                - heading [level=2] [ref=f2e293]:
+                  - link "Death of C Disk" [ref=f2e294] [cursor=pointer]:
+                    - /url: /blogs/
+                - paragraph [ref=f2e295]:
+                  - text: 在硬盘空间不足的情况下安装Docker的处理情况
+                  - link "Read more" [ref=f2e296] [cursor=pointer]:
+                    - /url: /blogs/
+            - heading "2025" [level=3] [ref=f2e297]
+            - article [ref=f2e300]:
+              - time [ref=f2e302]: September 06, 2025
+              - generic [ref=f2e303]:
+                - heading [level=2] [ref=f2e304]:
+                  - link "Markdown Syntax and Publishing Blogs in AcademicPages" [ref=f2e305] [cursor=pointer]:
+                    - /url: /posts/2025/09/blog-test/
+                - paragraph [ref=f2e306]:
+                  - text: A compact Markdown syntax list and a simple workflow for publishing posts in academicpages.
+                  - link "Read more" [ref=f2e307] [cursor=pointer]:
+                    - /url: /posts/2025/09/blog-test/
+        - region [ref=f2e308]:
+          - generic [ref=f2e309]:
+            - heading "Columns" [level=2] [ref=f2e310]
+            - generic [ref=f2e311]: Browse by column
+          - generic [ref=f2e312]:
+            - link "Computer Organization 6 posts Architecture, memory, operating systems, and low-level CS notes." [ref=f2e313] [cursor=pointer]:
+              - /url: /columns/computer-organization/
+              - generic [aria-hidden] [ref=f2e314]: 
+              - strong [ref=f2e315]: Computer Organization
+              - generic [ref=f2e316]: 6 posts
+              - emphasis [ref=f2e317]: Architecture, memory, operating systems, and low-level CS notes.
+            - link "Systems & Tools 1 posts Docker, WSL, shells, storage, and development environment notes." [ref=f2e318] [cursor=pointer]:
+              - /url: /columns/systems-tools/
+              - generic [aria-hidden] [ref=f2e319]: 
+              - strong [ref=f2e320]: Systems & Tools
+              - generic [ref=f2e321]: 1 posts
+              - emphasis [ref=f2e322]: Docker, WSL, shells, storage, and development environment notes.
+            - link "Writing Lab 3 posts Blogging workflow, Markdown, site maintenance, and publishing experiments." [ref=f2e323] [cursor=pointer]:
+              - /url: /columns/writing-lab/
+              - generic [aria-hidden] [ref=f2e324]: 
+              - strong [ref=f2e325]: Writing Lab
+              - generic [ref=f2e326]: 3 posts
+              - emphasis [ref=f2e327]: Blogging workflow, Markdown, site maintenance, and publishing experiments.
+            - article [ref=f2e328]:
+              - generic [aria-hidden] [ref=f2e329]: 
+              - strong [ref=f2e330]: Finance Science
+              - generic [ref=f2e331]: 0 posts
+              - emphasis [ref=f2e332]: Markets, financial systems, quantitative ideas, and economics notes.
+  - contentinfo [ref=f2e334]:
+    - link "Sitemap" [ref=f2e335] [cursor=pointer]:
+      - /url: /sitemap/
+    - list [ref=f2e337]:
+      - listitem [ref=f2e338]:
+        - strong [ref=f2e339]: "Follow:"
+      - listitem [ref=f2e340]:
+        - link "GitHub" [ref=f2e341] [cursor=pointer]:
+          - /url: http://github.com/HarudogMyLand
+          - generic [aria-hidden] [ref=f2e342]: 
+          - text: GitHub
+      - listitem [ref=f2e343]:
+        - link "Feed" [ref=f2e344] [cursor=pointer]:
+          - /url: http://localhost:4000/feed.xml
+          - generic [aria-hidden] [ref=f2e345]: 
+          - text: Feed
+    - generic [ref=f2e346]:
+      - text: © 2026 Harudog the Loner, Powered by
+      - link "Jekyll" [ref=f2e347] [cursor=pointer]:
+        - /url: http://jekyllrb.com
+      - text: "&"
+      - link "AcademicPages" [ref=f2e348] [cursor=pointer]:
+        - /url: https://github.com/academicpages/academicpages.github.io
+      - text: ", a fork of"
+      - link "Minimal Mistakes" [ref=f2e349] [cursor=pointer]:
+        - /url: https://mademistakes.com/work/minimal-mistakes-jekyll-theme/
+      - text: . Site last updated 2026-10-09

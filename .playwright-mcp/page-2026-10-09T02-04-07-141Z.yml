@@ -1,0 +1,658 @@
+- generic [active] [ref=f6e1]:
+  - navigation [ref=f6e5]:
+    - button "Toggle menu" [ref=f6e6] [cursor=pointer]
+    - list [ref=f6e8]:
+      - listitem [ref=f6e9]:
+        - link "Harudog" [ref=f6e10] [cursor=pointer]:
+          - /url: http://localhost:4000/
+      - listitem [ref=f6e11]:
+        - button "Toggle dark mode" [ref=f6e12] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f6e13]: 
+      - listitem [ref=f6e14]:
+        - group [ref=f6e15]:
+          - generic "Choose language" [ref=f6e16] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f6e17]: 
+            - generic "English" [ref=f6e18]: EH
+  - main [ref=f6e19]:
+    - text:     
+    - article [ref=f6e20]:
+      - generic [ref=f6e21]:
+        - generic [ref=f6e22]:
+          - heading "Lab6 管道与 Shell" [level=1] [ref=f6e23]
+          - paragraph [ref=f6e24]:
+            - generic [aria-hidden] [ref=f6e25]: 
+            - text: 3 minute read
+          - paragraph [ref=f6e26]:
+            - strong [ref=f6e27]:
+              - generic [aria-hidden] [ref=f6e28]: 
+              - text: "Published:"
+            - time [ref=f6e29]: July 27, 2026
+          - group [ref=f6e30]:
+            - generic "Style Paper ▾" [ref=f6e31] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f6e32]: 
+              - generic [ref=f6e33]: Style
+              - generic [ref=f6e34]: Paper
+              - text: ▾
+        - generic [ref=f6e35]:
+          - paragraph [ref=f6e36]: 由于大部分同学已经完成了5次实验，没有必要再进行代码精讲了。
+          - heading "实验报告总结要点" [level=3] [ref=f6e37]
+          - paragraph [ref=f6e38]:
+            - text: 在本次实验（Lab6 管道与 Shell）中，我们探索并实现了操作系统级进程间通信（IPC）的典型方式——
+            - strong [ref=f6e39]: 管道
+            - text: ，以及用户态核心交互程序——
+            - strong [ref=f6e40]: Shell
+            - text: 。以下为本次实验的核心设计与实现要点总结：
+          - list [ref=f6e41]:
+            - listitem [ref=f6e42]:
+              - paragraph [ref=f6e43]:
+                - strong [ref=f6e44]:
+                  - text: 共享页面机制（
+                  - code [ref=f6e45]: PTE_LIBRARY
+                  - text: ）的运用
+                - text: 管道在底层本质上是驻留在内存中的虚拟文件。通过在
+                - code [ref=f6e46]: fork
+                - text: 或
+                - code [ref=f6e47]: spawn
+                - text: 时保持对带有
+                - code [ref=f6e48]: PTE_LIBRARY
+                - text: 标记的物理页面的共享映射，父子进程能够共同读写同一片物理内存（
+                - code [ref=f6e49]: struct Pipe
+                - text: ），从而实现数据的无拷贝传递。
+            - listitem [ref=f6e50]:
+              - paragraph [ref=f6e51]:
+                - strong [ref=f6e52]: 环形缓冲区的协同读写
+                - text: 管道读写基于一个环形缓冲区（
+                - code [ref=f6e53]: p_buf
+                - text: ），通过读指针
+                - code [ref=f6e54]: p_rpos
+                - text: 和写指针
+                - code [ref=f6e55]: p_wpos
+                - text: 进行同步。当缓冲区为空或满时，进程通过系统调用
+                - code [ref=f6e56]: syscall_yield()
+                - text: 主动放弃 CPU，以等待另一端进程写入或读取数据。
+            - listitem [ref=f6e57]:
+              - strong [ref=f6e58]: 并发环境下的进程竞争及其消除
+              - text: 在抢占式微内核系统中，非原子性的用户态包装函数（如
+              - code [ref=f6e59]: dup
+              - text: 和
+              - code [ref=f6e60]: close
+              - text: ）容易受到时钟中断的影响。实验通过：
+              - list [ref=f6e61]:
+                - listitem [ref=f6e62]:
+                  - strong [ref=f6e63]: 控制重映射顺序
+                  - text: ：在
+                  - code [ref=f6e64]: pipe_close
+                  - text: 中先解除
+                  - code [ref=f6e65]: fd
+                  - text: 页映射再解除
+                  - code [ref=f6e66]: pipe
+                  - text: 数据页映射；在
+                  - code [ref=f6e67]: dup
+                  - text: 中相反，先映射
+                  - code [ref=f6e68]: pipe
+                  - text: 再映射
+                  - code [ref=f6e69]: fd
+                  - text: 。这确保了在不完整的中间状态下，页引用计数满足
+                  - code [ref=f6e70]: pageref(pipe) > pageref(fd)
+                  - text: ，从而消除了管道关闭状态的误判。
+                - listitem [ref=f6e71]:
+                  - strong [ref=f6e72]: 进程切换感知
+                  - text: ：在
+                  - code [ref=f6e73]: _pipe_is_closed
+                  - text: 中通过循环读取并对比
+                  - code [ref=f6e74]: env->env_runs
+                  - text: 的值，保证了读取引用计数时数据的有效性，避免了“脏读”引发的退出异常。
+            - listitem [ref=f6e75]:
+              - strong [ref=f6e76]:
+                - text: 用户态程序加载（
+                - code [ref=f6e77]: spawn
+                - text: ）与控制台重定向
+              - text: 实验实现了一个无需经历内核态直接在用户态装载 ELF 可执行文件的
+              - code [ref=f6e78]: spawn
+              - text: 函数，并利用文件描述符
+              - code [ref=f6e79]: "0"
+              - text: （标准输入）和
+              - code [ref=f6e80]: "1"
+              - text: （标准输出）的
+              - code [ref=f6e81]: dup
+              - text: 与
+              - code [ref=f6e82]: close
+              - text: 组合，实现了 Shell 中管道（
+              - code [ref=f6e83]: "|"
+              - text: ）以及输入输出重定向（
+              - code [ref=f6e84]: <
+              - text: 、
+              - code [ref=f6e85]: ">"
+              - text: ）的完整控制流。
+          - separator [ref=f6e86]
+          - heading "Thinking 思考题解答" [level=3] [ref=f6e87]
+          - heading [level=4] [ref=f6e88]:
+            - strong [ref=f6e89]: Thinking 6.1 如果不关闭自己不会用到的管道端会怎么样？
+          - paragraph [ref=f6e90]: 如果进程不关闭自己不使用的管道端，会导致管道另一端的阻塞操作无法正常结束。
+          - list [ref=f6e91]:
+            - listitem [ref=f6e92]:
+              - text: 对于
+              - strong [ref=f6e93]: 读者
+              - text: ：如果写端的文件描述符没有被全部关闭（包括读者进程自身保留的、未关闭的写端描述符），即使其他所有的写者进程都已经退出，管道的写端引用计数仍大于零。此时读者读到缓冲区末尾时，
+              - code [ref=f6e94]: _pipe_is_closed
+              - text: 会判断写端未关闭，导致读者无限期阻塞在
+              - code [ref=f6e95]: syscall_yield()
+              - text: 。
+            - listitem [ref=f6e96]:
+              - text: 对于
+              - strong [ref=f6e97]: 系统资源
+              - text: ：未关闭的无用描述符会造成文件描述符（
+              - code [ref=f6e98]: Fd
+              - text: 结构体）及相关物理内存页面的泄露。
+          - separator [ref=f6e99]
+          - heading [level=4] [ref=f6e100]:
+            - strong [ref=f6e101]: Thinking 6.2 如果现在想让父进程作为“读者”，子进程作为“写者”，代码应当如何修改？
+          - paragraph [ref=f6e102]: 应当调换父子进程中关闭端口与读写操作的逻辑。修改后的示意代码如下：
+          - code [ref=f6e106]: "switch(fork()) { case -1: break; case 0: /* 子进程 - 作为写者 */ close(fildes[0]); /* 关闭不用的读端 */ write(fildes[1], \"Hello world\\n\", 12); /* 向管道写数据 */ close(fildes[1]); /* 关闭写端 */ exit(EXIT_SUCCESS); default: /* 父进程 - 作为读者 */ close(fildes[1]); /* 关闭不用的写端 */ read(fildes[0], buf, 100); /* 从管道读数据 */ printf(\"parent-process read: %s\", buf); close(fildes[0]); /* 关闭读端 */ exit(EXIT_SUCCESS); }"
+          - separator [ref=f6e107]
+          - heading [level=4] [ref=f6e108]:
+            - strong [ref=f6e109]:
+              - text: Thinking 6.3 MOS 中的管道缓冲区大小
+              - code [ref=f6e110]: PIPE_SIZE
+              - text: 过小有什么影响？缓冲区大小是如何影响吞吐和切换效率的？
+          - list [ref=f6e111]:
+            - listitem [ref=f6e112]:
+              - strong [ref=f6e113]: 影响
+              - text: ：如果
+              - code [ref=f6e114]: PIPE_SIZE
+              - text: 过小，当写入稍微大一点的数据时，写者极易填满缓冲区并被迫调用
+              - code [ref=f6e115]: syscall_yield()
+              - text: 挂起，等待读者读取；同样，读者也容易因缓冲区迅速被读空而挂起。
+            - listitem [ref=f6e116]:
+              - strong [ref=f6e117]: 吞吐与切换效率
+              - text: ：
+              - list [ref=f6e118]:
+                - listitem [ref=f6e119]:
+                  - strong [ref=f6e120]: 较小的缓冲区
+                  - text: ：会导致读者与写者进程之间频繁发生进程上下文切换（Context Switch）。切换带来的调度开销会显著降低系统的实际有效吞吐量。
+                - listitem [ref=f6e121]:
+                  - strong [ref=f6e122]: 较大的缓冲区
+                  - text: ：可以允许写者和读者一次性连续写入/读取更多字节，减少了因阻塞引起的调度次数，提高了吞吐量与切换效率。但过大的缓冲区会占用更多的物理内存。
+          - separator [ref=f6e123]
+          - heading [level=4] [ref=f6e124]:
+            - strong [ref=f6e125]:
+              - text: Thinking 6.4 恒等式
+              - code [ref=f6e126]: pageref(rfd) + pageref(wfd) = pageref(pipe)
+              - text: 在所有时刻都成立吗？请给出你的分析过程，如果不成立，是否会造成误判？
+          - paragraph [ref=f6e127]:
+            - strong [ref=f6e128]: 不成立。
+          - list [ref=f6e129]:
+            - listitem [ref=f6e130]:
+              - strong [ref=f6e131]: 分析过程
+              - text: ：该等式在执行
+              - code [ref=f6e132]: close
+              - text: 或
+              - code [ref=f6e133]: dup
+              - text: 过程中会暂时失效。以
+              - code [ref=f6e134]: pipe_close
+              - text: 为例，关闭一个描述符涉及两次系统调用：
+              - code [ref=f6e135]: syscall_mem_unmap
+              - text: 卸载数据页（
+              - code [ref=f6e136]: pipe
+              - text: ）和卸载描述符页（
+              - code [ref=f6e137]: fd
+              - text: ）。由于这两个系统调用在用户态是以顺序执行的方式调用的，中途可能被时钟中断打断。
+              - list [ref=f6e138]:
+                - listitem [ref=f6e139]:
+                  - text: 若先解除了
+                  - code [ref=f6e140]: pipe
+                  - text: 映射，在解除
+                  - code [ref=f6e141]: fd
+                  - text: 映射前发生切换，此时
+                  - code [ref=f6e142]: pageref(pipe)
+                  - text: 已减 1，而
+                  - code [ref=f6e143]: pageref(fd)
+                  - text: 尚未减 1。
+            - listitem [ref=f6e144]:
+              - strong [ref=f6e145]: 是否会造成误判
+              - text: ：会。如果在上述不完整的中间状态下切换到了另一端的进程，另一端在执行
+              - code [ref=f6e146]: _pipe_is_closed
+              - text: 时会读到
+              - code [ref=f6e147]: pageref(pipe) == pageref(fd)
+              - text: ，从而误判管道另一端已经关闭，导致进程异常退出。
+          - separator [ref=f6e148]
+          - heading [level=4] [ref=f6e149]:
+            - strong [ref=f6e150]:
+              - text: Thinking 6.5 结合代码模仿上述情景，分析一下我们的
+              - code [ref=f6e151]: dup
+              - text: 函数中为什么会出现预想之外的情况？
+          - paragraph [ref=f6e152]:
+            - text: 在原版
+            - code [ref=f6e153]: dup(oldfd, newfd)
+            - text: 中，执行逻辑是先映射描述符页，再映射数据页：
+          - list [ref=f6e154]:
+            - listitem [ref=f6e155]:
+              - code [ref=f6e156]: syscall_mem_map(..., oldfd, ..., newfd, ...)
+              - text: —— 使得
+              - code [ref=f6e157]: pageref(fd)
+              - text: 增加 1。
+            - listitem [ref=f6e158]:
+              - code [ref=f6e159]: syscall_mem_map(..., ova, ..., nva, ...)
+              - text: —— 使得
+              - code [ref=f6e160]: pageref(pipe)
+              - text: 增加 1。
+          - paragraph [ref=f6e161]:
+            - strong [ref=f6e162]: 预想之外的情况分析
+            - text: ：
+          - list [ref=f6e163]:
+            - listitem [ref=f6e164]: 假设在步骤 1 执行完毕后、步骤 2 执行之前，产生时钟中断切换到了另一个读（或写）进程。
+            - listitem [ref=f6e165]:
+              - text: 此时新映射的
+              - code [ref=f6e166]: fd
+              - text: 页引用计数已经增加，但
+              - code [ref=f6e167]: pipe
+              - text: 页的引用计数还没来得及增加。
+            - listitem [ref=f6e168]:
+              - text: 另一个进程运行并调用
+              - code [ref=f6e169]: _pipe_is_closed
+              - text: 检查状态，在对比中会发现
+              - code [ref=f6e170]: pageref(pipe) == pageref(fd)
+              - text: ，导致其误判另一端已被关闭而提前退出。
+          - separator [ref=f6e171]
+          - heading [level=4] [ref=f6e172]:
+            - strong [ref=f6e173]: Thinking 6.6 为什么在我们的 MOS 中，系统调用一定是原子操作呢？如果你觉得不是所有的系统调用都是原子操作，请给出反例。
+          - list [ref=f6e174]:
+            - listitem [ref=f6e175]:
+              - strong [ref=f6e176]: 原理解析
+              - text: ：在 MOS 中，系统调用是通过触发
+              - code [ref=f6e177]: syscall
+              - text: 异常进入内核态执行的。MOS 内核目前设计为
+              - strong [ref=f6e178]: 非抢占式内核
+              - text: （或在内核态执行时关闭了中断）。当 CPU 处于内核态执行系统调用函数（如
+              - code [ref=f6e179]: sys_mem_map
+              - text: ）时，不会响应时钟中断进行进程切换，直至系统调用执行完毕并返回用户态。因此，单个
+              - code [ref=f6e180]: syscall_
+              - text: 开头的系统调用在实体执行上具有原子性。
+            - listitem [ref=f6e181]:
+              - strong [ref=f6e182]: 反例说明
+              - text: ：虽然单个底层系统调用是原子的，但
+              - strong [ref=f6e183]: 用户态封装的接口
+              - text: （如
+              - code [ref=f6e184]: fork
+              - text: 、
+              - code [ref=f6e185]: spawn
+              - text: 、
+              - code [ref=f6e186]: close
+              - text: ）由于包含多个系统调用，在多次系统调用之间可以被时钟中断打断，因此
+              - strong [ref=f6e187]: 不是
+              - text: 原子的。
+          - separator [ref=f6e188]
+          - heading [level=4] [ref=f6e189]:
+            - strong [ref=f6e190]:
+              - text: Thinking 6.7 控制
+              - code [ref=f6e191]: pipe_close
+              - text: 中
+              - code [ref=f6e192]: fd
+              - text: 和
+              - code [ref=f6e193]: pipe
+              - text: 的
+              - code [ref=f6e194]: unmap
+              - text: 顺序，是否可以解决上述进程竞争问题？如果要复制的文件描述符指向一个管道，
+              - code [ref=f6e195]: dup
+              - text: 会出现类似问题吗？
+          - list [ref=f6e196]:
+            - listitem [ref=f6e197]:
+              - strong [ref=f6e198]: 可以解决
+              - text: 。
+              - list [ref=f6e199]:
+                - listitem [ref=f6e200]:
+                  - text: 如果调整顺序为“先 unmap
+                  - code [ref=f6e201]: fd
+                  - text: ，再 unmap
+                  - code [ref=f6e202]: pipe
+                  - text: ”，在两个操作的间隙中，
+                  - code [ref=f6e203]: pageref(fd)
+                  - text: 先减 1，此时
+                  - code [ref=f6e204]: pageref(pipe) > pageref(fd)
+                  - text: 。
+                - listitem [ref=f6e205]:
+                  - text: 即使在此处发生时钟中断，判定条件
+                  - code [ref=f6e206]: pageref(pipe) == pageref(fd)
+                  - text: 依然不成立，不会引发另一端误判其关闭。只有两步都完成时，等式才会成立，这正是预期的正确状态。
+            - listitem [ref=f6e207]:
+              - strong [ref=f6e208]:
+                - code [ref=f6e209]: dup
+                - text: 会出现类似问题
+              - text: 。
+              - list [ref=f6e210]:
+                - listitem [ref=f6e211]:
+                  - text: 在复制指向管道的文件描述符时，若先 map
+                  - code [ref=f6e212]: fd
+                  - text: 再 map
+                  - code [ref=f6e213]: pipe
+                  - text: ，会在间隙中导致
+                  - code [ref=f6e214]: pageref(fd)
+                  - text: 暂时偏大，从而满足
+                  - code [ref=f6e215]: pageref(pipe) == pageref(fd)
+                  - text: 的误判条件。
+                - listitem [ref=f6e216]:
+                  - strong [ref=f6e217]: 解决方法
+                  - text: ：将顺序调整为“先 map
+                  - code [ref=f6e218]: pipe
+                  - text: 数据页，再 map
+                  - code [ref=f6e219]: fd
+                  - text: 描述符页”。这样在中间状态下，
+                  - code [ref=f6e220]: pageref(pipe)
+                  - text: 先增加，依然保持
+                  - code [ref=f6e221]: pageref(pipe) > pageref(fd)
+                  - text: ，避免了竞争。
+          - separator [ref=f6e222]
+          - heading [level=4] [ref=f6e223]:
+            - strong [ref=f6e224]:
+              - text: Thinking 6.8
+              - code [ref=f6e225]: elf_load_seg()
+              - text: 和
+              - code [ref=f6e226]: load_icode_mapper()
+              - text: 函数是如何确保加载 ELF 文件时，bss 段数据被正确加载进虚拟内存空间？
+          - list [ref=f6e227]:
+            - listitem [ref=f6e228]:
+              - strong [ref=f6e229]: 原理分析
+              - text: ：BSS 段代表未初始化的全局变量，在 ELF 磁盘文件中不占用实际的存储数据空间（
+              - code [ref=f6e230]: p_filesz
+              - text: 小于
+              - code [ref=f6e231]: p_memsz
+              - text: ），但在程序加载到内存中时需要为其分配物理空间并清零。
+            - listitem [ref=f6e232]:
+              - strong [ref=f6e233]: 具体实现细节
+              - text: ：
+              - list [ref=f6e234]:
+                - listitem [ref=f6e235]:
+                  - code [ref=f6e236]: elf_load_seg
+                  - text: 内部会根据程序头中的
+                  - code [ref=f6e237]: p_memsz
+                  - text: （内存大小）来循环分配物理页面，而不仅是根据
+                  - code [ref=f6e238]: p_filesz
+                  - text: （文件数据大小）。
+                - listitem [ref=f6e239]:
+                  - text: 在加载时，首先将文件内存在的数据（大小为
+                  - code [ref=f6e240]: p_filesz
+                  - text: ）从 ELF 文件中复制到分配的内存页对应偏移位置处。
+                - listitem [ref=f6e241]:
+                  - text: 对于超出
+                  - code [ref=f6e242]: p_filesz
+                  - text: 但在
+                  - code [ref=f6e243]: p_memsz
+                  - text: 范围内的内存区域（即 BSS 段），由于 MOS 在通过
+                  - code [ref=f6e244]: syscall_mem_alloc
+                  - text: 分配新页面时，内核默认会将物理页面内容清零，且在回调映射函数（如
+                  - code [ref=f6e245]: load_icode_mapper
+                  - text: 或
+                  - code [ref=f6e246]: spawn_mapper
+                  - text: ）中，若遇到超出
+                  - code [ref=f6e247]: p_filesz
+                  - text: 的部分，会配合
+                  - code [ref=f6e248]: memset
+                  - text: 显式将剩余内存空间清零。由此确保了 BSS 段在内存中占有空间且初始值为
+                  - code [ref=f6e249]: "0"
+                  - text: 。
+          - separator [ref=f6e250]
+          - heading [level=4] [ref=f6e251]:
+            - strong [ref=f6e252]: Thinking 6.9 在哪步，0 和 1 被“安排”为标准输入和标准输出？请分析代码执行流程。
+          - list [ref=f6e253]:
+            - listitem [ref=f6e254]:
+              - text: 系统的起始进程
+              - code [ref=f6e255]: user/icode.b
+              - text: 启动后，首先通过
+              - code [ref=f6e256]: spawn
+              - text: 创建了
+              - code [ref=f6e257]: init.b
+              - text: 进程。
+            - listitem [ref=f6e258]:
+              - text: 在
+              - code [ref=f6e259]: user/init.c
+              - text: 的
+              - code [ref=f6e260]: main
+              - text: 函数中，执行了如下代码：
+              - code [ref=f6e264]: opencons(); // 打开控制台设备，由于是第一个打开的文件，分配的文件描述符为 0 dup(0, 1); // 将 0 号描述符复制到 1 号，此时 1 号也指向控制台设备
+            - listitem [ref=f6e265]:
+              - text: 此时，
+              - code [ref=f6e266]: "0"
+              - text: 成为标准输入（stdin），
+              - code [ref=f6e267]: "1"
+              - text: 成为标准输出（stdout）。
+            - listitem [ref=f6e268]:
+              - text: 随后，
+              - code [ref=f6e269]: init.b
+              - text: 进程通过
+              - code [ref=f6e270]: spawn
+              - text: 创建了 Shell 进程
+              - code [ref=f6e271]: sh.b
+              - text: 。由于
+              - code [ref=f6e272]: spawn
+              - text: 会将带有
+              - code [ref=f6e273]: PTE_LIBRARY
+              - text: 权限的页面（包括文件描述符表）映射给子进程，
+              - code [ref=f6e274]: sh.b
+              - text: 继承了这两个文件描述符。此后，所有从 Shell 启动的外部程序都会默认继承并沿用这两个标准输入输出。
+          - separator [ref=f6e275]
+          - heading [level=4] [ref=f6e276]:
+            - strong [ref=f6e277]:
+              - text: Thinking 6.10 在 MOS 中我们用到的 shell 命令是内置命令还是外部命令？请思考为什么 Linux 的
+              - code [ref=f6e278]: cd
+              - text: 命令是内部命令而不是外部命令？
+          - list [ref=f6e279]:
+            - listitem [ref=f6e280]:
+              - strong [ref=f6e281]: MOS 中的命令类型
+              - text: ：在 MOS 中，我们用到的命令（如
+              - code [ref=f6e282]: ls.b
+              - text: 、
+              - code [ref=f6e283]: cat.b
+              - text: 等）是
+              - strong [ref=f6e284]: 外部命令
+              - text: 。它们是独立编译并存储在磁盘/文件系统上的可执行二进制文件，Shell 需要通过
+              - code [ref=f6e285]: spawn
+              - text: 产生新进程来加载并运行它们。
+            - listitem [ref=f6e286]:
+              - strong [ref=f6e287]:
+                - text: Linux 的
+                - code [ref=f6e288]: cd
+                - text: 命令为什么必须是内置命令
+              - text: ：
+              - list [ref=f6e289]:
+                - listitem [ref=f6e290]: 每个进程都拥有自己独立的“当前工作目录”属性。
+                - listitem [ref=f6e291]:
+                  - text: 如果
+                  - code [ref=f6e292]: cd
+                  - text: 是外部命令，Shell 在执行它时必须先
+                  - code [ref=f6e293]: fork
+                  - text: 一个子进程来运行
+                  - code [ref=f6e294]: cd
+                  - text: 。子进程虽然成功改变了自己的工作目录，但当它运行结束并退出后，父进程（Shell）的工作目录并没有发生任何改变。
+                - listitem [ref=f6e295]:
+                  - text: 因此，为了改变 Shell 进程本身的工作目录，
+                  - code [ref=f6e296]: cd
+                  - text: 必须作为内置命令由 Shell 进程自身直接调用系统调用（如
+                  - code [ref=f6e297]: chdir
+                  - text: ）来执行。
+          - separator [ref=f6e298]
+          - heading [level=4] [ref=f6e299]:
+            - strong [ref=f6e300]:
+              - text: Thinking 6.11 在你的 shell 中输入命令
+              - code [ref=f6e301]: ls.b|cat.b>motd
+              - text: ：
+          - heading [level=5] [ref=f6e302]:
+            - strong [ref=f6e303]:
+              - text: 1. 可以观察到几次
+              - code [ref=f6e304]: spawn
+              - text: ？分别对应哪个进程？
+          - paragraph [ref=f6e305]:
+            - text: 可以观察到
+            - strong [ref=f6e306]: 2 次
+            - code [ref=f6e307]: spawn
+            - text: ：
+          - list [ref=f6e308]:
+            - listitem [ref=f6e309]:
+              - strong [ref=f6e310]:
+                - text: 第一次
+                - code [ref=f6e311]: spawn
+              - text: ：对应
+              - code [ref=f6e312]: ls.b
+              - text: 进程。由负责执行管道左侧命令的子 Shell 进程调用，用于运行
+              - code [ref=f6e313]: ls.b
+              - text: 。
+            - listitem [ref=f6e314]:
+              - strong [ref=f6e315]:
+                - text: 第二次
+                - code [ref=f6e316]: spawn
+              - text: ：对应
+              - code [ref=f6e317]: cat.b
+              - text: 进程。由负责执行管道右侧命令的子 Shell 进程调用，用于运行
+              - code [ref=f6e318]: cat.b
+              - text: 。
+          - heading [level=5] [ref=f6e319]:
+            - strong [ref=f6e320]: 2. 可以观察到几次进程销毁？分别对应哪个进程？
+          - paragraph [ref=f6e321]:
+            - text: 可以观察到
+            - strong [ref=f6e322]: 4 次
+            - text: 进程销毁：
+          - list [ref=f6e323]:
+            - listitem [ref=f6e324]:
+              - strong [ref=f6e325]: 第一次销毁
+              - text: ：
+              - code [ref=f6e326]: ls.b
+              - text: 进程执行完毕，自行退出并被销毁。
+            - listitem [ref=f6e327]:
+              - strong [ref=f6e328]: 第二次销毁
+              - text: ：
+              - code [ref=f6e329]: cat.b
+              - text: 进程执行完毕，自行退出并被销毁。
+            - listitem [ref=f6e330]:
+              - strong [ref=f6e331]: 第三次销毁
+              - text: ：右侧子 Shell 进程在等待
+              - code [ref=f6e332]: cat.b
+              - text: 退出后执行
+              - code [ref=f6e333]: exit()
+              - text: 自身销毁。
+            - listitem [ref=f6e334]:
+              - strong [ref=f6e335]: 第四次销毁
+              - text: ：左侧子 Shell 进程在等待其子进程及
+              - code [ref=f6e336]: rightpipe
+              - text: （右侧子 Shell）退出后执行
+              - code [ref=f6e337]: exit()
+              - text: 自身销毁。
+        - region [ref=f6e338]:
+          - heading "Columns" [level=2] [ref=f6e339]
+          - generic [ref=f6e340]:
+            - paragraph [ref=f6e341]:
+              - text: This post belongs to the
+              - strong [ref=f6e342]: Computer Organization
+              - text: column
+            - paragraph [ref=f6e343]: Architecture, memory, operating systems, and low-level CS notes.
+            - generic "Computer Organization posts" [ref=f6e344]:
+              - link "Lab6 管道与 Shell 2026-07-27" [ref=f6e345] [cursor=pointer]:
+                - /url: /lab6/
+                - generic [ref=f6e346]: Lab6 管道与 Shell
+                - time [ref=f6e347]: 2026-07-27
+              - link "Lab5 文件系统 2026-07-23" [ref=f6e348] [cursor=pointer]:
+                - /url: /lab5/
+                - generic [ref=f6e349]: Lab5 文件系统
+                - time [ref=f6e350]: 2026-07-23
+              - link "Lab4 系统调用、系统间通信 2026-07-17" [ref=f6e351] [cursor=pointer]:
+                - /url: /lab4/
+                - generic [ref=f6e352]: Lab4 系统调用、系统间通信
+                - time [ref=f6e353]: 2026-07-17
+              - link "Lab3 进程管理 2026-07-14" [ref=f6e354] [cursor=pointer]:
+                - /url: /lab3/
+                - generic [ref=f6e355]: Lab3 进程管理
+                - time [ref=f6e356]: 2026-07-14
+              - link "Lab2 内存管理 2026-07-07" [ref=f6e357] [cursor=pointer]:
+                - /url: /lab2/
+                - generic [ref=f6e358]: Lab2 内存管理
+                - time [ref=f6e359]: 2026-07-07
+              - link "Lab1 操作系统引导 2026-07-05" [ref=f6e360] [cursor=pointer]:
+                - /url: /lab1/
+                - generic [ref=f6e361]: Lab1 操作系统引导
+                - time [ref=f6e362]: 2026-07-05
+        - paragraph [ref=f6e364]:
+          - strong [ref=f6e365]:
+            - generic [aria-hidden] [ref=f6e366]: 
+            - text: "Tags:"
+          - generic [ref=f6e367]:
+            - link "MOS" [ref=f6e368] [cursor=pointer]:
+              - /url: http://localhost:4000/tags/#mos
+            - link "OS" [ref=f6e369] [cursor=pointer]:
+              - /url: http://localhost:4000/tags/#os
+        - generic [ref=f6e370]:
+          - heading "Share on" [level=4] [ref=f6e371]
+          - link "Bluesky" [ref=f6e372] [cursor=pointer]:
+            - /url: https://bsky.app/intent/compose?text=http://localhost:4000/lab6/
+            - generic [aria-hidden] [ref=f6e373]: 
+          - link "Facebook" [ref=f6e375] [cursor=pointer]:
+            - /url: https://www.facebook.com/sharer/sharer.php?u=http://localhost:4000/lab6/
+            - generic [aria-hidden] [ref=f6e376]: 
+          - link "LinkedIn" [ref=f6e378] [cursor=pointer]:
+            - /url: https://www.linkedin.com/shareArticle?mini=true&url=http://localhost:4000/lab6/
+            - generic [aria-hidden] [ref=f6e379]: 
+          - link "X (formerly Twitter)" [ref=f6e381] [cursor=pointer]:
+            - /url: https://x.com/intent/post?text=http://localhost:4000/lab6/
+            - generic [aria-hidden] [ref=f6e382]: 
+        - navigation [ref=f6e384]:
+          - link "Previous" [ref=f6e385] [cursor=pointer]:
+            - /url: http://localhost:4000/lab5/
+          - link "Next":
+            - /url: "#"
+    - complementary "Article table of contents" [ref=f6e386]:
+      - button "Toggle article contents" [ref=f6e387] [cursor=pointer]:
+        - generic [aria-hidden] [ref=f6e388]: 
+      - generic:
+        - strong: Contents
+        - navigation:
+          - link "实验报告总结要点":
+            - /url: "#实验报告总结要点"
+          - link "Thinking 思考题解答":
+            - /url: "#thinking-思考题解答"
+    - generic [ref=f6e389]:
+      - heading "You May Also Enjoy" [level=4] [ref=f6e390]
+      - generic [ref=f6e391]:
+        - article [ref=f6e393]:
+          - time [ref=f6e395]: July 23, 2026
+          - heading [level=2] [ref=f6e397]:
+            - link "Lab5 文件系统" [ref=f6e398] [cursor=pointer]:
+              - /url: /lab5/
+        - article [ref=f6e400]:
+          - time [ref=f6e402]: July 17, 2026
+          - heading [level=2] [ref=f6e404]:
+            - link "Lab4 系统调用、系统间通信" [ref=f6e405] [cursor=pointer]:
+              - /url: /lab4/
+        - article [ref=f6e407]:
+          - time [ref=f6e409]: July 14, 2026
+          - heading [level=2] [ref=f6e411]:
+            - link "Lab3 进程管理" [ref=f6e412] [cursor=pointer]:
+              - /url: /lab3/
+        - article [ref=f6e414]:
+          - time [ref=f6e416]: July 07, 2026
+          - heading [level=2] [ref=f6e418]:
+            - link "Lab2 内存管理" [ref=f6e419] [cursor=pointer]:
+              - /url: /lab2/
+  - contentinfo [ref=f6e421]:
+    - link "Sitemap" [ref=f6e422] [cursor=pointer]:
+      - /url: /sitemap/
+    - list [ref=f6e424]:
+      - listitem [ref=f6e425]:
+        - strong [ref=f6e426]: "Follow:"
+      - listitem [ref=f6e427]:
+        - link "GitHub" [ref=f6e428] [cursor=pointer]:
+          - /url: http://github.com/HarudogMyLand
+          - generic [aria-hidden] [ref=f6e429]: 
+          - text: GitHub
+      - listitem [ref=f6e430]:
+        - link "Feed" [ref=f6e431] [cursor=pointer]:
+          - /url: http://localhost:4000/feed.xml
+          - generic [aria-hidden] [ref=f6e432]: 
+          - text: Feed
+    - generic [ref=f6e433]:
+      - text: © 2026 Harudog the Loner, Powered by
+      - link "Jekyll" [ref=f6e434] [cursor=pointer]:
+        - /url: http://jekyllrb.com
+      - text: "&"
+      - link "AcademicPages" [ref=f6e435] [cursor=pointer]:
+        - /url: https://github.com/academicpages/academicpages.github.io
+      - text: ", a fork of"
+      - link "Minimal Mistakes" [ref=f6e436] [cursor=pointer]:
+        - /url: https://mademistakes.com/work/minimal-mistakes-jekyll-theme/
+      - text: . Site last updated 2026-10-09

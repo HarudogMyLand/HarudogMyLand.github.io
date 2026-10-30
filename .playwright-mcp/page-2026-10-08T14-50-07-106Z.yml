@@ -1,0 +1,127 @@
+- generic [active] [ref=e1]:
+  - navigation [ref=e5]:
+    - list [ref=e6]:
+      - listitem [ref=e7]:
+        - link "Harudog" [ref=e8] [cursor=pointer]:
+          - /url: http://localhost:4000/
+      - listitem [ref=e9]:
+        - link "Publications" [ref=e10] [cursor=pointer]:
+          - /url: http://localhost:4000/publications/
+      - listitem [ref=e11]:
+        - link "Blog Posts" [ref=e12] [cursor=pointer]:
+          - /url: http://localhost:4000/year-archive/
+      - listitem [ref=e13]:
+        - link "CV" [ref=e14] [cursor=pointer]:
+          - /url: http://localhost:4000/cv/
+      - listitem [ref=e15]:
+        - link "Archive" [ref=e16] [cursor=pointer]:
+          - /url: http://localhost:4000/archive/
+      - listitem [ref=e17]:
+        - generic [aria-hidden] [ref=e19] [cursor=pointer]: 
+      - listitem [ref=e20]:
+        - group [ref=e21]:
+          - generic "Choose language" [ref=e22] [cursor=pointer]:
+            - generic [aria-hidden] [ref=e23]: 
+            - generic [ref=e24]: Language
+            - generic "English" [ref=e25]: EH
+  - main [ref=e26]:
+    - generic [ref=e28]:
+      - img "Harudog the Loner" [ref=e30]
+      - generic [ref=e31]:
+        - heading "Harudog the Loner" [level=3] [ref=e32]
+        - paragraph [ref=e33]: struggling CS Student
+      - list [ref=e35]:
+        - listitem [ref=e36]:
+          - generic [aria-hidden] [ref=e37]: 
+          - text: Earth
+        - listitem [ref=e38]:
+          - generic [aria-hidden] [ref=e39]: 
+          - text: BUAA student
+        - listitem [ref=e40]:
+          - link "Website" [ref=e41] [cursor=pointer]:
+            - /url: https://HarudogMyLand.github.io/about
+            - generic [aria-hidden] [ref=e42]: 
+            - text: Website
+        - listitem [ref=e43]:
+          - link "Email" [ref=e44] [cursor=pointer]:
+            - /url: mailto:lyx123qwert@163.com
+            - generic [aria-hidden] [ref=e45]: 
+            - text: Email
+        - listitem [ref=e46]:
+          - link "GitHub" [ref=e47] [cursor=pointer]:
+            - /url: https://github.com/HarudogMyLand
+            - generic [aria-hidden] [ref=e48]: 
+            - text: GitHub
+    - article [ref=e49]:
+      - generic [ref=e50]:
+        - heading "Hello, World! I’m Harudog" [level=1] [ref=e52]
+        - generic [ref=e53]:
+          - paragraph [ref=e54]:
+            - text: Hi, I am
+            - strong [ref=e55]: Harudog
+            - text: . Currently an undergraduate student majoring in Computer Science at
+            - strong [ref=e56]: Beihang University (BUAA)
+            - text: in Beijing, China.
+          - heading "🏝️ About This Web" [level=2] [ref=e57]
+          - paragraph [ref=e58]:
+            - text: This website serves as
+            - strong [ref=e59]: Harudog’s blog and academic webpage
+            - text: . Though I have no talent in academy.
+          - paragraph [ref=e60]:
+            - text: I built this site to be a
+            - strong [ref=e61]: shared oasis of knowledge and technology
+            - text: ", as well as a sanctuary for"
+            - strong [ref=e62]: thoughts and reflection
+            - text: . In the fast-paced digital era, I hope to cultivate a small garden here to document my journey in CS, share technical notes, and occasionally ramble about life as a “struggling student.”
+          - separator [ref=e63]
+          - heading "🐾 What is “Harudog”?" [level=2] [ref=e64]
+          - paragraph [ref=e65]: You might be wondering about the name and the avatar.
+          - paragraph [ref=e66]:
+            - strong [ref=e67]: “Harudog”
+            - text: is a series of self-set Original Characters that I have designed. It represents my projection in the digital world—curious, sometimes struggling, but always exploring.
+          - paragraph [ref=e68]: Whenever I am coding, writing, or drawing, Harudog is the persona that accompanies me.
+          - separator [ref=e69]
+          - heading "🔬 Research Interests" [level=2] [ref=e70]
+          - paragraph [ref=e71]: "My current study interests include (but are not limited to):"
+          - list [ref=e72]:
+            - listitem [ref=e73]:
+              - strong [ref=e74]: Computer Systems & Architecture
+            - listitem [ref=e75]:
+              - strong [ref=e76]: Financial & Economy
+              - text: I am always open to learning new technologies and collaborating on interesting projects.
+          - separator [ref=e77]
+          - heading "📰 News" [level=2] [ref=e78]
+          - list [ref=e79]:
+            - listitem [ref=e80]:
+              - strong [ref=e81]: "Aug 2024:"
+              - text: Started my journey at BUAA.
+            - listitem [ref=e82]:
+              - strong [ref=e83]: "Feb 2024:"
+              - text: Made a new version of this website.
+  - contentinfo [ref=e85]:
+    - link "Sitemap" [ref=e86] [cursor=pointer]:
+      - /url: /sitemap/
+    - list [ref=e88]:
+      - listitem [ref=e89]:
+        - strong [ref=e90]: "Follow:"
+      - listitem [ref=e91]:
+        - link "GitHub" [ref=e92] [cursor=pointer]:
+          - /url: http://github.com/HarudogMyLand
+          - generic [aria-hidden] [ref=e93]: 
+          - text: GitHub
+      - listitem [ref=e94]:
+        - link "Feed" [ref=e95] [cursor=pointer]:
+          - /url: http://localhost:4000/feed.xml
+          - generic [aria-hidden] [ref=e96]: 
+          - text: Feed
+    - generic [ref=e97]:
+      - text: © 2026 Harudog the Loner, Powered by
+      - link "Jekyll" [ref=e98] [cursor=pointer]:
+        - /url: http://jekyllrb.com
+      - text: "&"
+      - link "AcademicPages" [ref=e99] [cursor=pointer]:
+        - /url: https://github.com/academicpages/academicpages.github.io
+      - text: ", a fork of"
+      - link "Minimal Mistakes" [ref=e100] [cursor=pointer]:
+        - /url: https://mademistakes.com/work/minimal-mistakes-jekyll-theme/
+      - text: . Site last updated 2026-10-08

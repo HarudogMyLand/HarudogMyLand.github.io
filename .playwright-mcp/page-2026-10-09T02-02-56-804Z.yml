@@ -1,0 +1,54 @@
+- generic [active] [ref=f4e1]:
+  - navigation [ref=f4e5]:
+    - button "Toggle menu" [ref=f4e6] [cursor=pointer]
+    - list [ref=f4e8]:
+      - listitem [ref=f4e9]:
+        - link "Harudog" [ref=f4e10] [cursor=pointer]:
+          - /url: http://localhost:4000/
+      - listitem [ref=f4e11]:
+        - button "Toggle dark mode" [ref=f4e12] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f4e13]: 
+      - listitem [ref=f4e14]:
+        - group [ref=f4e15]:
+          - generic "Choose language" [ref=f4e16] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f4e17]: 
+            - generic "English" [ref=f4e18]: EH
+  - main [ref=f4e19]:
+    - article [ref=f4e20]:
+      - generic [ref=f4e21]:
+        - heading "404 - Not Found" [level=1] [ref=f4e23]
+        - generic [ref=f4e26]:
+          - heading "404" [level=1] [ref=f4e27]
+          - heading "Oops! 你不应该看到这个页面。" [level=2] [ref=f4e28]
+          - paragraph [ref=f4e29]: The page you are looking for has been lost in the Oasis, or perhaps Harudog ate the link.
+          - link " Return to Base" [ref=f4e30] [cursor=pointer]:
+            - /url: /
+            - generic [ref=f4e31]: 
+            - text: Return to Base
+  - contentinfo [ref=f4e33]:
+    - link "Sitemap" [ref=f4e34] [cursor=pointer]:
+      - /url: /sitemap/
+    - list [ref=f4e36]:
+      - listitem [ref=f4e37]:
+        - strong [ref=f4e38]: "Follow:"
+      - listitem [ref=f4e39]:
+        - link "GitHub" [ref=f4e40] [cursor=pointer]:
+          - /url: http://github.com/HarudogMyLand
+          - generic [aria-hidden] [ref=f4e41]: 
+          - text: GitHub
+      - listitem [ref=f4e42]:
+        - link "Feed" [ref=f4e43] [cursor=pointer]:
+          - /url: http://localhost:4000/feed.xml
+          - generic [aria-hidden] [ref=f4e44]: 
+          - text: Feed
+    - generic [ref=f4e45]:
+      - text: © 2026 Harudog the Loner, Powered by
+      - link "Jekyll" [ref=f4e46] [cursor=pointer]:
+        - /url: http://jekyllrb.com
+      - text: "&"
+      - link "AcademicPages" [ref=f4e47] [cursor=pointer]:
+        - /url: https://github.com/academicpages/academicpages.github.io
+      - text: ", a fork of"
+      - link "Minimal Mistakes" [ref=f4e48] [cursor=pointer]:
+        - /url: https://mademistakes.com/work/minimal-mistakes-jekyll-theme/
+      - text: . Site last updated 2026-10-09

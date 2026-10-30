@@ -1,0 +1,672 @@
+- generic [active] [ref=f3e1]:
+  - navigation [ref=f3e5]:
+    - list [ref=f3e6]:
+      - listitem [ref=f3e7]:
+        - link "Harudog" [ref=f3e8] [cursor=pointer]:
+          - /url: http://localhost:4000/
+      - listitem [ref=f3e9]:
+        - link "Publications" [ref=f3e10] [cursor=pointer]:
+          - /url: http://localhost:4000/publications/
+      - listitem [ref=f3e11]:
+        - link "Blog Posts" [ref=f3e12] [cursor=pointer]:
+          - /url: http://localhost:4000/year-archive/
+      - listitem [ref=f3e13]:
+        - link "CV" [ref=f3e14] [cursor=pointer]:
+          - /url: http://localhost:4000/cv/
+      - listitem [ref=f3e15]:
+        - link "Archive" [ref=f3e16] [cursor=pointer]:
+          - /url: http://localhost:4000/archive/
+      - listitem [ref=f3e17]:
+        - button "Toggle dark mode" [ref=f3e18] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f3e19]: 
+      - listitem [ref=f3e20]:
+        - group [ref=f3e21]:
+          - generic "Choose language" [ref=f3e22] [cursor=pointer]:
+            - generic [aria-hidden] [ref=f3e23]: 
+            - generic [ref=f3e24]: Language
+            - generic "English" [ref=f3e25]: EH
+  - main [ref=f3e26]:
+    - text:     
+    - generic [ref=f3e28]:
+      - generic [ref=f3e29]:
+        - paragraph [ref=f3e30]: Harudog Index
+        - heading "Archive" [level=1] [ref=f3e31]
+        - paragraph [ref=f3e32]: Browse posts by time when you want a historical trace, or by category when you want a reading path.
+      - tablist "Archive organization mode" [ref=f3e33]:
+        - tab "Time Archive" [selected] [ref=f3e34] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f3e35]: 
+          - text: Time Archive
+        - tab "Category Index" [ref=f3e36] [cursor=pointer]:
+          - generic [aria-hidden] [ref=f3e37]: 
+          - text: Category Index
+      - tabpanel "Time Archive" [ref=f3e38]:
+        - generic [ref=f3e39]:
+          - generic [ref=f3e40]:
+            - heading "Time Archive" [level=2] [ref=f3e41]
+            - paragraph [ref=f3e42]: Compact calendar plus a filterable historical timeline.
+          - generic [ref=f3e43]:
+            - generic [ref=f3e44] [cursor=pointer]:
+              - generic [ref=f3e45]: Year
+              - combobox "Choose archive year" [ref=f3e46]:
+                - option "2026" [selected]
+                - option "2025"
+            - button "Collapse Calendar" [expanded] [ref=f3e47] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f3e48]: 
+        - generic [ref=f3e51]:
+          - generic [ref=f3e52]:
+            - heading "Jan" [level=3] [ref=f3e53]
+            - generic [ref=f3e54]:
+              - generic [ref=f3e55]: S
+              - generic [ref=f3e56]: M
+              - generic [ref=f3e57]: T
+              - generic [ref=f3e58]: W
+              - generic [ref=f3e59]: T
+              - generic [ref=f3e60]: F
+              - generic [ref=f3e61]: S
+            - generic [ref=f3e62]:
+              - button "1" [ref=f3e67] [cursor=pointer]
+              - button "2" [ref=f3e68] [cursor=pointer]
+              - button "3" [ref=f3e69] [cursor=pointer]
+              - button "4" [ref=f3e70] [cursor=pointer]
+              - button "5" [ref=f3e71] [cursor=pointer]
+              - button "6" [ref=f3e72] [cursor=pointer]
+              - button "7" [ref=f3e73] [cursor=pointer]
+              - button "8" [ref=f3e74] [cursor=pointer]
+              - button "9" [ref=f3e75] [cursor=pointer]
+              - button "10" [ref=f3e76] [cursor=pointer]
+              - button "11" [ref=f3e77] [cursor=pointer]
+              - button "12" [ref=f3e78] [cursor=pointer]
+              - button "13" [ref=f3e79] [cursor=pointer]
+              - button "14" [ref=f3e80] [cursor=pointer]
+              - button "15" [ref=f3e81] [cursor=pointer]
+              - button "16" [ref=f3e82] [cursor=pointer]
+              - button "17" [ref=f3e83] [cursor=pointer]
+              - button "18" [ref=f3e84] [cursor=pointer]
+              - button "19" [ref=f3e85] [cursor=pointer]
+              - button "20" [ref=f3e86] [cursor=pointer]
+              - button "21" [ref=f3e87] [cursor=pointer]
+              - button "22" [ref=f3e88] [cursor=pointer]
+              - button "23" [ref=f3e89] [cursor=pointer]
+              - button "24" [ref=f3e90] [cursor=pointer]
+              - button "25" [ref=f3e91] [cursor=pointer]
+              - button "26" [ref=f3e92] [cursor=pointer]
+              - button "27" [ref=f3e93] [cursor=pointer]
+              - button "28" [ref=f3e94] [cursor=pointer]
+              - button "29" [ref=f3e95] [cursor=pointer]
+              - button "30" [ref=f3e96] [cursor=pointer]
+              - button "31" [ref=f3e97] [cursor=pointer]
+          - generic [ref=f3e98]:
+            - heading "Feb" [level=3] [ref=f3e99]
+            - generic [ref=f3e100]:
+              - generic [ref=f3e101]: S
+              - generic [ref=f3e102]: M
+              - generic [ref=f3e103]: T
+              - generic [ref=f3e104]: W
+              - generic [ref=f3e105]: T
+              - generic [ref=f3e106]: F
+              - generic [ref=f3e107]: S
+            - generic [ref=f3e108]:
+              - button "1" [ref=f3e109] [cursor=pointer]
+              - button "2" [ref=f3e110] [cursor=pointer]
+              - button "3" [ref=f3e111] [cursor=pointer]
+              - button "4" [ref=f3e112] [cursor=pointer]
+              - button "5" [ref=f3e113] [cursor=pointer]
+              - button "6" [ref=f3e114] [cursor=pointer]
+              - button "7" [ref=f3e115] [cursor=pointer]
+              - button "8" [ref=f3e116] [cursor=pointer]
+              - button "9" [ref=f3e117] [cursor=pointer]
+              - button "10" [ref=f3e118] [cursor=pointer]
+              - button "11" [ref=f3e119] [cursor=pointer]
+              - button "12" [ref=f3e120] [cursor=pointer]
+              - button "13" [ref=f3e121] [cursor=pointer]
+              - button "14" [ref=f3e122] [cursor=pointer]
+              - button "15" [ref=f3e123] [cursor=pointer]
+              - button "16" [ref=f3e124] [cursor=pointer]
+              - button "17" [ref=f3e125] [cursor=pointer]
+              - button "18" [ref=f3e126] [cursor=pointer]
+              - button "19" [ref=f3e127] [cursor=pointer]
+              - button "20" [ref=f3e128] [cursor=pointer]
+              - button "21" [ref=f3e129] [cursor=pointer]
+              - button "22" [ref=f3e130] [cursor=pointer]
+              - button "23" [ref=f3e131] [cursor=pointer]
+              - button "24" [ref=f3e132] [cursor=pointer]
+              - button "25" [ref=f3e133] [cursor=pointer]
+              - button "26" [ref=f3e134] [cursor=pointer]
+              - button "27" [ref=f3e135] [cursor=pointer]
+              - button "28" [ref=f3e136] [cursor=pointer]
+          - generic [ref=f3e137]:
+            - heading "Mar" [level=3] [ref=f3e138]
+            - generic [ref=f3e139]:
+              - generic [ref=f3e140]: S
+              - generic [ref=f3e141]: M
+              - generic [ref=f3e142]: T
+              - generic [ref=f3e143]: W
+              - generic [ref=f3e144]: T
+              - generic [ref=f3e145]: F
+              - generic [ref=f3e146]: S
+            - generic [ref=f3e147]:
+              - button "1" [ref=f3e148] [cursor=pointer]
+              - button "2" [ref=f3e149] [cursor=pointer]
+              - button "3" [ref=f3e150] [cursor=pointer]
+              - button "4" [ref=f3e151] [cursor=pointer]
+              - button "5" [ref=f3e152] [cursor=pointer]
+              - button "6" [ref=f3e153] [cursor=pointer]
+              - button "7" [ref=f3e154] [cursor=pointer]
+              - button "8" [ref=f3e155] [cursor=pointer]
+              - button "9" [ref=f3e156] [cursor=pointer]
+              - button "10" [ref=f3e157] [cursor=pointer]
+              - button "11" [ref=f3e158] [cursor=pointer]
+              - button "12" [ref=f3e159] [cursor=pointer]
+              - button "13" [ref=f3e160] [cursor=pointer]
+              - button "14" [ref=f3e161] [cursor=pointer]
+              - button "15" [ref=f3e162] [cursor=pointer]
+              - button "16" [ref=f3e163] [cursor=pointer]
+              - button "17" [ref=f3e164] [cursor=pointer]
+              - button "18" [ref=f3e165] [cursor=pointer]
+              - button "19" [ref=f3e166] [cursor=pointer]
+              - button "20" [ref=f3e167] [cursor=pointer]
+              - button "21" [ref=f3e168] [cursor=pointer]
+              - button "22" [ref=f3e169] [cursor=pointer]
+              - button "23" [ref=f3e170] [cursor=pointer]
+              - button "24" [ref=f3e171] [cursor=pointer]
+              - button "25" [ref=f3e172] [cursor=pointer]
+              - button "26" [ref=f3e173] [cursor=pointer]
+              - button "27" [ref=f3e174] [cursor=pointer]
+              - button "28" [ref=f3e175] [cursor=pointer]
+              - button "29" [ref=f3e176] [cursor=pointer]
+              - button "30" [ref=f3e177] [cursor=pointer]
+              - button "31" [ref=f3e178] [cursor=pointer]
+          - generic [ref=f3e179]:
+            - heading "Apr" [level=3] [ref=f3e180]
+            - generic [ref=f3e181]:
+              - generic [ref=f3e182]: S
+              - generic [ref=f3e183]: M
+              - generic [ref=f3e184]: T
+              - generic [ref=f3e185]: W
+              - generic [ref=f3e186]: T
+              - generic [ref=f3e187]: F
+              - generic [ref=f3e188]: S
+            - generic [ref=f3e189]:
+              - button "1" [ref=f3e193] [cursor=pointer]
+              - button "2" [ref=f3e194] [cursor=pointer]
+              - button "3" [ref=f3e195] [cursor=pointer]
+              - button "4" [ref=f3e196] [cursor=pointer]
+              - button "5" [ref=f3e197] [cursor=pointer]
+              - button "6" [ref=f3e198] [cursor=pointer]
+              - button "7" [ref=f3e199] [cursor=pointer]
+              - button "8" [ref=f3e200] [cursor=pointer]
+              - button "9" [ref=f3e201] [cursor=pointer]
+              - button "10" [ref=f3e202] [cursor=pointer]
+              - button "11" [ref=f3e203] [cursor=pointer]
+              - button "12" [ref=f3e204] [cursor=pointer]
+              - button "13" [ref=f3e205] [cursor=pointer]
+              - button "14" [ref=f3e206] [cursor=pointer]
+              - button "15" [ref=f3e207] [cursor=pointer]
+              - button "16" [ref=f3e208] [cursor=pointer]
+              - button "17" [ref=f3e209] [cursor=pointer]
+              - button "18" [ref=f3e210] [cursor=pointer]
+              - button "19" [ref=f3e211] [cursor=pointer]
+              - button "20" [ref=f3e212] [cursor=pointer]
+              - button "21" [ref=f3e213] [cursor=pointer]
+              - button "22" [ref=f3e214] [cursor=pointer]
+              - button "23" [ref=f3e215] [cursor=pointer]
+              - button "24" [ref=f3e216] [cursor=pointer]
+              - button "25" [ref=f3e217] [cursor=pointer]
+              - button "26" [ref=f3e218] [cursor=pointer]
+              - button "27" [ref=f3e219] [cursor=pointer]
+              - button "28" [ref=f3e220] [cursor=pointer]
+              - button "29" [ref=f3e221] [cursor=pointer]
+              - button "30" [ref=f3e222] [cursor=pointer]
+          - generic [ref=f3e223]:
+            - heading "May" [level=3] [ref=f3e224]
+            - generic [ref=f3e225]:
+              - generic [ref=f3e226]: S
+              - generic [ref=f3e227]: M
+              - generic [ref=f3e228]: T
+              - generic [ref=f3e229]: W
+              - generic [ref=f3e230]: T
+              - generic [ref=f3e231]: F
+              - generic [ref=f3e232]: S
+            - generic [ref=f3e233]:
+              - button "1" [ref=f3e239] [cursor=pointer]
+              - button "2" [ref=f3e240] [cursor=pointer]
+              - button "3" [ref=f3e241] [cursor=pointer]
+              - button "4" [ref=f3e242] [cursor=pointer]
+              - button "5" [ref=f3e243] [cursor=pointer]
+              - button "6" [ref=f3e244] [cursor=pointer]
+              - button "7" [ref=f3e245] [cursor=pointer]
+              - button "8" [ref=f3e246] [cursor=pointer]
+              - button "9" [ref=f3e247] [cursor=pointer]
+              - button "10" [ref=f3e248] [cursor=pointer]
+              - button "11" [ref=f3e249] [cursor=pointer]
+              - button "12" [ref=f3e250] [cursor=pointer]
+              - button "13" [ref=f3e251] [cursor=pointer]
+              - button "14" [ref=f3e252] [cursor=pointer]
+              - button "15" [ref=f3e253] [cursor=pointer]
+              - button "16" [ref=f3e254] [cursor=pointer]
+              - button "17" [ref=f3e255] [cursor=pointer]
+              - button "18" [ref=f3e256] [cursor=pointer]
+              - button "19" [ref=f3e257] [cursor=pointer]
+              - button "20" [ref=f3e258] [cursor=pointer]
+              - button "21" [ref=f3e259] [cursor=pointer]
+              - button "22" [ref=f3e260] [cursor=pointer]
+              - button "23" [ref=f3e261] [cursor=pointer]
+              - button "24" [ref=f3e262] [cursor=pointer]
+              - button "25" [ref=f3e263] [cursor=pointer]
+              - button "26" [ref=f3e264] [cursor=pointer]
+              - button "27" [ref=f3e265] [cursor=pointer]
+              - button "28" [ref=f3e266] [cursor=pointer]
+              - button "29" [ref=f3e267] [cursor=pointer]
+              - button "30" [ref=f3e268] [cursor=pointer]
+              - button "31" [ref=f3e269] [cursor=pointer]
+          - generic [ref=f3e270]:
+            - heading "Jun" [level=3] [ref=f3e271]
+            - generic [ref=f3e272]:
+              - generic [ref=f3e273]: S
+              - generic [ref=f3e274]: M
+              - generic [ref=f3e275]: T
+              - generic [ref=f3e276]: W
+              - generic [ref=f3e277]: T
+              - generic [ref=f3e278]: F
+              - generic [ref=f3e279]: S
+            - generic [ref=f3e280]:
+              - button "1" [ref=f3e282] [cursor=pointer]
+              - button "2" [ref=f3e283] [cursor=pointer]
+              - button "3" [ref=f3e284] [cursor=pointer]
+              - button "4" [ref=f3e285] [cursor=pointer]
+              - button "5" [ref=f3e286] [cursor=pointer]
+              - button "6" [ref=f3e287] [cursor=pointer]
+              - button "7" [ref=f3e288] [cursor=pointer]
+              - button "8" [ref=f3e289] [cursor=pointer]
+              - button "9" [ref=f3e290] [cursor=pointer]
+              - button "10" [ref=f3e291] [cursor=pointer]
+              - button "11" [ref=f3e292] [cursor=pointer]
+              - button "12" [ref=f3e293] [cursor=pointer]
+              - button "13" [ref=f3e294] [cursor=pointer]
+              - button "14" [ref=f3e295] [cursor=pointer]
+              - button "15" [ref=f3e296] [cursor=pointer]
+              - button "16" [ref=f3e297] [cursor=pointer]
+              - button "17" [ref=f3e298] [cursor=pointer]
+              - button "18" [ref=f3e299] [cursor=pointer]
+              - button "19" [ref=f3e300] [cursor=pointer]
+              - button "20" [ref=f3e301] [cursor=pointer]
+              - button "21" [ref=f3e302] [cursor=pointer]
+              - button "22" [ref=f3e303] [cursor=pointer]
+              - button "23" [ref=f3e304] [cursor=pointer]
+              - button "24" [ref=f3e305] [cursor=pointer]
+              - button "25" [ref=f3e306] [cursor=pointer]
+              - button "26" [ref=f3e307] [cursor=pointer]
+              - button "27" [ref=f3e308] [cursor=pointer]
+              - button "28" [ref=f3e309] [cursor=pointer]
+              - button "29" [ref=f3e310] [cursor=pointer]
+              - button "30" [ref=f3e311] [cursor=pointer]
+          - generic [ref=f3e312]:
+            - heading "Jul" [level=3] [ref=f3e313]
+            - generic [ref=f3e314]:
+              - generic [ref=f3e315]: S
+              - generic [ref=f3e316]: M
+              - generic [ref=f3e317]: T
+              - generic [ref=f3e318]: W
+              - generic [ref=f3e319]: T
+              - generic [ref=f3e320]: F
+              - generic [ref=f3e321]: S
+            - generic [ref=f3e322]:
+              - button "1" [ref=f3e326] [cursor=pointer]
+              - button "2" [ref=f3e327] [cursor=pointer]
+              - button "3" [ref=f3e328] [cursor=pointer]
+              - button "4" [ref=f3e329] [cursor=pointer]
+              - button "5" [ref=f3e330] [cursor=pointer]
+              - button "6" [ref=f3e331] [cursor=pointer]
+              - button "7" [ref=f3e332] [cursor=pointer]
+              - button "8" [ref=f3e333] [cursor=pointer]
+              - button "9" [ref=f3e334] [cursor=pointer]
+              - button "10" [ref=f3e335] [cursor=pointer]
+              - button "11" [ref=f3e336] [cursor=pointer]
+              - button "12" [ref=f3e337] [cursor=pointer]
+              - button "13" [ref=f3e338] [cursor=pointer]
+              - button "14" [ref=f3e339] [cursor=pointer]
+              - button "15" [ref=f3e340] [cursor=pointer]
+              - button "16" [ref=f3e341] [cursor=pointer]
+              - button "17" [ref=f3e342] [cursor=pointer]
+              - button "18" [ref=f3e343] [cursor=pointer]
+              - button "19" [ref=f3e344] [cursor=pointer]
+              - button "20" [ref=f3e345] [cursor=pointer]
+              - button "21" [ref=f3e346] [cursor=pointer]
+              - button "22" [ref=f3e347] [cursor=pointer]
+              - button "23" [ref=f3e348] [cursor=pointer]
+              - button "24" [ref=f3e349] [cursor=pointer]
+              - button "25" [ref=f3e350] [cursor=pointer]
+              - button "26" [ref=f3e351] [cursor=pointer]
+              - button "27" [ref=f3e352] [cursor=pointer]
+              - button "28" [ref=f3e353] [cursor=pointer]
+              - button "29" [ref=f3e354] [cursor=pointer]
+              - button "30" [ref=f3e355] [cursor=pointer]
+              - button "31" [ref=f3e356] [cursor=pointer]
+          - generic [ref=f3e357]:
+            - heading "Aug" [level=3] [ref=f3e358]
+            - generic [ref=f3e359]:
+              - generic [ref=f3e360]: S
+              - generic [ref=f3e361]: M
+              - generic [ref=f3e362]: T
+              - generic [ref=f3e363]: W
+              - generic [ref=f3e364]: T
+              - generic [ref=f3e365]: F
+              - generic [ref=f3e366]: S
+            - generic [ref=f3e367]:
+              - button "1" [ref=f3e374] [cursor=pointer]
+              - button "2" [ref=f3e375] [cursor=pointer]
+              - button "3" [ref=f3e376] [cursor=pointer]
+              - button "4" [ref=f3e377] [cursor=pointer]
+              - button "5" [ref=f3e378] [cursor=pointer]
+              - button "6" [ref=f3e379] [cursor=pointer]
+              - button "7" [ref=f3e380] [cursor=pointer]
+              - button "8" [ref=f3e381] [cursor=pointer]
+              - button "9" [ref=f3e382] [cursor=pointer]
+              - button "10" [ref=f3e383] [cursor=pointer]
+              - button "11" [ref=f3e384] [cursor=pointer]
+              - button "12" [ref=f3e385] [cursor=pointer]
+              - button "13" [ref=f3e386] [cursor=pointer]
+              - button "14" [ref=f3e387] [cursor=pointer]
+              - button "15" [ref=f3e388] [cursor=pointer]
+              - button "16" [ref=f3e389] [cursor=pointer]
+              - button "17" [ref=f3e390] [cursor=pointer]
+              - button "18" [ref=f3e391] [cursor=pointer]
+              - button "19" [ref=f3e392] [cursor=pointer]
+              - button "20" [ref=f3e393] [cursor=pointer]
+              - button "21" [ref=f3e394] [cursor=pointer]
+              - button "22" [ref=f3e395] [cursor=pointer]
+              - button "23" [ref=f3e396] [cursor=pointer]
+              - button "24" [ref=f3e397] [cursor=pointer]
+              - button "25" [ref=f3e398] [cursor=pointer]
+              - button "26" [ref=f3e399] [cursor=pointer]
+              - button "27" [ref=f3e400] [cursor=pointer]
+              - button "28" [ref=f3e401] [cursor=pointer]
+              - button "29" [ref=f3e402] [cursor=pointer]
+              - button "30" [ref=f3e403] [cursor=pointer]
+              - button "31" [ref=f3e404] [cursor=pointer]
+          - generic [ref=f3e405]:
+            - heading "Sep" [level=3] [ref=f3e406]
+            - generic [ref=f3e407]:
+              - generic [ref=f3e408]: S
+              - generic [ref=f3e409]: M
+              - generic [ref=f3e410]: T
+              - generic [ref=f3e411]: W
+              - generic [ref=f3e412]: T
+              - generic [ref=f3e413]: F
+              - generic [ref=f3e414]: S
+            - generic [ref=f3e415]:
+              - button "1" [ref=f3e418] [cursor=pointer]
+              - button "2" [ref=f3e419] [cursor=pointer]
+              - button "3" [ref=f3e420] [cursor=pointer]
+              - button "4" [ref=f3e421] [cursor=pointer]
+              - button "5" [ref=f3e422] [cursor=pointer]
+              - button "6" [ref=f3e423] [cursor=pointer]
+              - button "7" [ref=f3e424] [cursor=pointer]
+              - button "8" [ref=f3e425] [cursor=pointer]
+              - button "9" [ref=f3e426] [cursor=pointer]
+              - button "10" [ref=f3e427] [cursor=pointer]
+              - button "11" [ref=f3e428] [cursor=pointer]
+              - button "12" [ref=f3e429] [cursor=pointer]
+              - button "13" [ref=f3e430] [cursor=pointer]
+              - button "14" [ref=f3e431] [cursor=pointer]
+              - button "15" [ref=f3e432] [cursor=pointer]
+              - button "16" [ref=f3e433] [cursor=pointer]
+              - button "17" [ref=f3e434] [cursor=pointer]
+              - button "18" [ref=f3e435] [cursor=pointer]
+              - button "19" [ref=f3e436] [cursor=pointer]
+              - button "20" [ref=f3e437] [cursor=pointer]
+              - button "21" [ref=f3e438] [cursor=pointer]
+              - button "22" [ref=f3e439] [cursor=pointer]
+              - button "23" [ref=f3e440] [cursor=pointer]
+              - button "24" [ref=f3e441] [cursor=pointer]
+              - button "25" [ref=f3e442] [cursor=pointer]
+              - button "26" [ref=f3e443] [cursor=pointer]
+              - button "27" [ref=f3e444] [cursor=pointer]
+              - button "28" [ref=f3e445] [cursor=pointer]
+              - button "29" [ref=f3e446] [cursor=pointer]
+              - button "30" [ref=f3e447] [cursor=pointer]
+          - generic [ref=f3e448]:
+            - heading "Oct" [level=3] [ref=f3e449]
+            - generic [ref=f3e450]:
+              - generic [ref=f3e451]: S
+              - generic [ref=f3e452]: M
+              - generic [ref=f3e453]: T
+              - generic [ref=f3e454]: W
+              - generic [ref=f3e455]: T
+              - generic [ref=f3e456]: F
+              - generic [ref=f3e457]: S
+            - generic [ref=f3e458]:
+              - button "1" [ref=f3e463] [cursor=pointer]
+              - button "2" [ref=f3e464] [cursor=pointer]
+              - button "3" [ref=f3e465] [cursor=pointer]
+              - button "4" [ref=f3e466] [cursor=pointer]
+              - button "5" [ref=f3e467] [cursor=pointer]
+              - button "6" [ref=f3e468] [cursor=pointer]
+              - button "7" [ref=f3e469] [cursor=pointer]
+              - button "8" [ref=f3e470] [cursor=pointer]
+              - button "9" [ref=f3e471] [cursor=pointer]
+              - button "10" [ref=f3e472] [cursor=pointer]
+              - button "11" [ref=f3e473] [cursor=pointer]
+              - button "12" [ref=f3e474] [cursor=pointer]
+              - button "13" [ref=f3e475] [cursor=pointer]
+              - button "14" [ref=f3e476] [cursor=pointer]
+              - button "15" [ref=f3e477] [cursor=pointer]
+              - button "16" [ref=f3e478] [cursor=pointer]
+              - button "17" [ref=f3e479] [cursor=pointer]
+              - button "18" [ref=f3e480] [cursor=pointer]
+              - button "19" [ref=f3e481] [cursor=pointer]
+              - button "20" [ref=f3e482] [cursor=pointer]
+              - button "21" [ref=f3e483] [cursor=pointer]
+              - button "22" [ref=f3e484] [cursor=pointer]
+              - button "23" [ref=f3e485] [cursor=pointer]
+              - button "24" [ref=f3e486] [cursor=pointer]
+              - button "25" [ref=f3e487] [cursor=pointer]
+              - button "26" [ref=f3e488] [cursor=pointer]
+              - button "27" [ref=f3e489] [cursor=pointer]
+              - button "28" [ref=f3e490] [cursor=pointer]
+              - button "29" [ref=f3e491] [cursor=pointer]
+              - button "30" [ref=f3e492] [cursor=pointer]
+              - button "31" [ref=f3e493] [cursor=pointer]
+          - generic [ref=f3e494]:
+            - heading "Nov" [level=3] [ref=f3e495]
+            - generic [ref=f3e496]:
+              - generic [ref=f3e497]: S
+              - generic [ref=f3e498]: M
+              - generic [ref=f3e499]: T
+              - generic [ref=f3e500]: W
+              - generic [ref=f3e501]: T
+              - generic [ref=f3e502]: F
+              - generic [ref=f3e503]: S
+            - generic [ref=f3e504]:
+              - button "1" [ref=f3e505] [cursor=pointer]
+              - button "2" [ref=f3e506] [cursor=pointer]
+              - button "3" [ref=f3e507] [cursor=pointer]
+              - button "4" [ref=f3e508] [cursor=pointer]
+              - button "5" [ref=f3e509] [cursor=pointer]
+              - button "6" [ref=f3e510] [cursor=pointer]
+              - button "7" [ref=f3e511] [cursor=pointer]
+              - button "8" [ref=f3e512] [cursor=pointer]
+              - button "9" [ref=f3e513] [cursor=pointer]
+              - button "10" [ref=f3e514] [cursor=pointer]
+              - button "11" [ref=f3e515] [cursor=pointer]
+              - button "12" [ref=f3e516] [cursor=pointer]
+              - button "13" [ref=f3e517] [cursor=pointer]
+              - button "14" [ref=f3e518] [cursor=pointer]
+              - button "15" [ref=f3e519] [cursor=pointer]
+              - button "16" [ref=f3e520] [cursor=pointer]
+              - button "17" [ref=f3e521] [cursor=pointer]
+              - button "18" [ref=f3e522] [cursor=pointer]
+              - button "19" [ref=f3e523] [cursor=pointer]
+              - button "20" [ref=f3e524] [cursor=pointer]
+              - button "21" [ref=f3e525] [cursor=pointer]
+              - button "22" [ref=f3e526] [cursor=pointer]
+              - button "23" [ref=f3e527] [cursor=pointer]
+              - button "24" [ref=f3e528] [cursor=pointer]
+              - button "25" [ref=f3e529] [cursor=pointer]
+              - button "26" [ref=f3e530] [cursor=pointer]
+              - button "27" [ref=f3e531] [cursor=pointer]
+              - button "28" [ref=f3e532] [cursor=pointer]
+              - button "29" [ref=f3e533] [cursor=pointer]
+              - button "30" [ref=f3e534] [cursor=pointer]
+          - generic [ref=f3e535]:
+            - heading "Dec" [level=3] [ref=f3e536]
+            - generic [ref=f3e537]:
+              - generic [ref=f3e538]: S
+              - generic [ref=f3e539]: M
+              - generic [ref=f3e540]: T
+              - generic [ref=f3e541]: W
+              - generic [ref=f3e542]: T
+              - generic [ref=f3e543]: F
+              - generic [ref=f3e544]: S
+            - generic [ref=f3e545]:
+              - button "1" [ref=f3e548] [cursor=pointer]
+              - button "2" [ref=f3e549] [cursor=pointer]
+              - button "3" [ref=f3e550] [cursor=pointer]
+              - button "4" [ref=f3e551] [cursor=pointer]
+              - button "5" [ref=f3e552] [cursor=pointer]
+              - button "6" [ref=f3e553] [cursor=pointer]
+              - button "7" [ref=f3e554] [cursor=pointer]
+              - button "8" [ref=f3e555] [cursor=pointer]
+              - button "9" [ref=f3e556] [cursor=pointer]
+              - button "10" [ref=f3e557] [cursor=pointer]
+              - button "11" [ref=f3e558] [cursor=pointer]
+              - button "12" [ref=f3e559] [cursor=pointer]
+              - button "13" [ref=f3e560] [cursor=pointer]
+              - button "14" [ref=f3e561] [cursor=pointer]
+              - button "15" [ref=f3e562] [cursor=pointer]
+              - button "16" [ref=f3e563] [cursor=pointer]
+              - button "17" [ref=f3e564] [cursor=pointer]
+              - button "18" [ref=f3e565] [cursor=pointer]
+              - button "19" [ref=f3e566] [cursor=pointer]
+              - button "20" [ref=f3e567] [cursor=pointer]
+              - button "21" [ref=f3e568] [cursor=pointer]
+              - button "22" [ref=f3e569] [cursor=pointer]
+              - button "23" [ref=f3e570] [cursor=pointer]
+              - button "24" [ref=f3e571] [cursor=pointer]
+              - button "25" [ref=f3e572] [cursor=pointer]
+              - button "26" [ref=f3e573] [cursor=pointer]
+              - button "27" [ref=f3e574] [cursor=pointer]
+              - button "28" [ref=f3e575] [cursor=pointer]
+              - button "29" [ref=f3e576] [cursor=pointer]
+              - button "30" [ref=f3e577] [cursor=pointer]
+              - button "31" [ref=f3e578] [cursor=pointer]
+        - generic [ref=f3e579]:
+          - generic [ref=f3e580]:
+            - text: Timeline Range
+            - strong [ref=f3e581]: 2025-09-06 - 2026-07-27
+          - generic [ref=f3e582] [cursor=pointer]:
+            - text: From
+            - textbox "Timeline start date" [ref=f3e583]: 2025-09-06
+          - generic [ref=f3e584] [cursor=pointer]:
+            - text: To
+            - textbox "Timeline end date" [ref=f3e585]: 2026-07-27
+          - button "Reset" [ref=f3e586] [cursor=pointer]
+        - generic [ref=f3e587]:
+          - article [ref=f3e588]:
+            - time [ref=f3e589]: 2026-07-27
+            - generic [ref=f3e590]:
+              - heading [level=3] [ref=f3e591]:
+                - link "Lab6 管道与 Shell" [ref=f3e592] [cursor=pointer]:
+                  - /url: /lab6/
+              - paragraph [ref=f3e593]: 由于大部分同学已经完成了5次实验，没有必要再进行代码精讲了。
+              - generic [ref=f3e594]: OS / MOS
+          - article [ref=f3e595]:
+            - time [ref=f3e596]: 2026-07-23
+            - generic [ref=f3e597]:
+              - heading [level=3] [ref=f3e598]:
+                - link "Lab5 文件系统" [ref=f3e599] [cursor=pointer]:
+                  - /url: /lab5/
+              - paragraph [ref=f3e600]: 文件系统教程分为四个部分。
+              - generic [ref=f3e601]: OS / MOS
+          - article [ref=f3e602]:
+            - time [ref=f3e603]: 2026-07-17
+            - generic [ref=f3e604]:
+              - heading [level=3] [ref=f3e605]:
+                - link "Lab4 系统调用、系统间通信" [ref=f3e606] [cursor=pointer]:
+                  - /url: /lab4/
+              - paragraph [ref=f3e607]: 内核态的运行逐步趋于完善，Lab4不再继续添加大型的数据结构。内核态完善了，用户态怎么办？用户态目前仍是一片空白，尽管我们能编写一些裸机代码（bare中），期望的C语言代码还是无法实现。
+              - generic [ref=f3e608]: OS / MOS
+          - article [ref=f3e609]:
+            - time [ref=f3e610]: 2026-07-14
+            - generic [ref=f3e611]:
+              - heading [level=3] [ref=f3e612]:
+                - link "Lab3 进程管理" [ref=f3e613] [cursor=pointer]:
+                  - /url: /lab3/
+              - paragraph [ref=f3e614]: Lab3的主要流程，讲解操作系统如何创建，管理与感知进程的。操作系统通过进程控制块感知进程，通过队列调度这些控制块并调度他们的运行。
+              - generic [ref=f3e615]: OS / MOS
+          - article [ref=f3e616]:
+            - time [ref=f3e617]: 2026-07-07
+            - generic [ref=f3e618]:
+              - heading [level=3] [ref=f3e619]:
+                - link "Lab2 内存管理" [ref=f3e620] [cursor=pointer]:
+                  - /url: /lab2/
+              - paragraph [ref=f3e621]: 这里还只有棍母，似乎我没有书写这一部分内容。不过我记得 lab2 的内容是内存管理……
+              - generic [ref=f3e622]: OS / MOS
+          - article [ref=f3e623]:
+            - time [ref=f3e624]: 2026-07-05
+            - generic [ref=f3e625]:
+              - heading [level=3] [ref=f3e626]:
+                - link "Lab1 操作系统引导" [ref=f3e627] [cursor=pointer]:
+                  - /url: /lab1/
+              - paragraph [ref=f3e628]: 这里还只有棍母，似乎我没有书写这一部分内容。不过我记得 lab1 的内容是操作系统引导……
+              - generic [ref=f3e629]: OS / MOS
+          - article [ref=f3e630]:
+            - time [ref=f3e631]: 2026-06-26
+            - generic [ref=f3e632]:
+              - heading [level=3] [ref=f3e633]:
+                - link "Building an Obsidian-like Knowledge Graph for My Blog" [ref=f3e634] [cursor=pointer]:
+                  - /url: /blog-knowledge-graph/
+              - paragraph [ref=f3e635]: How the blog knowledge graph is generated, rendered, searched, zoomed, and connected to columns and tags.
+              - generic [ref=f3e636]: Blog / Jekyll / JavaScript / Visualization
+          - article [ref=f3e637]:
+            - time [ref=f3e638]: 2026-06-26
+            - generic [ref=f3e639]:
+              - heading [level=3] [ref=f3e640]:
+                - link "How I Added Columns To My Blog" [ref=f3e641] [cursor=pointer]:
+                  - /url: /blog-columns/
+              - paragraph [ref=f3e642]: A short note on the new blog column system, its implementation, and how to use it.
+              - generic [ref=f3e643]: Blog / Jekyll / Frontend
+          - article [ref=f3e644]:
+            - time [ref=f3e645]: 2026-03-10
+            - generic [ref=f3e646]:
+              - heading [level=3] [ref=f3e647]:
+                - link "Death of C Disk" [ref=f3e648] [cursor=pointer]:
+                  - /url: /blogs/
+              - paragraph [ref=f3e649]: 在硬盘空间不足的情况下安装Docker的处理情况
+              - generic [ref=f3e650]: Blog / Docker
+          - article [ref=f3e651]:
+            - time [ref=f3e652]: 2025-09-06
+            - generic [ref=f3e653]:
+              - heading [level=3] [ref=f3e654]:
+                - link "Markdown Syntax and Publishing Blogs in AcademicPages" [ref=f3e655] [cursor=pointer]:
+                  - /url: /posts/2025/09/blog-test/
+              - paragraph [ref=f3e656]: A compact Markdown syntax list and a simple workflow for publishing posts in academicpages.
+              - generic [ref=f3e657]: Markdown / AcademicPages / Blog
+      - text:       
+  - contentinfo [ref=f3e659]:
+    - link "Sitemap" [ref=f3e660] [cursor=pointer]:
+      - /url: /sitemap/
+    - list [ref=f3e662]:
+      - listitem [ref=f3e663]:
+        - strong [ref=f3e664]: "Follow:"
+      - listitem [ref=f3e665]:
+        - link "GitHub" [ref=f3e666] [cursor=pointer]:
+          - /url: http://github.com/HarudogMyLand
+          - generic [aria-hidden] [ref=f3e667]: 
+          - text: GitHub
+      - listitem [ref=f3e668]:
+        - link "Feed" [ref=f3e669] [cursor=pointer]:
+          - /url: http://localhost:4000/feed.xml
+          - generic [aria-hidden] [ref=f3e670]: 
+          - text: Feed
+    - generic [ref=f3e671]:
+      - text: © 2026 Harudog the Loner, Powered by
+      - link "Jekyll" [ref=f3e672] [cursor=pointer]:
+        - /url: http://jekyllrb.com
+      - text: "&"
+      - link "AcademicPages" [ref=f3e673] [cursor=pointer]:
+        - /url: https://github.com/academicpages/academicpages.github.io
+      - text: ", a fork of"
+      - link "Minimal Mistakes" [ref=f3e674] [cursor=pointer]:
+        - /url: https://mademistakes.com/work/minimal-mistakes-jekyll-theme/
+      - text: . Site last updated 2026-10-09
