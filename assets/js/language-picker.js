@@ -53,7 +53,8 @@
       } catch (error) {}
     }
     path = path.replace(/\/+$/, '').replace(/\.[^./]+$/, '');
-    var suffixMatch = path.match(/-([a-z0-9]{2,})$/i);
+    // Letters only: digits pass the uppercase check below, so "-01" would become a language.
+    var suffixMatch = path.match(/-([a-z]{2,})$/i);
     var language = defaultLanguage;
     var hasLanguageSuffix = false;
     if (suffixMatch) {
