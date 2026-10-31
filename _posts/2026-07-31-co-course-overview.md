@@ -79,7 +79,7 @@ columns:
 
 推荐使用以下网站学习与练习 Verilog：
 
-- [USTC VLab Verilog OJ | YAVG Group Presents](https://verilogoj.ustc.edu.cn/oj/)：中科大的开放OJ，但是有点怪怪的；
+- [USTC VLab Verilog OJ YAVG Group Presents](https://verilogoj.ustc.edu.cn/oj/)：中科大的开放OJ，但是有点怪怪的；
 - [HDLBits](https://hdlbits.01xz.net/wiki/Main_Page)：个人认为没有比HDLBits更经典的 Verilog 练习网站了；
 
 关于 Co Pre 详情见[Co Pre](copre.md)。
