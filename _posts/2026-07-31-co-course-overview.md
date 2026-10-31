@@ -1,7 +1,7 @@
 ---
 title: "CO课程做什么"
 date: 2026-07-31
-excerpt: "北京航空航天大学的计算机系本科课程在许多学子眼中富有盛名，喜爱者赞不绝口，厌恶者亦恨不得将其中糟粕之处挫骨扬灰。而计算机系本科基础教育的三大课程之一，便是计算机组成原理，该课程是延续了数十年的老牌计算机体系结构课程，相信各位早有耳闻；比……"
+excerpt: "计算机组成课程的一个概述"
 tags:
   - CO
   - BUAA
@@ -130,15 +130,15 @@ columns:
 
 在此希望新生们能够对计算机组成的理论知识保持重视，不要因为平时没有考察就放弃了了解。重难点可以等到期末再突破，但堆积必不能带来好结果。
 
-- [北航co计算机组成理论复习 | anAilurus' Blog](https://anailurus.github.io/2026/02/13/co理论复习/)
+- [北航co计算机组成理论复习 anAilurus' Blog](https://anailurus.github.io/2026/02/13/co理论复习/)
 - [计算机考研杂货铺](https://csgraduates.com/)
 - [王道计算机组成原理bilibili](https://www.bilibili.com/video/BV1ps4y1d73V/)
 
 ## 关于自动化测试
 
-近年来由于 AI Agent 的飞速发展，传统摸索的自动化测试思路似乎略显笨拙，不过依然具有参考作用。往届学长学姐的自动化测试的博客链接与一些仓库链接在此：
+近年来由于 AI Agent 的飞速发展，传统摸索的自动化测试思路似乎略显笨拙，不过依然具有参考作用，至少可以给AI提供一个参考。往届学长学姐的自动化测试的博客链接与一些仓库链接在此：
 
-- [「BUAA CO」计组小白的自动化测试 | Squirrel7ang's Blog](https://squirrel7ang.github.io/2024/01/09/CO/AutoTest/)
+- [「BUAA CO」计组小白的自动化测试 Squirrel7ang's Blog](https://squirrel7ang.github.io/2024/01/09/CO/AutoTest/)
 - [Mistariano/BUAA-CO-Killer: 为北航计算机组成原理设计的CPU测试程序自动生成器](https://github.com/Mistariano/BUAA-CO-Killer)
-- [单周期CPU全自动测试思路（Verilog） | ForeverYolo的博客](https://foreveryolo.top/posts/34987/index.html)
+- [单周期CPU全自动测试思路（Verilog） ForeverYolo的博客](https://foreveryolo.top/posts/34987/index.html)
 - [BUAA CO Toolkit - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=stone926.buaa-co-toolkit)
