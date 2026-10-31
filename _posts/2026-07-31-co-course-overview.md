@@ -22,7 +22,7 @@ columns:
 - [FlyingFlame's Blog - 记录技术、学习与生活](https://flyinglandlord.github.io/blog/)：FlyingLandlord...或者FlyingFlame的笔记，常看常新；
 - [zhp的博客](https://pppphop.github.io/)：2024级学生 zhp 的博客，内容很多，可以当指导书来看，膜拜 zhp 对成绩有帮助，但学习笔记帮助更大；
 - [Istina's Blog](https://istinaa.github.io/)：2024级学生 zja 的博客，哈哈哈；
-- [北航计算机组成 | ROIFE BLOG](https://roife.github.io/series/buaa-co/)：Roife 的牢笔记，提供上机记录；
+- [北航计算机组成 ROIFE BLOG](https://roife.github.io/series/buaa-co/)：Roife 的牢笔记，提供上机记录；
 
 优秀教材与阅读资料推荐：
 
