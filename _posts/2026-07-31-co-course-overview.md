@@ -17,7 +17,7 @@ columns:
 
 历年来，许多学长学姐将自己的代码与学习资料存放在个人博客与 Github 上，包括但不限于：
 
-- [一本书教你通关计组实验（上） | Kamonto's Little Planet](https://kamonto.github.io/Kamonto_blog/2025/09/07/一本书教你通关计组实验（上）/#1.1)：2023级学生，2024级高级优秀助教 SuperKamonto 的全流程CO实况，内容之详尽无与伦比；
+- [一本书教你通关计组实验](https://kamonto.github.io/Kamonto_blog/2025/09/07/一本书教你通关计组实验（上）/#1.1)：2023级学生，2024级高级优秀助教 SuperKamonto 的全流程CO实况，内容之详尽无与伦比；
 - [Lazyfish & chilly_river - The Hyacinth Story](https://lazyfish-lc.github.io/)：LazyFish 的笔记，提供非常优秀的上机回忆与课下实现记录，考前极其值得一看；
 - [FlyingFlame's Blog - 记录技术、学习与生活](https://flyinglandlord.github.io/blog/)：FlyingLandlord...或者FlyingFlame的笔记，常看常新；
 - [zhp的博客](https://pppphop.github.io/)：2024级学生 zhp 的博客，内容很多，可以当指导书来看，膜拜 zhp 对成绩有帮助，但学习笔记帮助更大；
